@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="version">1.0</string>
+    <string name="versionName">Apple Pie</string>
+    <string name="build">101</string>
+     <string name="derived_device_screen_size">unspecified</string>
+    <string name="derived_device_resolution">unspecified</string>
+
+    <string name="wordnik_apiKey">48f31f368d20791114b01067e1d05b68ca177aabdbab4150b</string>
+    <string name="chartboost_app_id">5126a10716ba477b0e000019</string>
+    <string name="chartboost_app_signature">cc41971b1b681903b94c7c666f88d83d7da43762</string>
+    <string name="app_name">WordSmash</string>
+    <string name="anonymous_player_name">You</string>
+    
+    <string name="header_1_win">1 win</string>
+    <string name="header_num_wins">%s wins</string>
+    <string name="version_name_display">(%s)</string>
+	<string name="logo">logo</string>
+	
+    <string name="admob_pub_id_main_landing">ca-app-pub-7811514377323585/2429670350</string>
+    <string name="admob_pub_id_full_rules">ca-app-pub-7811514377323585/5383136758</string>
+    <string name="admob_pub_id_game_played_words">ca-app-pub-7811514377323585/9952937157</string> 
+    <string name="admob_pub_id_game_word_definition">ca-app-pub-7811514377323585/9813336350</string>
+ 	<string name="admob_pub_id_about">ca-app-pub-7811514377323585/6580668358</string> 
+    <string name="admob_pub_id_completed_games">ca-app-pub-7811514377323585/9534134756</string>
+ 
+   <!-- 
+    <string name="admob_pub_id_main_landing">a150e5e3748e238</string>
+    <string name="admob_pub_id_full_rules">a150e7b398d7ec4</string>
+    <string name="admob_pub_id_game_played_words">a150e7b549b5cb3</string> 
+    <string name="admob_pub_id_game_word_definition">a15124d73407724</string>
+    -->
+         
+	<string name="go_to_store">go to store</string>
+	<string name="no_thanks">no thanks</string>		
+	<string name="ok">OK</string>
+	<string name="cancel">cancel</string>
+	<string name="thank_you">thank you</string>
+	<string name="yes">yes</string>
+	<string name="no">no</string>
+	<string name="oops">Oops</string>
+	<string name="sorry">Sorry</string>
+	<string name="game_over">game over</string>
+ 	<string name="progress_looking_up">looking up&#8230;</string>
+ 	<string name="progress_wait">please wait&#8230;</string>
+ 	<string name="progress_almost_ready">please support our advertisers&#8230;</string>
+ 	<string name="progress_opponent_thinking">%s is thinking&#8230;</string>
+ 	<string name="progress_saving">saving&#8230;</string>
+
+ 	<string name="full_rules_1">The idea is to score more points than your opponent by forming valid words out of the letters in your tray combined with the letters 
+ 	    		   on the board.  Letters must be placed on the board in a single axis, either horizontally or vertically.  Letters can played played on top of previously played letters.</string>
+   	<string name="full_rules_2">To start the game, the letters of the first word must placed on at least one of the four smiley faces in the middle of the board.  All words must contain 2 or more letters. 
+                       The players alternate turns. Each turn after the first (with the exception of skips and swaps) must 
+                       place at least one letter next to a previously placed letter on the board, either to the left or right or above or below, OR overlaying 
+                       a previously played letter.</string>                
+ 	<string name="full_rules_3">An overlay is a letter that is played on top of a letter that was placed on the 
+                       board in any previous turn.  Just remember that a player must overlay a letter with a different letter.  In other words, one 
+                       cannot overlay an \"A\" with another \"A\".  The letters must be different.</string>  
+ 	<string name="full_rules_4">A player can skip a turn or swap letters.  
+                       Swapped letters are returned to the hopper, the hopper is reshuffled, and the amount of swapped letters are pulled out of the hopper
+                       and given to the player.  The player\'s turn is then skipped.  Swapping is not allowed after the hopper is empty.</string>  
+ 	<string name="full_rules_letters_0">The Basics</string>
+ 	<string name="full_rules_letters_1">The Letters</string>
+ 	<string name="full_rules_letters_2">105 letters are shuffled and stored in the hopper until they are dispersed into the player\'s trays.  The mix of the first 100 letters is as follows:</string>                      
+ 	<string name="full_rules_letters_3">The final 5 letters are made up of 4 randomly chosen consonants and 1 randomly chosen vowel (A, E, I, O, or U).  The random letters will 
+                        be unique, meaning that the random consonants chosen might be, for example, "P", "R", "K" and "C", but would never be "P", "K", "R", and "R".</string>   
+	<string name="full_rules_scoring_1">Scoring</string>
+	<string name="full_rules_scoring_2">Each letter has an assigned value as follows:</string>	
+	<string name="full_rules_scoring_3">Bonuses</string>	
+	<string name="full_rules_scoring_4">The codes on the board represent bonus values that are multiplied times various letter values that 
+                            are placed during a turn.  </string>
+    <string name="full_rules_scoring_bonus_2l">the value of the individual letter is multiplied by 2. </string>	
+    <string name="full_rules_scoring_bonus_3l">the value of the individual letter is multiplied by 3. </string>	
+    <string name="full_rules_scoring_bonus_4l">the value of the individual letter is multiplied by 4. </string>	
+    <string name="full_rules_scoring_bonus_2w">the value of the word is multiplied by 2. </string>	
+    <string name="full_rules_scoring_bonus_3w">the value of the word is multiplied by 3. </string>
+    <string name="full_rules_scoring_5">If an overlay is placed on a bonus tile the bonus does not count.  Only the overlay\'s letter value counts.  Other bonus tiles in the same turn 
+                                count normally, just not overlays. Just like any other letter, an overlay\'s letter value is calculated as part of the value of the word if 
+                                another letter is placed on a 2W or 3W.</string>  
+    <string name="full_rules_scoring_6">If more than one word is formed during a turn, bonus tiles values are only assigned to the word that contained the bonus tiles.</string>
+    <string name="full_rules_scoring_7">Letter multipliers are calculated before word multipliers when the points are calculated for a turn.
+                                If a word lands on more than one word multiplier bonus tile, each bonus multiplier is used to determine the final score.</string>                            
+    <string name="full_rules_scoring_smasher_1">Smashers</string>
+    <string name="full_rules_scoring_smasher_2">Another way to earn points is to use all 7 letters in your tray in a single turn. If you use 7 letters in a single turn,
+                            you\'ve played a smasher, which is worth 40 bonus points.</string>
+    <string name="full_rules_finish_1">Win, Lose, or Draw</string>                        
+    <string name="full_rules_finish_2">Normally, the game ends when a player uses all of the letters in his or her tray after the hopper has been emptied. 
+                            The first player to finish his or her letters gets a bonus value added to his or her score.
+                            The bonus is equal to the accumulated value of all of the letters left in all of the opponent\'s tray.  For instance, if you finished out the 
+                            letters in your tray (and the hopper was empty) and your opponent still had a "K", a "U", and a "B" left in the tray, a bonus of 15 points would be awarded
+                            to the player in addition to the points that the turn earned.  The player with the most points after the bonus is awarded is declared the 
+                            winner.  If you and your opponent have the same score, a draw is declared.</string>
+    <string name="full_rules_finish_3">If 2 skips in a row happen by each player, the game is automatically stopped and a winner is determined based on the 
+                                points already earned by the players.  No bonus points are awarded in this situation.  Again, if you and your opponent have the same score, a draw is declared.</string>
+    <string name="full_rules_finish_4">If you concede, your opponent automatically wins, even if you were leading at the time or the score was tied.  
+                               If you were leading (or the score was tied) when the concede button was clicked, the opponent\'s score is adjusted to be 1 point higher
+                               than the your score, making your opponent the winner.  The same is true in the opposite.  If your opponent concedes, you automatically win, even if your opponent is leading at the time.</string>
+    <string name="full_rules_dictionary_1">The Dictionary</string>                                                                 		
+    <string name="full_rules_dictionary_2">The original source for the dictionary is 
+                        <a href="http://code.google.com/p/dotnetperls-controls/downloads/detail?name=enable1.txt">Enhanced North American Benchmark Lexicon (ENABLE)</a>. 
+                         We have added many words to the dictionary and are continually expanding it. 
+	</string>
+	<string name="full_rules_letter1_value">A - 1</string>
+	<string name="full_rules_letter2_value">B - 6</string>
+	<string name="full_rules_letter3_value">C - 5</string>
+	<string name="full_rules_letter4_value">D - 3</string>
+	<string name="full_rules_letter5_value">E - 1</string>
+	<string name="full_rules_letter6_value">F - 5</string>
+	<string name="full_rules_letter7_value">G - 5</string>
+	<string name="full_rules_letter8_value">H - 2</string>
+	<string name="full_rules_letter9_value">I - 1</string>
+	<string name="full_rules_letter10_value">J - 10</string>
+	<string name="full_rules_letter11_value">K - 7</string>
+	<string name="full_rules_letter12_value">L - 3</string>
+	<string name="full_rules_letter13_value">M - 5</string>
+	<string name="full_rules_letter14_value">N - 2</string>
+	<string name="full_rules_letter15_value">O - 1</string>
+	<string name="full_rules_letter16_value">P - 6</string>
+	<string name="full_rules_letter17_value">Q - 10</string>
+	<string name="full_rules_letter18_value">R - 2</string>
+	<string name="full_rules_letter19_value">S - 1</string>
+	<string name="full_rules_letter20_value">T - 1</string>
+	<string name="full_rules_letter21_value">U - 2</string>
+	<string name="full_rules_letter22_value">V - 7</string>
+	<string name="full_rules_letter23_value">W - 5</string>
+	<string name="full_rules_letter24_value">X - 10</string>
+	<string name="full_rules_letter25_value">Y - 6</string>
+	<string name="full_rules_letter26_value">Z - 10</string>
+	
+	<string name="full_rules_letter1_num">A - 8</string>
+	<string name="full_rules_letter2_num">B - 2</string>
+	<string name="full_rules_letter3_num">C - 2</string>
+	<string name="full_rules_letter4_num">D - 4</string>
+	<string name="full_rules_letter5_num">E - 12</string>
+	<string name="full_rules_letter6_num">F - 2</string>
+	<string name="full_rules_letter7_num">G - 2</string>
+	<string name="full_rules_letter8_num">H - 4</string>
+	<string name="full_rules_letter9_num">I - 8</string>
+	<string name="full_rules_letter10_num">J - 1</string>
+	<string name="full_rules_letter11_num">K - 1</string>
+	<string name="full_rules_letter12_num">L - 4</string>
+	<string name="full_rules_letter13_num">M - 2</string>
+	<string name="full_rules_letter14_num">N - 6</string>
+	<string name="full_rules_letter15_num">O - 8</string>
+	<string name="full_rules_letter16_num">P - 2</string>
+	<string name="full_rules_letter17_num">Q - 1</string>
+	<string name="full_rules_letter18_num">R - 6</string>
+	<string name="full_rules_letter19_num">S - 5</string>
+	<string name="full_rules_letter20_num">T - 9</string>
+	<string name="full_rules_letter21_num">U - 4</string>
+	<string name="full_rules_letter22_num">V - 1</string>
+	<string name="full_rules_letter23_num">W - 2</string>
+	<string name="full_rules_letter24_num">X - 1</string>
+	<string name="full_rules_letter25_num">Y - 2</string>
+	<string name="full_rules_letter26_num">Z - 1</string>
+	
+ 	
+ 	<string name="tile_4L">4L</string>
+ 	<string name="tile_3L">3L</string>
+ 	<string name="tile_3W">3W</string>
+ 	<string name="tile_2L">2L</string>
+ 	<string name="tile_2W">2W</string>
+ 	<string name="upper_gap_randoms">the random letters in this game: %1$s, %2$s, %3$s, %4$s, %5$s</string>
+ 	<string name="scoreboard_letters_left">%s letters left</string>
+ 	<string name="scoreboard_1_letter_left">1 letter left</string>
+ 	<string name="scoreboard_num_points">%s points</string>
+ 	<string name="scoreboard_num_points_scored">%s points scored</string>
+ 	<string name="gameboard_recall_button_text">RECALL</string>
+ 	<string name="gameboard_shuffle_button_text">SHUFFLE</string>
+ 	<string name="gameboard_play_button_text">PLAY</string>
+ 	<string name="gameboard_more_button_text">MORE &gt;&gt;</string>
+ 	<string name="gameboard_back_button_text">&lt;&lt; BACK</string>
+ 	<string name="gameboard_hints_button_text">ETHAN\'S\nHINTS</string>
+ 	<string name="gameboard_resign_button_text">CONCEDE</string>
+ 	<string name="gameboard_skip_button_text">SKIP</string>
+ 	<string name="gameboard_cancel_button_text">CANCEL</string>
+ 	<string name="gameboard_played_words_button_text">LOOK UP\nWORDS</string>
+ 	<string name="gameboard_hopper_peek_button_text">PEEK AT\nHOPPER</string>
+ 	<string name="gameboard_swap_button_text">SWAP</string>
+ 	<string name="gameboard_swap_dialog_button_text">swap letters</string>
+ 	<string name="gameboard_swap_dialog_title_text">tap the letter(s) to swap</string>
+ 	<string name="gameboard_swap_dialog_please_choose_text">please choose the letters to swap or tap cancel</string>
+ 	
+	 
+	   <string name="game_surface_cancel_game_confirmation_title">cancel this game</string>
+	   <string name="game_surface_cancel_game_confirmation_text">are you sure?</string>
+	   <string name="game_surface_resign_game_confirmation_title">concede this game</string>
+	   <string name="game_surface_resign_game_confirmation_text">are you sure?</string>
+	   <string name="game_last_action_started_context">You started the game.  Have fun and thanks for playing!</string>
+	   <string name="game_last_action_started">%s started the game</string>
+	   <string name="game_last_action_undetermined">The last action is undetermined.</string>
+	   <string name="game_last_action_swapped_1_context">You swapped 1 letter</string>
+	   <string name="game_last_action_swapped_1">%s swapped 1 letter.</string>
+	   <string name="game_last_action_swapped_context">You swapped %s letters</string>
+	   <string name="game_last_action_swapped">%1$s swapped %2$s letters</string>
+	   <string name="game_last_action_skipped_context">You skipped your turn</string>
+	   <string name="game_last_action_skipped">%s skipped a turn</string>
+	   <string name="game_last_action_resigned_context">You conceded</string>
+	   <string name="game_last_action_resigned">%s conceded</string>
+	   <string name="few_seconds_ago">a few seconds ago</string>
+	   <string name="seconds_ago">%s seconds ago</string>
+	   <string name="about_a_minute_ago">about a minute ago</string>
+	   <string name="minutes_ago">%s minutes ago</string>
+	   <string name="an_hour_ago">an hour ago</string>
+	   <string name="hours_ago">%s hours ago</string>
+	   <string name="a_day_ago">a day ago</string>
+	   <string name="days_ago">%s days ago</string>
+	
+		   <string name="game_last_action_word_played">%2$s played %3$s for %1$s points</string>
+	   <string name="game_last_action_2_words_played">%2$s played %3$s and %4$s for %1$s points</string>
+	   <string name="game_last_action_word_played_error">error occured</string>
+	   <string name="game_last_action_word_played_context">You played %2$s for %1$s points</string>
+	   <string name="game_last_action_2_words_played_context">You played %2$s and %3$s for %1$s points</string>
+	   
+ 		<string name="game_play_too_few_letters">Please form a word at least 2 letters long.</string>
+  		<string name="game_play_invalid_start_position">The first played word must have at least one letter placed on a smiley.</string>
+  		<string name="game_play_invalid_overlay">You can only overlay previously played letters with a different letter.</string>
+  		<string name="game_play_invalid_axis">Please be sure to place letters in a single axis with no gaps between letters.</string>
+  		<string name="game_play_invalid_gaps">Sorry, there cannot be any gaps between letters.</string>
+  		<string name="game_play_invalid_gaps_placed_words">All placed letters must be connected together or to a previously played letter.</string>
+  		<string name="game_play_1_invalid_word">%s is not in our dictionary.</string>
+  		<string name="game_play_2_invalid_words">%1$s and %2$s are not in our dictionary.</string>
+  		<string name="game_play_3_invalid_words">%1$s, %2$s and %3$s are not in our dictionary.</string>
+  		<string name="game_play_4_invalid_words">%1$s, %2$s, %3$s and %4$s are not in our dictionary.</string>
+  		<string name="game_play_5_invalid_words">%1$s, %2$s, %3$s, %4$s and %5$s are not in our dictionary.</string>
+  		<string name="game_play_6_invalid_words">%1$s, %2$s, %3$s, %4$s, %5$s and %6$s are not in our dictionary.</string>
+   		<string name="game_play_7_invalid_words">%1$s, %2$s, %3$s, %4$s, %5$s, %6$s and %7$s are not in our dictionary.</string>
+   		<string name="game_play_8_invalid_words">%1$s, %2$s, %3$s, %4$s, %5$s, %6$s, %7$s and %8$s are not in our dictionary.</string>
+    	<string name="game_play_9_invalid_words">%1$s, %2$s, %3$s, %4$s, %5$s, %6$s, %7$s, %8$s and %9$s are not in our dictionary.</string>
+   		<string name="game_play_10_invalid_words">%1$s, %2$s, %3$s, %4$s, %5$s, %6$s, %7$s, %8$s, %9$s and %10$s are not in our dictionary. Wow.  That\'s a boatload of invalid words.</string>
+    	<string name="game_play_title">about to play</string>
+    	<string name="game_play_skip_title">about to skip a turn</string>
+    	<string name="game_play_skip_confirmation_text">are you sure?</string>
+    	<string name="game_play_words_confirmation_text">are you sure?</string>
+    	<string name="game_play_1_word">%s</string>
+  		<string name="game_play_2_words">%1$s\n%2$s</string>
+  		<string name="game_play_3_words">%1$s\n%2$s\n%3$s</string>
+  		<string name="game_play_4_words">%1$s\n%2$s\n%3$s\n%4$s</string>
+  		<string name="game_play_5_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s</string>
+  		<string name="game_play_6_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s</string>
+   		<string name="game_play_7_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s</string>
+   		<string name="game_play_8_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s</string>
+    	<string name="game_play_9_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s\n%9$s</string>
+   		<string name="game_play_10_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s\n%9$s\n%10$s</string>
+   		<string name="game_play_11_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s\n%9$s\n%10$s\n%11$s</string>
+   		<string name="game_play_12_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s\n%9$s\n%10$s\n%11$s\n%12$s</string>
+   		<string name="game_play_13_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s\n%9$s\n%10$s\n%11$s\n%12$s\n%13$s</string>
+   		<string name="game_play_14_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s\n%9$s\n%10$s\n%11$s\n%12$s\n%13$s\n%14$s</string>
+   		<string name="game_play_15_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s\n%9$s\n%10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s</string>
+   		<string name="game_play_16_words">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s\n%9$s\n%10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s</string>   												
+
+		<string name="game_history_turn_info">played by %1$s in turn %2$s for %3$s points</string>
+		<string name="game_history_title">tap to look up definition</string>
+		<string name="game_lookup_title">word definition</string>
+		
+
+		<string name="game_alert_game_over_2_player_context">you won!\n%1$s - %2$s\n\nCongratulations on win number %3$s!</string>
+		<string name="game_alert_game_over_2_player">%3$s won!\n%1$s - %2$s</string>
+		<string name="game_alert_game_over_2_player_draw">it\'s a draw!\n%1$s - %2$s</string>
+		
+		<string name="game_list_game_over_win">you defeated %4$s %2$s - %3$s %1$s</string>
+		<string name="game_list_game_over_loss">%4$s won %2$s - %3$s %1$s</string>
+		<string name="game_list_game_over_draw">a %2$s - %2$s draw was declared %1$s</string>
+		<string name="game_surface_game_over_win">You defeated %3$s %1$s - %2$s</string>
+		<string name="game_surface_game_over_win_after_skips">After 4 skips in a row, you defeated %3$s %1$s - %2$s</string>
+		<string name="game_surface_game_over_loss">%3$s won %1$s - %2$s</string>
+		<string name="game_surface_game_over_loss_after_skips">after 4 skips in a row, %3$s won %1$s - %2$s</string>
+		<string name="game_surface_game_over_draw">a %1$s - %2$s draw was declared</string>
+		<string name="game_surface_game_over_draw_after_skips">after 4 skips in a row, a %1$s - %2$s draw was declared</string>
+		<string name="lookup_definition_num">%s.</string>
+		<string name="lookup_definition">(%1$s) %2$s</string>
+		<string name="lookup_definition_not_found">Sorry, we couldn\'t find the definition.</string>
+		<string name="about_main">WordSmash by RiotApps</string>
+		<string name="about_version">version: %s</string>		
+		<string name="about_build_number">build: %s</string>		
+		<string name="about_support">Need support? Have comments? Want to report a bug?</string>	 
+		<string name="about_support_link">http://www.getsatisfaction.com/wordsmash</string>	 
+		<string name="smiley_attribution_link">http://www.codicode.com</string>	 
+			
+		<string name="skill_level_1">Novice</string>		
+		<string name="skill_level_2">Amateur</string>
+		<string name="skill_level_3">Semi-Pro</string>
+		<string name="skill_level_4">Professional</string>
+		<string name="skill_level_5">Expert</string>
+		<string name="skill_level_6">Master</string>
+		<string name="main_choose">Tap an opponent to start a game</string>
+		<string name="main_game_start_prompt">%s is ready to play.  Are you ready?</string>
+		<string name="main_game_start_prompt_title">start a game</string>
+		<string name="main_menu_about">About WordSmash</string>
+		<string name="main_menu_completed_games">Completed Games</string>
+	 
+		<string name="main_menu_rules">Game Rules</string>
+		<string name="main_menu_store">Store</string>
+		<string name="main_menu_share">Share</string>
+		<string name="win_loss_draw_separator"> - </string>
+		<string name="validation_create_game_duplicate">A game is already active.</string>
+		<string name="post_turn_message_with_auto_play">%1$s and then %2$s</string>
+		<string name="post_turn_title_with_auto_play"></string>
+		<string name="share_using">Share using</string>
+		<string name="game_list_skill_level">(%s)</string>
+		<string name="hopper_peek_title">peek at the hopper</string>
+		
+		<string name="hopper_peek_letter">%1$s - %2$s</string>
+		<string name="gameboard_hopper_peek_dialog_title">peek</string>
+		<string name="gameboard_hopper_peek_dialog_description">There are %1$s remaining letters in the hopper and %2$s\'s tray.</string>
+		<string name="share_subject">WordSmash</string>
+		<string name="share_message">Check out WordSmash for Android in the Google Play store.  Test your crossword skills against the character of your choice.  Always play at your own pace, as fast as you desire.</string>
+		<string name="hopper_peek_purchase_offer">Now that the free previews are over, peeking at the hopper requires a Peek at the Hopper Upgrade or a Premium Upgrade.  Just tap the button to go to the store to get unlimited usage of hopper peeks.</string>
+		<string name="hopper_peek_preview">%1$s\n\nYou have %2$s more free uses before needing a Peek at the Hopper upgrade or a Premium Upgrade.</string>
+		<string name="hopper_peek_1_preview_left">%1$s\n\nYou have 1 more free use before needing a Peek at the Hopper upgrade or a Premium Upgrade.</string>
+		<string name="hopper_peek_no_previews_left">%s\n\nTo keep using hopper peeks, you\'ll need a Peek at the Hopper upgrade or a Premium Upgrade!</string>
+
+		<string name="word_definition_purchase_offer">Now that the free previews are over, looking up word definitions requires a Word Definition Lookups upgrage or a Premium Upgrade.  Just tap the button to go to the store to get unlimited lookups of word definitions.  It\'s a great way to learn as you play!\n</string>
+		<string name="word_definition_preview">You have %s more free uses before needing a Word Definition Lookups upgrade or a Premium Upgrade.</string>
+		<string name="word_definition_1_preview_left">You have 1 more free use before needing a Word Definition Lookups upgrade or a Premium Upgrade.</string>
+		<string name="word_definition_no_previews_left">To keep looking up word definitions, you\'ll need a Word Definition Lookups upgrade or a Premium Upgrade!</string>
+	
+		<string name="purchase_thanks_hopper_peek">We hope you enjoy your unlimited usage of Hopper Peeks!</string>	
+	
+		<string name="purchase_thanks_word_definitions">We hope you enjoy your unlimited usage of Word Definitions!</string>			
+		<string name="purchase_thanks_premium_upgrade">We hope you enjoy your Premium Upgrade!</string>
+		<string name="purchase_thanks_hide_interstitial">No more ads between plays!</string>
+		<string name="purchase_thanks_word_hints">We hope you enjoy your unlimited usage of Ethan\'s Hints!</string>
+			
+		<string name="header_title_store">STORE</string>		
+		<string name="header_title_about">ABOUT</string>
+		<string name="header_title_completed_games">GAMES</string>
+		<string name="header_title_rules">RULES</string>
+		
+		<string name="store_item_premium_upgrade_title">Premium Upgrade</string>
+		<string name="store_item_premium_upgrade_description">Enjoy the purest WordSmash experience.  No third-party ads at all.  
+		    Unlimited word definition lookup for any played word. 
+		    Unlimited peeks at the hopper.</string>
+	    <string name="store_item_word_definitions_title">Word Definition Lookups</string>
+		<string name="store_item_word_definitions_description">Lookup the definition of any played word. Learn as you play! Unlimited usage.</string>
+	    <string name="store_item_no_ads_title">No Ads Between Moves</string>
+		<string name="store_item_no_ads_description">Want to get rid of the ads between moves?  This is the upgrade for you.</string>
+	    <string name="store_item_hopper_peek_title">Peek at the Hopper</string>
+		<string name="store_item_hopper_peek_description">At any time, you will be able to see which letters are left in play in the hopper
+		     as well as in your opponent\'s tray.  Unlimited usage.</string>		
+		<string name="smiley_attribution">Thanks to Codicode for the cool smiley characters!</string>    
+		
+		<string name="about_device_specs">This device is %1$s size with %2$s resolution.</string>    
+		<string name="game_surface_first_time_alert_title">Good luck!</string>
+		<string name="game_surface_first_time_alert_message">Drag letters from the tray onto the board to form words in a single axis.\n\nThe first word must be played on at least one smiley.\n\nLetters can be played on top of previously played letters.</string>
+		<string name="main_first_time_alert_title">Welcome!</string>
+		<string name="main_first_time_alert_message">To get started, just choose an opponent.  You can check out all of the rules and visit the store by tapping the 3 squares in the top right corner.\n\nEnjoy WordSmash!</string>
+		<string name="word_hint_num_points">%s points</string>	
+		<string name="word_hint_dialog_title">Ethan\'s Hints</string>		
+		<string name="word_hint_previews_over">Now that the free previews are over, getting hints from Ethan requires an Ethan\'s Hints Upgrage or a Premium Upgrade.\n\n Just tap the button to go to the store to get 2 hints per game for unlimited games.  It\'s cheap and a great way to get an extra boost of brain power when you need it!\n</string>		
+		<string name="word_hint_used_this_game">You\'ve used your %s Ethan\'s hints for this game!</string>	
+		<string name="word_hint_no_previews_left">To keep using Ethan\'s Hints after this game, you\'ll need an Ethan\'s Hints Upgrade or a Premium Upgrade!</string>	
+		
+  		<string name="word_hint_preview">You have %s more games in which to preview Ethan\'s Hints.\n</string>
+		<string name="word_hint_1_preview_left">You have 1 more game in which to preview Ethan\'s hints before needing an Ethan\'s Hints Upgrade or a Premium Upgrade.\n</string>
+		<string name="word_hint_description">Just tap a word to place that word on the board.</string>
+		<string name="word_hint_sub_description">(Don\'t forget to tap the Play button if you decide to play the word.)</string>
+		<string name="word_hint_description_none_found">Sorry, Ethan didn\'t find any word hints.  That doesn\'t mean all hope is lost though!  You may be able to play a word that Ethan didn\'t find.</string>
+		 <string name="progress_word_hint_is_thinking">Ethan is thinking&#8230;</string>
+					
+</resources>

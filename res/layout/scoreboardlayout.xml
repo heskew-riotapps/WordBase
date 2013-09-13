@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+ 	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"    
+    >
+	<RelativeLayout
+	    android:id="@+id/scoreboard"
+		style="@style/ScoreboardLayoutStyle"
+	 >
+    	<ImageView 
+		    android:id="@+id/ivOpponent"
+		    style="@style/ScoreboardImageStyle"
+	    />	
+		   
+		 <TextView
+	        android:id="@+id/tvOpponentName"
+	        style="@style/ScoreboardOpponentNameStyle"	        
+	    /> 
+	      <TextView
+	        android:id="@+id/tvOpponentScore"
+			style="@style/ScoreboardOpponentScoreStyle"
+	   	  
+ 	    />
+	    <TextView
+	        style="@style/ScoreboardPlayerNameStyle"
+	        android:id="@+id/tvPlayerName"
+	    />
+	    <TextView
+	        android:id="@+id/tvPlayerScore"
+			style="@style/ScoreboardPlayerScoreStyle"
+	    />
+ 	    <RelativeLayout
+	       android:id="@+id/scoreboardNumbers"
+	    	android:layout_width="wrap_content"
+	   	 	android:layout_height="wrap_content"
+	    	android:paddingRight="4dp" 
+	        android:layout_alignParentRight="true"
+	        android:paddingTop="2dp"
+	        android:layout_centerVertical="true"
+	    >    
+	    	 <ImageButton 
+		          android:id="@+id/options"
+				style="@style/ScoreboardOptionStyle"
+				/>
+ 	        
+	     	<TextView
+	            android:id="@+id/tvLettersLeft"
+				style="@style/ScoreboardLettersLeftStyle"
+	          
+	         />
+	     	<TextView
+	            android:id="@+id/tvNumPoints"
+				style="@style/ScoreboardNumPointsStyle"
+ 
+	         />
+	    </RelativeLayout>
+</RelativeLayout>
+   <View 
+	    android:id="@+id/bottomBorder"
+	    android:layout_width="fill_parent"
+	    android:layout_height="2dp"
+	    android:background="@color/game_surface_fill_color" 
+	       android:layout_below="@id/scoreboard"
+	    />
+</RelativeLayout>

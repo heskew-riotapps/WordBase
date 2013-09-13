@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+     xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    >
+    
+    	<com.google.ads.AdView  
+          android:id="@+id/adView"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           ads:adUnitId="@string/admob_pub_id_game_word_definition" 
+           android:layout_centerHorizontal="true" 
+           ads:adSize="BANNER"
+           ads:testDevices="TEST_EMULATOR"
+           ads:loadAdOnCreate="false"/>
+		<LinearLayout
+		 android:layout_above="@id/adView" 
+		    style="@style/LayoutStyle" 
+		    android:orientation="vertical">
+		<include android:id="@+id/topAreaLayout" layout="@layout/scoreboardlayout" />
+		<LinearLayout 
+           style="@style/LayoutFormStyle"
+           android:layout_height="fill_parent"
+           > 
+		 <LinearLayout
+				style="@style/FormBackgroundStyle"
+				android:layout_marginTop="5dp"
+				 android:layout_marginBottom="5dp"
+				 android:orientation="vertical"
+				 android:layout_width="fill_parent"
+				 android:layout_height="fill_parent"
+			>
+			<TextView
+		        style="@style/ContentAreaTextTopStyle"
+		        />
+		    <TextView
+		        style="@style/InlineHeaderStyle"
+		        android:text="@string/game_lookup_title" 
+		        android:id="@+id/header"    
+		        />
+	 			<RelativeLayout
+	 			    android:layout_height="fill_parent"
+	 			    android:layout_width="fill_parent"
+	 			    style="@style/ContentAreaTextBottomStyle"
+	 			    android:drawablePadding="0dp"
+	 			    android:paddingLeft="0dp"
+					android:paddingRight="0dp"
+					android:paddingBottom="0dp"
+					android:orientation="vertical"
+	 			>    
+	 				<TextView
+ 						android:paddingLeft="5dp"
+				        style="@style/TextLargeStyle"
+				     	android:id="@+id/tvWord"
+				     	android:layout_marginLeft="2.0dip"
+				     	android:layout_marginBottom="3.0dip"
+				        android:layout_width="fill_parent"
+				        android:layout_height="wrap_content" />
+	 			
+	 			    <ImageView 
+ 						android:paddingRight="5dp"
+					   	android:layout_width="wrap_content"
+				   		android:layout_height="wrap_content"
+					    android:id="@+id/ivWordnik"	
+					    android:src="@drawable/wordnik_badge_a1"
+					    android:layout_alignParentRight="true"
+					 />
+	 			      <TextView 
+					     style="@style/TextStyle"
+					  	 android:id="@+id/tvPreviewMessage"
+					     android:layout_width="fill_parent"
+					     android:layout_height="wrap_content"
+					     android:layout_below="@id/tvWord"
+						android:paddingLeft="5dp"
+						android:paddingRight="5dp"	
+							android:layout_marginBottom="10dp"	  
+					     
+					     />
+	 				  <TextView 
+					     style="@style/TextStyle"
+					  	 android:id="@+id/tvNotFound"
+					     android:layout_width="fill_parent"
+					     android:layout_height="wrap_content"
+					     android:layout_below="@id/tvPreviewMessage"
+					     android:paddingLeft="5dp"
+							android:paddingRight="5dp"
+					     />
+	 				
+	 				  	 
+		    		  <ScrollView   
+		    		    android:id="@+id/scroller"
+				    	android:layout_below="@id/tvPreviewMessage"
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="fill_parent" 
+				    	android:fadingEdge="none"
+				    	android:layout_marginRight="5dp"  
+ 				    	android:layout_marginLeft="5dp"  
+ 				    	android:layout_marginBottom="50dp"
+ 				    	>
+				   
+				    	 <LinearLayout
+						    android:layout_width="fill_parent"
+				    		android:layout_height="wrap_content" 
+				    		android:orientation="vertical"
+				    		android:id="@+id/llDefs"
+						    > 
+						    
+				    	   </LinearLayout>  
+		    		  </ScrollView>
+			  <LinearLayout
+			        style="@style/FormButtonAreaStyle"
+			 	   android:id="@+id/llOK"
+		 		   android:gravity="center"
+			        android:layout_height="50dp"
+					android:layout_width="fill_parent"
+					android:layout_alignParentBottom="true"
+	        	>
+ 
+				<TextView
+				  
+				        android:id="@+id/tvOK"
+				        android:layout_width="fill_parent"
+				        android:layout_height="wrap_content"
+						style="@style/TextStyle"
+						android:gravity="center"
+						android:text="@string/ok"
+						android:textSize="20sp"
+						android:textColor="@color/sub_text_color"
+					 
+				    />
+					<Button 
+				  	    style="@style/ButtonStyle"
+				  	    android:id="@+id/bStore"
+				        android:layout_width="120dp" 
+				       
+				        android:text="@string/go_to_store"
+				    />
+					<Button 
+				  	    style="@style/ButtonStyle"
+				  	    android:id="@+id/bNoThanks"
+				        android:layout_width="120dp" 
+				        android:layout_marginLeft="4dp"
+				        android:text="@string/no_thanks"
+				    />
+		
+	    			</LinearLayout>		    		  
+			     </RelativeLayout>
+	 
+		    </LinearLayout>
+	</LinearLayout>   
+</LinearLayout>
+</RelativeLayout>

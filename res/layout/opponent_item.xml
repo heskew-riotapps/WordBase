@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+ 
+<RelativeLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@color/player_image_background_color"
+    android:id="@+id/rlLineItem"
+  >
+	       <ImageView 
+			 android:layout_width="fill_parent"
+			 android:layout_height="fill_parent"
+			    android:id="@+id/ivOpponent"	
+			    android:background="@drawable/image_border"
+			    android:padding="1dp"
+		        android:scaleType="fitXY"    
+			 />
+		
+          <TextView
+            android:id="@+id/tvOpponent"
+            style="@style/OpponentNameStyle"
+            android:layout_width="wrap_content"
+            
+             android:layout_alignTop="@id/ivOpponent"
+           />
+  
+               <TextView
+	            android:id="@+id/tvSkillLevel"
+	            style="@style/OpponentSkillLevelStyle"
+ 	            android:layout_width="wrap_content"
+	           
+	           
+	           />
+ 			<LinearLayout 
+ 			    android:id="@+id/llOpponentRecordWrapper"
+ 			   style="@style/OpponentRecordWrapperStyle"
+ 			    >
+		          
+		          <TextView
+		            android:layout_width="wrap_content"
+		            android:id="@+id/tvYourWins"
+		            style="@style/OpponentRecordStyle"
+		           />
+		           <TextView
+		               android:layout_width="wrap_content"
+		               android:id="@+id/hyphen1"
+		               style="@style/OpponentRecordStyle"
+		               android:text="@string/win_loss_draw_separator"
+		 
+		           
+		               />
+		            <TextView
+		                android:layout_width="wrap_content"
+		            android:id="@+id/tvYourLosses"
+		            style="@style/OpponentRecordStyle"
+		        
+		           
+		           />
+		            <TextView
+		                android:layout_width="wrap_content"
+		               android:id="@+id/hyphen2"
+		               style="@style/OpponentRecordStyle"
+		               android:text="@string/win_loss_draw_separator" 
+		            />
+		          <TextView
+		            android:layout_width="wrap_content" 
+		            android:id="@+id/tvYourDraws"
+		            style="@style/OpponentRecordStyle" 
+		           />
+	          </LinearLayout>	
+         
+</RelativeLayout>
+ 
+ 

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/LayoutStyle" >
+<include android:id="@+id/topAreaLayout" layout="@layout/scoreboardlayout" />
+
+	<RelativeLayout
+	    android:layout_below="@id/topAreaLayout"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"  
+	 >
+    	<com.riotapps.word.ui.GameSurfaceView 
+    	   
+        	android:id="@+id/gameSurface"
+        	android:layout_margin="0dp"
+        	android:background="@null"
+        />
+    
+    </RelativeLayout>
+
+	<LinearLayout
+	     android:id="@+id/llButtons"
+        style="@style/GameBoardButtonAreaStyle">
+
+	<Button 
+  	    style="@style/GameBoardButtonStyle"
+  	    android:id="@+id/bMoreOptions"
+        android:layout_width="0dp" 
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_more_button_text"
+        
+    />
+
+	  <Button 
+  	    style="@style/GameBoardButtonStyle"
+  	    android:id="@+id/bRecall"
+        android:layout_width="0dp" 
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_recall_button_text"
+    />
+	<Button 
+  	    style="@style/GameBoardButtonStyle"
+  	    android:id="@+id/bShuffle"
+        android:layout_width="0dp" 
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_shuffle_button_text"
+    />
+	<Button
+  	    style="@style/GameBoardButtonStyle"
+  	    android:id="@+id/bSwap"
+        android:layout_width="0dp" 
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_swap_button_text"
+    />
+	<Button 
+  	    style="@style/GameBoardButtonStyle"
+  	    android:id="@+id/bPlay"
+        android:layout_width="0dp" 
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_play_button_text"
+    />
+	<Button 
+  	    style="@style/GameBoardButtonStyle"
+  	    android:id="@+id/bSkip"
+        android:layout_width="0dp" 
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_skip_button_text"
+    />
+  
+   
+ 
+    <Button 
+        style="@style/GameBoardSecondaryButtonStyle"
+        android:id="@+id/bBackToMainOptions"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_back_button_text"
+    />
+    <Button 
+  	    style="@style/GameBoardSecondaryButtonStyle"
+  	    android:id="@+id/bPlayedWords"
+        android:layout_width="0dp" 
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_played_words_button_text"
+        
+    />
+    <Button 
+  	    style="@style/GameBoardSecondaryButtonStyle"
+  	    android:id="@+id/bHints"
+        android:layout_width="0dp" 
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_hints_button_text"
+    />
+    <Button 
+  	    style="@style/GameBoardSecondaryButtonStyle"
+  	    android:id="@+id/bHopperPeek"
+        android:layout_width="0dp" 
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_hopper_peek_button_text"
+     
+    />
+      <Button 
+        style="@style/GameBoardSecondaryButtonStyle"
+        android:id="@+id/bCancel"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_cancel_button_text"
+    />
+
+   <Button
+        style="@style/GameBoardSecondaryButtonStyle"
+        android:id="@+id/bResign"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:text="@string/gameboard_resign_button_text"
+    />
+    </LinearLayout>
+   
+</RelativeLayout>

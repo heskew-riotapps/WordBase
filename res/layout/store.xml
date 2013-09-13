@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+     xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+<LinearLayout  
+    style="@style/LayoutStyle"
+  
+    android:orientation="vertical" >
+   
+     <include android:id="@+id/topAreaLayout" layout="@layout/toparealayout" />
+
+   <LinearLayout
+         style="@style/LayoutFormStyle"
+         android:layout_height="fill_parent"
+    >
+	<LinearLayout
+		style="@style/FormBackgroundStyle"
+		android:layout_marginTop="5dp"
+		 android:layout_marginBottom="5dp"
+		 android:orientation="vertical"
+		 android:layout_width="fill_parent"
+		 android:layout_height="wrap_content"
+	>
+		<TextView
+		        style="@style/ContentAreaTextTopStyle"
+		        android:paddingTop="0dp"
+		        android:layout_height="12dp"
+		        />
+		 
+		<LinearLayout 
+        style="@style/ContentAreaTextBottomStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:orientation="vertical"
+        >
+    <ScrollView   
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent" 
+    	android:fadingEdge="none"
+    	 
+    	
+    	 >
+		<LinearLayout 
+		   	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content" 
+			android:orientation="vertical"
+		    > 
+		
+			<RelativeLayout 
+				   	android:layout_width="fill_parent"
+			    	android:layout_height="wrap_content" 
+					android:id="@+id/rlPremiumUpgrade"
+			> 
+		 
+				 <TextView
+				        style="@style/StoreItemTitleStyle"
+						android:id="@+id/tvPremiumUpgradeTitle"
+				  />
+				 <LinearLayout 
+			  	    android:id="@+id/llPremiumUpgradePriceWrapper"	
+			  	    style="@style/StoreItemPriceWrapperStyle"  	    
+				 >
+	 				  <Button 
+					  	    style="@style/StoreItemPriceButtonStyle"
+					  	    android:id="@+id/bPremiumUpgradePrice"
+					    />
+	 				  <ImageView
+	 				      style="@style/StoreItemCheckStyle"
+	 				      android:id="@+id/ivPremiumUpgradePurchased"
+	 				   />
+ 				  </LinearLayout>
+				  <TextView
+				        style="@style/ContentAreaTextStyle"
+						android:id="@+id/tvPremiumUpgradeDescription"
+				
+				        android:layout_below="@id/tvPremiumUpgradeTitle"
+				        android:layout_toLeftOf="@id/llPremiumUpgradePriceWrapper"
+				        />
+				  <View
+				      android:layout_width="fill_parent"
+				      android:layout_height="2dp" 
+				      android:background="@color/store_item_divider_color" 
+				     
+				      android:layout_marginTop="3dp"
+				      android:layout_below="@id/tvPremiumUpgradeDescription"
+				      />
+			  </RelativeLayout>
+			  
+			  <RelativeLayout 
+				   	android:layout_width="fill_parent"
+			    	android:layout_height="wrap_content" 
+					android:id="@+id/rlNoAds"
+					android:layout_marginTop="5dp"
+				> 
+				<TextView
+				        style="@style/StoreItemTitleStyle"
+						android:id="@+id/tvNoAdsTitle"
+				
+				        />
+				<LinearLayout 
+			  	    android:id="@+id/llNoAdsPriceWrapper"	
+			  	    style="@style/StoreItemPriceWrapperStyle"  	    
+				 >
+	 				  <Button 
+					  	    style="@style/StoreItemPriceButtonStyle"
+					  	    android:id="@+id/bNoAdsPrice"
+					    />
+	 				  <ImageView
+	 				     style="@style/StoreItemCheckStyle"
+	 				      android:id="@+id/ivNoAdsPurchased"
+	 				   />
+ 				  </LinearLayout>
+				  <TextView
+				        style="@style/ContentAreaTextStyle"
+						android:id="@+id/tvNoAdsDescription"
+				       
+				        android:layout_below="@id/tvNoAdsTitle"
+				        android:layout_toLeftOf="@id/llNoAdsPriceWrapper"
+				        />
+				  <View
+				      android:layout_width="fill_parent"
+				      android:layout_height="2dp" 
+				      android:background="@color/store_item_divider_color" 
+				     
+				      android:layout_marginTop="3dp"
+				      android:layout_below="@id/tvNoAdsDescription"
+				      />
+			  </RelativeLayout>
+			  
+			  <RelativeLayout 
+				   	android:layout_width="fill_parent"
+			    	android:layout_height="wrap_content" 
+					android:id="@+id/rlWordDefinitions"
+					android:layout_marginTop="5dp"
+				> 
+				<TextView
+				        style="@style/StoreItemTitleStyle"
+						android:id="@+id/tvWordDefinitionsTitle"
+				 
+				        />
+				 <LinearLayout 
+			  	    android:id="@+id/llWordDefinitionsPriceWrapper"	
+			  	    style="@style/StoreItemPriceWrapperStyle"  	    
+				 >
+	 				  <Button 
+					  	    style="@style/StoreItemPriceButtonStyle"
+					  	    android:id="@+id/bWordDefinitionsPrice"
+					  	    />
+	 				  <ImageView
+	 				      style="@style/StoreItemCheckStyle"
+	 				      android:id="@+id/ivWordDefinitionsPurchased"
+	 				   />
+ 				    </LinearLayout>
+				  <TextView
+				        style="@style/ContentAreaTextStyle"
+						android:id="@+id/tvWordDefinitionsDescription"
+			
+				        android:layout_below="@id/tvWordDefinitionsTitle"
+				       android:layout_toLeftOf="@id/llWordDefinitionsPriceWrapper"
+				        />
+				
+				  <View
+				      android:layout_width="fill_parent"
+				      android:layout_height="2dp" 
+				      android:background="@color/store_item_divider_color" 
+				     
+				      android:layout_marginTop="3dp"
+				      android:layout_below="@id/tvWordDefinitionsDescription"
+				      />
+				  
+				  
+			  </RelativeLayout>
+			  
+			  <RelativeLayout 
+				   	android:layout_width="fill_parent"
+			    	android:layout_height="wrap_content" 
+					android:id="@+id/rlHopperPeek"
+					 android:layout_marginTop="5dp" 
+				> 
+				<TextView
+				        style="@style/StoreItemTitleStyle"
+						android:id="@+id/tvHopperPeekTitle"
+				        />
+				<LinearLayout 
+			  	    android:id="@+id/llHopperPeekPriceWrapper"	
+			  	    style="@style/StoreItemPriceWrapperStyle"  	    
+				 >
+	 				  <Button 
+					  	    style="@style/StoreItemPriceButtonStyle"
+					  	    android:id="@+id/bHopperPeekPrice"
+	 				    />
+	 				  <ImageView
+	 				      style="@style/StoreItemCheckStyle"
+	 				      android:id="@+id/ivHopperPeekPurchased"
+	 				   />
+ 				  </LinearLayout>
+				  <TextView
+				        style="@style/ContentAreaTextStyle"
+						android:id="@+id/tvHopperPeekDescription"
+				        android:layout_below="@id/tvHopperPeekTitle"
+				       android:layout_toLeftOf="@id/llHopperPeekPriceWrapper"
+				      
+				        />
+
+			  </RelativeLayout>
+		</LinearLayout>
+ 	</ScrollView> 
+</LinearLayout>
+</LinearLayout> 
+   </LinearLayout> 
+
+</LinearLayout> 
+</RelativeLayout>

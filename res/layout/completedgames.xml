@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+     xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    >
+    
+    	<com.google.ads.AdView  
+          android:id="@+id/adView"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           ads:adUnitId="@string/admob_pub_id_completed_games"
+           android:layout_centerHorizontal="true" 
+           ads:adSize="BANNER"
+           ads:testDevices="TEST_EMULATOR"
+           ads:loadAdOnCreate="false"/>
+<LinearLayout  
+    android:layout_above="@id/adView" 
+    style="@style/LayoutStyle"
+   
+    android:orientation="vertical" >
+   
+     <include android:id="@+id/topAreaLayout" layout="@layout/toparealayout" />
+
+   <LinearLayout
+         style="@style/LayoutFormStyle"
+                android:layout_height="fill_parent"
+     
+         >
+	<LinearLayout
+		style="@style/FormBackgroundStyle"
+					android:layout_marginTop="5dp"
+				 android:layout_marginBottom="5dp"
+				 android:orientation="vertical"
+				 android:layout_width="fill_parent"
+				 android:layout_height="wrap_content"
+		
+	>
+		<TextView
+		        style="@style/ContentAreaTextTopStyle"
+		           android:paddingTop="0dp"
+		        android:layout_height="12dp"
+		        />
+		  <LinearLayout 
+            style="@style/ContentAreaTextBottomStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:orientation="vertical"
+        >
+    <ListView
+        android:id="@+id/lvGames"
+        >
+        
+        
+        
+    </ListView>
+</LinearLayout>
+</LinearLayout> 
+   </LinearLayout> 
+
+</LinearLayout> 
+</RelativeLayout>
