@@ -87,17 +87,12 @@ public class About extends FragmentActivity implements View.OnClickListener{
 	public void onClick(View v) {
 		Intent browserIntent;
 		
-		switch(v.getId()){  
-        case R.id.tvSupportLink:  
-        case R.id.tvSupportText:  
-        	browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.SUPPORT_SITE_URL));
-	   		startActivity(browserIntent);
-			break;
-        case R.id.tvSmileyAttributionLink:
-        case R.id.tvSmileyAttribution:
-        	browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.CODICODE_URL));
-	   		startActivity(browserIntent);
-			break;
+		if (v.getId() == R.id.tvSupportLink || v.getId() == R.id.tvSupportText) {
+			browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.SUPPORT_SITE_URL));
+			startActivity(browserIntent);
+		} else if (v.getId() == R.id.tvSmileyAttributionLink || v.getId() == R.id.tvSmileyAttribution) {
+			browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.CODICODE_URL));
+			startActivity(browserIntent);
 		}
 		
 	}

@@ -25,9 +25,6 @@
      <include android:id="@+id/topAreaLayout" layout="@layout/toparealayout" />
       <TextView
           android:layout_below="@id/topAreaLayout"
-          android:background="@drawable/logo_bg"
-        
-       
           android:text="@string/main_choose"
            style="@style/OpponentChooseStyle"
           android:id="@+id/txtMainLabel"

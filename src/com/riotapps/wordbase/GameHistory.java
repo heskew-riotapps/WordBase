@@ -1,7 +1,9 @@
 package com.riotapps.wordbase;
 
  
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
@@ -14,6 +16,7 @@ import com.riotapps.wordbase.hooks.StoreService;
 import com.riotapps.wordbase.ui.MenuUtils;
 import com.riotapps.wordbase.utils.ApplicationContext;
 import com.riotapps.wordbase.utils.Constants;
+import com.riotapps.wordbase.utils.IntentExtra;
 import com.riotapps.wordbase.utils.Logger;
 
 import android.content.Context;
@@ -125,10 +128,15 @@ private void loadList(){
 	    //	dialog.show();
         	
         	//this will eventually call wordnik for definition lookup
-         	Intent intent = new Intent(context, GameLookup.class);
-        	intent.putExtra(Constants.EXTRA_GAME_ID, game.getId());
-        	intent.putExtra(Constants.EXTRA_WORD_LOOKUP, view.getTag().toString());
-			startActivity(intent);
+        	List<IntentExtra> extras = new ArrayList<IntentExtra>();
+        	extras.add(new IntentExtra(Constants.EXTRA_GAME_ID, game.getId(), String.class));	
+        	extras.add(new IntentExtra(Constants.EXTRA_WORD_LOOKUP, view.getTag().toString(), String.class));	
+			((ApplicationContext)GameHistory.this.getApplication()).startNewActivity(GameHistory.this, Constants.ACTIVITY_CLASS_GAME_LOOKUP, extras);
+        	
+         	//Intent intent = new Intent(context, GameLookup.class);
+        	//intent.putExtra(Constants.EXTRA_GAME_ID, game.getId());
+        	//intent.putExtra(Constants.EXTRA_WORD_LOOKUP, view.getTag().toString());
+			//startActivity(intent);
         }
     });
 

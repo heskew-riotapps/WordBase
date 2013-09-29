@@ -343,7 +343,7 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
 	 	RelativeLayout.LayoutParams paramsImage = new RelativeLayout.LayoutParams(width, height);
 		ivOpponent.setLayoutParams(paramsImage);
 		
-		int opponentImageId = context.getResources().getIdentifier("com.riotapps.word:drawable/" + opponent.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);
+		int opponentImageId = context.getResources().getIdentifier(this.getString(R.string.namespace) + ":drawable/" + opponent.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);
 		ivOpponent.setImageResource(opponentImageId);
 		
 		
@@ -371,15 +371,12 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
 		 //open dialog mgr to confirm that player wants to play this particular opponent
 		 
 		 
-		 switch (v.getId()){
-		 	case R.id.options:
-		 		popupMenu.show();
-		 		break;
-			default:
-				 int opponentId = Integer.parseInt(v.getTag().toString());
-			   	this.handleGameStartPrompt(opponentId);
-			    		 
-		 }
+		 if (v.getId() == R.id.options) {
+			popupMenu.show();
+		} else {
+			int opponentId = Integer.parseInt(v.getTag().toString());
+			this.handleGameStartPrompt(opponentId);
+		}
  
     }  
  

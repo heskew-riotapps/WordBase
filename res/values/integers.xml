@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
- 
-     <integer name="gameboard_button_area_height">48</integer>
-     <integer name="gameboard_lookup_words_width">200</integer>
-     <integer name="gameboard_lookup_words_height">40</integer>
-         <integer name="derived_device_screen_size">0</integer>
+ 	<integer name="gameBoardLogoHeightPercentageInTenths">7</integer>
+    <integer name="gameboard_button_area_height">48</integer>
+    <integer name="gameboard_lookup_words_width">200</integer>
+    <integer name="gameboard_lookup_words_height">40</integer>
+    <integer name="derived_device_screen_size">0</integer>
     <integer name="derived_device_resolution">0</integer>
     <integer name="maxTrayTileSize">90</integer>
- <integer name="maxDraggingTileSize">120</integer>
- <integer name="maxGameBoardLogoHeight">60</integer>
- <integer name="maxGameBoardTextHeight">28</integer>
+ 	<integer name="maxDraggingTileSize">120</integer>
+ 	<integer name="maxGameBoardLogoHeight">60</integer>
+ 	<integer name="maxGameBoardTextHeight">28</integer>
 </resources>

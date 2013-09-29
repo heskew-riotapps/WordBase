@@ -137,22 +137,25 @@ public class Splash  extends FragmentActivity {
 		 Logger.d(TAG, "onPurchaseCheck");
 		  if (result.isFailure()) {
 		         // handle error here
+			  Logger.d(TAG, "onPurchaseCheck failure=" + result.getMessage());
 		       } 
 	       else {
 	         // does the user have the premium upgrade?
 	    	   StoreService.syncPurchases(inventory);
 	       }
 		  
-		  Intent intent;
+		 // Intent intent;
 	      	if (appContext.getPlayer().getActiveGameId().length() > 0){
-	      		intent = new Intent(Splash.this, com.riotapps.wordbase.GameSurface.class);
-	      		//intent.putExtra(Constants.EXTRA_GAME_ID, appContext.getPlayer().getActiveGameId());
-	      	}
+				((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_GAME_SURFACE);
+	      		
+	      	//	intent = new Intent(Splash.this, com.riotapps.wordbase.GameSurface.class);
+	       	}
 	      	else{
-	      		intent = new Intent(Splash.this, com.riotapps.wordbase.Main.class);
+				((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_MAIN);
+	      //		intent = new Intent(Splash.this, com.riotapps.wordbase.Main.class);
 	      	}
 	      	//intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-	      	Splash.this.startActivity(intent); 
+	      //	Splash.this.startActivity(intent); 
 	 }
 	    
     private void startBackgroundService(){

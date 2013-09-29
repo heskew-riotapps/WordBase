@@ -384,6 +384,13 @@ public class ApplicationContext extends Application{
 		this.opponents = opponents;
 	}
 	
+//	public void closeApp(){
+//		Intent startMain = new Intent(Intent.ACTION_MAIN);
+//		startMain.addCategory(Intent.CATEGORY_HOME);
+//		startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//		startActivity(startMain);
+//	}
+	
 	public void startNewActivity(Context context, String activity){
 		startNewActivity(context, activity, new ArrayList<IntentExtra>());
 	}

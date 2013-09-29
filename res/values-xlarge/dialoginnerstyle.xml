@@ -5,6 +5,6 @@
   >
     <item name="android:layout_width">400dp</item>
 	<item name="android:layout_height">wrap_content</item>    
-    <item name="android:background">@drawable/progress_inner_background</item>
+    <item name="android:background">@drawable/dialog_inner_background</item>
  </style>
 </resources>

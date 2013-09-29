@@ -1,19 +1,12 @@
 package com.riotapps.wordbase;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Tracker;
 import com.riotapps.wordbase.billing.IabHelper;
 import com.riotapps.wordbase.billing.IabResult;
 import com.riotapps.wordbase.billing.Inventory;
 import com.riotapps.wordbase.billing.SkuDetails;
-import com.riotapps.wordbase.hooks.OpponentGroup;
-import com.riotapps.wordbase.hooks.OpponentGroupService;
-import com.riotapps.wordbase.hooks.OpponentService;
 import com.riotapps.wordbase.hooks.PlayerService;
-import com.riotapps.wordbase.hooks.StoreItem;
 import com.riotapps.wordbase.hooks.StoreService;
 import com.riotapps.wordbase.ui.DialogManager;
 import com.riotapps.wordbase.ui.MenuUtils;
@@ -29,7 +22,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class Store  extends FragmentActivity implements View.OnClickListener{

@@ -3,6 +3,7 @@
     <string name="version">1.0</string>
     <string name="versionName">Apple Pie</string>
     <string name="build">101</string>
+    <string name="namespace">com.riotapps.wordbase</string>
      <string name="derived_device_screen_size">unspecified</string>
     <string name="derived_device_resolution">unspecified</string>
 
@@ -190,7 +191,7 @@
 	   <string name="game_last_action_started">%s started the game</string>
 	   <string name="game_last_action_undetermined">The last action is undetermined.</string>
 	   <string name="game_last_action_swapped_1_context">You swapped 1 letter</string>
-	   <string name="game_last_action_swapped_1">%s swapped 1 letter.</string>
+	   <string name="game_last_action_swapped_1">%s swapped 1 letter</string>
 	   <string name="game_last_action_swapped_context">You swapped %s letters</string>
 	   <string name="game_last_action_swapped">%1$s swapped %2$s letters</string>
 	   <string name="game_last_action_skipped_context">You skipped your turn</string>

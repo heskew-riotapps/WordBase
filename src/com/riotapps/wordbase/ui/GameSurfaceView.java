@@ -80,7 +80,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	private static Bitmap bgTrayBaseScaled = null;
 	private static Bitmap bgTrayEmptyScaled = null;
 	private static Bitmap bgTrayBaseDragging = null;
-	private static Bitmap bgTrayBackground = null;
+ //	private static Bitmap bgTrayBackground = null;
 	
 	int absoluteTop = 0;
 	int absoluteLeft = 0;
@@ -97,6 +97,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
     private int currentY = 20;
     private int fullWidth;
     private int fullViewTileWidth;
+    private int trayHeight = 0;
     private boolean isTablet = false;
     private int onDrawCounter = 0;
     //private int trayAreaTop = 0;
@@ -492,6 +493,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		this.zoomedTileMidpoint = Math.round(this.zoomedTileWidth / 2);	
 		this.trayTileMidpoint = Math.round(this.trayTileSize / 2);	
 		this.draggingTileMidpoint = Math.round(this.draggingTileSize / 2);	
+		this.trayHeight = this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2);
 
 		this.parent.captureTime("SetDerivedValues before bitmaps");
 		  
@@ -515,13 +517,14 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 			  GameSurfaceView.bgTrayBaseDragging = ImageHelper.getResizedBitmap(GameSurfaceView.bgTrayBaseDragging, this.draggingTileSize, this.draggingTileSize);		
 	 	 }	 
 		 this.parent.captureTime("SetDerivedValues bgTrayBackground start load resized");
-		 if (GameSurfaceView.bgTrayBackground == null) {
+	/*  if (GameSurfaceView.bgTrayBackground == null) {
 			// GameSurfaceView.bgTrayBackground = BitmapFactory.decodeResource(getResources(), R.drawable.sbd_bg);
-			 GameSurfaceView.bgTrayBackground = decodeSampledBitmapFromResource(getResources(), R.drawable.sbd_bg, this.fullWidth,this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2));
+			 GameSurfaceView.bgTrayBackground = decodeSampledBitmapFromResource(getResources(), R.drawable.gameboard_tray_bg, this.fullWidth,this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2));
 			//  GameSurfaceView.bgTrayBackground = Bitmap.createScaledBitmap(GameSurfaceView.bgTrayBackground, this.fullWidth, this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2), false);
 
 			  GameSurfaceView.bgTrayBackground = ImageHelper.getResizedBitmap(GameSurfaceView.bgTrayBackground, this.fullWidth, this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2));
 		 }
+		*/ 
 		 this.parent.captureTime("SetDerivedValues bgTrayEmptyScaled start load resized");
 		 if (GameSurfaceView.bgTrayEmptyScaled == null) {
 				//GameSurfaceView.bgTrayEmptyScaled = BitmapFactory.decodeResource(getResources(), R.drawable.tray_tile_empty_bg); //decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_empty_bg, this.trayTileSize,this.trayTileSize);
@@ -635,7 +638,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 
 			 GameSurfaceView.bg4LScaled = ImageHelper.getResizedBitmap(GameSurfaceView.bg4LZoomed, this.fullViewTileWidth + 1, this.fullViewTileWidth + 1);
 		}
-		 this.parent.captureTime("SetDerivedValues bg3LZoomed start load");
+		 this.parent.captureTime("SetDerivedValues bg3LZoomed start load"); 
 		 if (GameSurfaceView.bg3LZoomed == null){
 		// Bitmap bg3L = BitmapFactory.decodeResource(getResources(), R.drawable.tile_3l_bg);
 			 GameSurfaceView.bg3LZoomed = decodeSampledBitmapFromResource(getResources(), R.drawable.tile_3l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
@@ -2609,7 +2612,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	private void drawLowerGap(Canvas canvas){
 		if (this.logo == null) { this.LoadExtras(); }
 		Paint pGap = new Paint(); 
-		pGap.setColor(Color.parseColor(this.parent.getString(R.color.game_board_full_view_upper_gap_bg)));
+		pGap.setColor(Color.parseColor(this.parent.getString(R.color.game_board_full_view_lower_gap_bg)));
 	    
 		pGap.setAntiAlias(true);
 	     Rect boundsGap = new Rect();
@@ -2652,13 +2655,32 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	     
 	    // this.trayAreaTop = boundsBorder.top;
 	     
-		canvas.drawBitmap(GameSurfaceView.bgTrayBackground, 0, this.trayTop - TRAY_VERTICAL_MARGIN, null);
+	//	canvas.drawBitmap(GameSurfaceView.bgTrayBackground, 0, this.trayTop - TRAY_VERTICAL_MARGIN, null);
+ 
+		Paint pBackground = new Paint(); 
+		pBackground.setColor(Color.parseColor(this.parent.getString(R.color.tray_background)));
+	    
+		pBackground.setAntiAlias(true);
+	     Rect boundsBackground = new Rect();
+	     boundsBackground.left = 0;
+	     boundsBackground.right = this.trayAreaRect.getRight(); //this.fullWidth;
+	     boundsBackground.top = this.trayTop - TRAY_VERTICAL_MARGIN; //this.trayTop - TRAY_VERTICAL_MARGIN - TRAY_TOP_BORDER_HEIGHT;
+	     
+	     Logger.d(TAG, "drawTray this.trayAreaRect.getBottom()=" + this.trayAreaRect.getBottom());
+	     
+	     boundsBackground.bottom = boundsBackground.top + this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2);
+	     
+	     //boundsBackground.bottom = this.trayAreaRect.getBottom();
+	     canvas.drawRect(boundsBackground, pBackground);
+	 
+		
 		 
 		for (TrayTile tile : this.trayTiles) { 
 			 //canvas.drawBitmap(tile.getCurrentBitmap(),tile.getxPosition(), tile.getyPosition(), null);
 			 //if (!tile.isDragging() && tile.getCurrentLetter().length() > 0){
-			 if (tile.getCurrentLetter().length() > 0){
-				 canvas.drawBitmap(tile.getCurrentBitmap(),tile.getxPosition(), tile.getyPosition(), null);
+			 if (tile.getCurrentLetter().length() > 0){ 
+				 canvas.drawBitmap(GameSurfaceView.bgTrayBaseScaled,tile.getxPosition(), tile.getyPosition(), null);
+				 //canvas.drawBitmap(tile.getCurrentBitmap(),tile.getxPosition(), tile.getyPosition(), null);
 		     	 Paint pLetter = new Paint();
 		     	 pLetter.setColor(Color.parseColor(this.parent.getString(R.color.game_board_tray_tile_letter)));
 		     	 pLetter.setTextSize(Math.round(this.trayTileSize * .78));
@@ -3035,7 +3057,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		this.parent.switchToShuffle();
 	}
 	
-	private boolean isTrayFull(){
+	public boolean isTrayFull(){
 		int numLettersInTray = 0;
 		for(TrayTile tile : this.trayTiles){
 			if (tile.getCurrentLetter().length() > 0){
@@ -3072,13 +3094,21 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		//check to see if this has already run
 		if (this.logo != null) { return; }
 		Logger.d(TAG, "LoadExtras starting");
-		int height = Math.round(this.bottomGapHeight * .7F);
+		
+		int gameBoardLogoHeightPercentageInTenths = this.parent.getResources().getInteger(R.integer.gameBoardLogoHeightPercentageInTenths);
+		
+		//int height = Math.round(this.bottomGapHeight * .9F);  //make this percentage an integer 
+		int height = Math.round(this.bottomGapHeight * (float)(gameBoardLogoHeightPercentageInTenths / 10.0 ));  //make this percentage an integer 
+		
+		Logger.d(TAG, "LoadExtras gameBoardLogoHeightPercentageInTenths=" + this.parent.getResources().getInteger(R.integer.gameBoardLogoHeightPercentageInTenths) + " height=" + height + " bottomGapHeight=" + this.bottomGapHeight);
+		
+		
 		int maxLogoHeight = this.parent.getResources().getInteger(R.integer.maxGameBoardLogoHeight);
 		if (height > maxLogoHeight){
-			height = maxLogoHeight;
+			height = maxLogoHeight; 
 		}
 		//Logger.d(TAG, "loadExtras logo height=" + height);
-		Bitmap bgLogo = BitmapFactory.decodeResource(getResources(), R.drawable.wordsmash_logo8);
+		Bitmap bgLogo = BitmapFactory.decodeResource(getResources(), R.drawable.gameboard_logo); 
 	 
 		float factor = height / (float) bgLogo.getHeight(); 
 		float width = bgLogo.getWidth() * factor;
@@ -3115,9 +3145,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 			 tile.setxPositionCenter(Math.round(tile.getxPosition() + (this.trayTileSize / 2)));
 			 tile.setyPositionCenter(Math.round(tile.getyPosition() + (this.trayTileSize / 2)));
 
-			 tile.setOriginalBitmap(GameSurfaceView.bgTrayBaseScaled);
-			 //tile.setOriginalBitmapDragging(this.bgTrayBaseDragging);
-
+			//// tile.setOriginalBitmap(GameSurfaceView.bgTrayBaseScaled);
+			 
 			// Logger.d(TAG, "LoadTray this.parent.getGameState().getTrayLetter(y)=" + this.parent.getGameState().getTrayLetter(y));
 			 
 			 //this will come from state object if it exists for this turn, this is temp

@@ -103,15 +103,15 @@ public class CompletedGames extends FragmentActivity {
 	            	
 	            	String gameId = llItem.getTag().toString();
 	  			
-	            	Intent intent = new Intent(CompletedGames.this, com.riotapps.wordbase.GameSurface.class);
+	            	//Intent intent = new Intent(CompletedGames.this, com.riotapps.wordbase.GameSurface.class);
 	            	
 	            	List<IntentExtra> extras = new ArrayList<IntentExtra>();
 	            	extras.add(new IntentExtra(Constants.EXTRA_GAME_ID, gameId, String.class));
 	            	extras.add(new IntentExtra(Constants.EXTRA_FROM_COMPLETED_GAME_LIST, true, Boolean.class));
-	            	((ApplicationContext)CompletedGames.this.getApplication()).startNewActivity(CompletedGames.this, Constants.ACTIVITY_CLASS_COMPLETED_GAMES, extras);
+	            	((ApplicationContext)CompletedGames.this.getApplication()).startNewActivity(CompletedGames.this, Constants.ACTIVITY_CLASS_GAME_SURFACE, extras);
 	          		//intent.putExtra(Constants.EXTRA_GAME_ID, gameId, gameId.t);
 	          		//intent.putExtra(Constants.EXTRA_FROM_COMPLETED_GAME_LIST, true);
-	          		CompletedGames.this.startActivity(intent); 
+	          		//CompletedGames.this.startActivity(intent); 
 	            }
 	        });
 

@@ -680,9 +680,10 @@ public static void skip(boolean isOpponent, Game game){
 		 finally {
 		        
 			 //put word lookup calls here
-	 	            
-		     wordService.finish();
-		     wordService = null;
+	 	     if (wordService != null){       
+	 	    	 wordService.finish();
+	 	    	 wordService = null;
+	 	     }
 		 }
 		
 		

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Tracker;
-import com.riotapps.wordbase.GameSurface;
 //import com.riotapps.wordbase.Main;
 import com.riotapps.wordbase.R;
 import com.riotapps.wordbase.hooks.AlphabetService;
@@ -20,7 +19,6 @@ import com.riotapps.wordbase.utils.Logger;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,9 +26,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -207,27 +202,21 @@ private Tracker tracker;
 	 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()){
-			case R.id.llOK:
-				this.close();
-				break;
-			case R.id.bStore:
-				this.dismiss(); 
-				Intent intent = new Intent(this.parent, com.riotapps.wordbase.Store.class);
-				this.trackEvent(Constants.TRACKER_ACTION_HOPPER_PEEK, Constants.TRACKER_LABEL_HOPPER_PEEK_GO_TO_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-
-				this.parent.startActivity(intent); 
-				break;
-			case R.id.bNoThanks:
-				this.dismiss();
-				this.trackEvent(Constants.TRACKER_ACTION_HOPPER_PEEK, Constants.TRACKER_LABEL_HOPPER_PEEK_DECLINE_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-
-				((ICloseDialog)this.parent).dialogClose(Constants.RETURN_CODE_HOPPER_PEEK_CLOSE);
-				break;
-			default:
-				this.close();	
-				
-				break;
+		if (v.getId() == R.id.llOK) {
+			this.close();
+		} else if (v.getId() == R.id.bStore) {
+			this.dismiss();
+			
+			((ApplicationContext)((Activity) parent).getApplication()).startNewActivity(parent, Constants.ACTIVITY_CLASS_STORE);
+			Intent intent = new Intent(this.parent, com.riotapps.wordbase.Store.class);
+			this.trackEvent(Constants.TRACKER_ACTION_HOPPER_PEEK, Constants.TRACKER_LABEL_HOPPER_PEEK_GO_TO_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
+			this.parent.startActivity(intent);
+		} else if (v.getId() == R.id.bNoThanks) {
+			this.dismiss();
+			this.trackEvent(Constants.TRACKER_ACTION_HOPPER_PEEK, Constants.TRACKER_LABEL_HOPPER_PEEK_DECLINE_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
+			((ICloseDialog)this.parent).dialogClose(Constants.RETURN_CODE_HOPPER_PEEK_CLOSE);
+		} else {
+			this.close();
 		}
 	}
 	

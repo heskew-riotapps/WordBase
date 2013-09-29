@@ -307,25 +307,17 @@ public class GameLookup extends FragmentActivity  implements View.OnClickListene
 
 	@Override
 	public void onClick(View v) {
-		switch(v.getId()){  
-        case R.id.ivWordnik:  
-        	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format(Constants.WORDNIK_WORD_URL, this.word.toLowerCase())));
-	   		startActivity(browserIntent);
-        	break;
-        case R.id.llOK:
-        	this.finish();
-			break;
-		case R.id.bStore: 
+		if (v.getId() == R.id.ivWordnik) {
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format(Constants.WORDNIK_WORD_URL, this.word.toLowerCase())));
+			startActivity(browserIntent);
+		} else if (v.getId() == R.id.llOK) {
+			this.finish();
+		} else if (v.getId() == R.id.bStore) {
 			((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_STORE);
-			//Intent intent = new Intent(this, com.riotapps.wordbase.Store.class);
-			//this.startActivity(intent); 
-			break;
-		case R.id.bNoThanks:
+		} else if (v.getId() == R.id.bNoThanks) {
 			this.finish();
-			break;
-		default:
+		} else {
 			this.finish();
-			break;
 		}
 		
 	}

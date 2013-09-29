@@ -32,6 +32,7 @@ import com.riotapps.wordbase.ui.WordLoaderThread;
 import com.riotapps.wordbase.utils.ApplicationContext;
 import com.riotapps.wordbase.utils.Check;
 import com.riotapps.wordbase.utils.Constants;
+import com.riotapps.wordbase.utils.IntentExtra;
 import com.riotapps.wordbase.ui.CustomProgressDialog;
 import com.riotapps.wordbase.utils.ImageFetcher;
 import com.riotapps.wordbase.utils.Logger;
@@ -243,9 +244,15 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	
     
     public void unfreezeButtons(){
+    	Logger.d(TAG, "Unfreeze buttons called");
     	this.isButtonActive = false;
     }
 
+    public void freezeButtons(){
+    	Logger.d(TAG, "Freeze buttons called");
+    	this.isButtonActive = true;
+    }
+    
 	@SuppressWarnings("unused")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -350,16 +357,19 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	 	
 	 	if (fromCompletedGameList){
 	 		this.gameId = i.getStringExtra(Constants.EXTRA_GAME_ID);
-	 	}
+	 	} 
 	 	
 	 	Logger.d(TAG, "setGameId=" + (this.gameId == null ? "null" : this.gameId));
 	 	
 	 	if (this.gameId == null || this.gameId.equals("")){
 	 		Logger.d(TAG, "setGameId starting over, sending user to main");
 	 		//reroute player to main
-	 		Intent intent = new Intent(this, com.riotapps.wordbase.Main.class);
-    		this.startActivity(intent); 
-    		this.finish();
+	 		
+			((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_MAIN);
+	 		//Intent intent = new Intent(this, com.riotapps.wordbase.Main.class);
+	 		//this.startActivity(intent); 
+   
+	 		this.finish();
 	 	}
   }
 
@@ -566,8 +576,17 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 			    	switch (this.activeButton){
 				    	case 1:
 				    		if (GameSurface.this.bMoreOptions.getVisibility() == View.VISIBLE){
-				    			bRecall.setVisibility(View.GONE);
-				    			bShuffle.setVisibility(View.VISIBLE);
+				    		
+				    			//only show shuffle if the tray is full (this can be fixed to shuffle anytime later)
+				    			if (GameSurface.this.game.getPlayerGames().get(0).getTrayLetters().size() != 7){
+				    				GameSurface.this.bRecall.setClickable(false);
+				    				GameSurface.this.bRecall.setTextColor(Color.parseColor(GameSurface.this.getString(R.color.button_text_color_off)));	
+				    				bShuffle.setVisibility(View.GONE); ///this is likely not need, but just in case...
+							 	}
+				    			else {
+				    				bRecall.setVisibility(View.GONE);
+					    			bShuffle.setVisibility(View.VISIBLE);
+				    			}
 				    		}
 				    		break;
 				    	case 2:
@@ -673,7 +692,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	 }
 	 
 	 private void setupButtons(boolean showSecondary){
-		this.isButtonActive = false;
+		this.unfreezeButtons();
 		buttonsLoaded = true;
 		//Logger.d(TAG,  "setupButtons called");
 
@@ -777,6 +796,8 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		 	bPlay.setClickable(this.game.isContextPlayerTurn());
 		 	
 	//	 	Logger.d(TAG, "getNumLettersLeft=" + this.game.getHopper().size());
+
+
 		 	
 		 
 		  	if (this.game.getHopper().size() > 0){
@@ -794,11 +815,16 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		  	
 		 	bSkip.setClickable(this.game.isContextPlayerTurn());
 		 	
-	
 		 	
+			if (this.game.getPlayerGames().get(0).getTrayLetters().size() == 7){
 		 	//by default recall button will be hidden, it will be switched with shuffle button when a letter is dropped on the board
-		 	this.bRecall.setVisibility(View.GONE); 
-		 	
+		 		this.bRecall.setVisibility(View.GONE); 
+		 	}
+		 	else{
+		 		this.bShuffle.setVisibility(View.GONE); 
+		 		this.bRecall.setClickable(false);
+		 		this.bRecall.setTextColor(Color.parseColor(this.getString(R.color.button_text_color_off)));	
+		 	}
 		 	//set cancel button area mode:
 		 	//if it's the first play of the game by starting player, it should be "CANCEL" mode
 		 	//if it's not the first play of the game, it should be in "RESIGN" mode
@@ -843,6 +869,9 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		 		}
 		 		else {
 		 			bPlayedWords.setVisibility(View.VISIBLE);
+		 			bPlayedWords.setClickable(true);
+		 			
+		 			Logger.d(TAG, "bPlayedWords clickable true");
 		 			//LinearLayout llButtons = (LinearLayout)this.findViewById(R.id.llButtons);
 		 			
 		 			// LinearLayout.LayoutParams llParams = (LinearLayout.LayoutParams)llButtons.getLayoutParams();
@@ -860,7 +889,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		 		}
 		 	//}
 	 	}
-	 	
+		 	Logger.d(TAG, "bPlayedWords clickable=" + bPlayedWords.isClickable());
 	 //	if (!StoreService.isHopperPeekPurchased() && PlayerService.getRemainingFreeUsesHopperPeek() == 0){
 	 //	 	bHopperPeek.setVisibility(View.GONE);
 	 //	}
@@ -1103,9 +1132,11 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 			
 			//if anything happens here let's just restart the activity from scratch
 			//occasionally a null error occurs, so let's just start over if that happens
-			Intent intent = new Intent(this, com.riotapps.wordbase.GameSurface.class);
-    		this.startActivity(intent); 
-    		this.finish();
+			((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_GAME_SURFACE);
+
+			//Intent intent = new Intent(this, com.riotapps.wordbase.GameSurface.class);
+    		//this.startActivity(intent); 
+    		//this.finish();
 		}
 
 	}
@@ -1182,8 +1213,10 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 				
 				if (backToMain){
 					//in this case the game was completed in this session so lets just send player to main activity
-					Intent intent = new Intent(this, com.riotapps.wordbase.Main.class);
-		    		this.startActivity(intent); 
+					((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_MAIN);
+
+					//Intent intent = new Intent(this, com.riotapps.wordbase.Main.class);
+		    		//this.startActivity(intent); 
 		    		this.finish();
 				}	
 				else{
@@ -1438,7 +1471,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 				this.fillGameState();
 				this.setupButtons();
 				this.gameSurfaceView.setInitialButtonStates();
-				this.isButtonActive = false;
+				this.unfreezeButtons();
 			}
 			
 			//reprime the pump
@@ -1474,98 +1507,85 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	 @Override 
 	    public void onClick(View v) {
 		 Logger.d(TAG, "onclick this.isButtonActive=" + this.isButtonActive);
-	    	Intent intent;
+	    	//Intent intent;
 	    	if (this.isButtonActive == true){
 	    		//skip processing to stop dialogs from doubling up
 	    	}
 	    	else {		
-		    	switch(v.getId()){  
-		    		case R.id.bMoreOptions:
-		    			this.setupButtons(true);
-		    			break;
-		    		case R.id.bBackToMainOptions:
-		    			this.setupButtons();
-		    			this.gameSurfaceView.setInitialButtonStates();
-		    			break;
-			    	case R.id.options:
-				 		popupMenu.show();
-				 		break;
-			        case R.id.bShuffle: 
-			        	this.isButtonActive = true;
-			        	Logger.d(TAG, "bShuffle clicked");
-			        	 this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
-				        			Constants.TRACKER_LABEL_SHUFFLE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-			        	this.gameSurfaceView.shuffleTray();
-			        	this.unfreezeButtons();
-		    		 	Logger.d(TAG, "unfreeze shuffle");
-			        	break;
-			        case R.id.bHints:  
-			        	this.isButtonActive = true;
-			        	this.handleLoadHints();
- 
-						break;
-			        case R.id.bHopperPeek:  
-			        	this.isButtonActive = true;
- 		        	 
-			        	this.hopperPeekdialog = new HopperPeekDialog(this, this.game.getId());
-				  	 	this.hopperPeekdialog.show();
- 
-						break;
-			        case R.id.bPlayedWords:  
-			        	this.isButtonActive = true;
-			        	intent = new Intent(this, GameHistory.class);
-			        	intent.putExtra(Constants.EXTRA_GAME_ID, game.getId());
-						startActivity(intent);
-					 
-						break;
-			   
-			        case R.id.bRecall:
-			        	this.isButtonActive = true;
-			        	this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
-			        			Constants.TRACKER_LABEL_RECALL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-			        	this.gameSurfaceView.recallLetters();
-			        	this.unfreezeButtons();
-		    		 	Logger.d(TAG, "unfreeze recall");
-						break;
-			        case R.id.bPlay:
-			        	this.isButtonActive = true;
-			        	this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
-			        			Constants.TRACKER_LABEL_PLAY_INITIAL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-			        	//this.loadPlaySpinner();
-			        	v.post(new Runnable() {
-		                    public void run() {
-		                        // Your job here
-		                     gameSurfaceView.onPlayClick();
-		                    }
-		                });
-			        	//this.gameSurfaceView.onPlayClick();
-						break;
-			       case R.id.bSkip:
-			    	   this.isButtonActive = true;
-			    	   this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
+		    	if (v.getId() == R.id.bMoreOptions) {
+					this.setupButtons(true);
+				} else if (v.getId() == R.id.bBackToMainOptions) {
+					this.setupButtons();
+					this.gameSurfaceView.setInitialButtonStates();
+				} else if (v.getId() == R.id.options) {
+					popupMenu.show();
+				} else if (v.getId() == R.id.bShuffle) {
+					this.freezeButtons(); //this.isButtonActive = true;
+					Logger.d(TAG, "bShuffle clicked");
+					this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
+								Constants.TRACKER_LABEL_SHUFFLE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
+					this.gameSurfaceView.shuffleTray();
+					this.unfreezeButtons();
+					Logger.d(TAG, "unfreeze shuffle");
+				} else if (v.getId() == R.id.bHints) {
+					this.freezeButtons(); //this.isButtonActive = true;
+					this.handleLoadHints();
+				} else if (v.getId() == R.id.bHopperPeek) {
+					this.freezeButtons(); //this.isButtonActive = true;
+					this.hopperPeekdialog = new HopperPeekDialog(this, this.game.getId());
+					this.hopperPeekdialog.show();
+				} else if (v.getId() == R.id.bPlayedWords) {
+					this.freezeButtons(); //this.isButtonActive = true;
+					List<IntentExtra> extras = new ArrayList<IntentExtra>();
+	            	extras.add(new IntentExtra(Constants.EXTRA_GAME_ID, gameId, String.class));					
+					((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_GAME_HISTORY, extras);
+
+					//intent = new Intent(this, GameHistory.class);
+					//intent.putExtra(Constants.EXTRA_GAME_ID, game.getId());
+					//startActivity(intent);
+				} else if (v.getId() == R.id.bRecall) {
+					this.freezeButtons(); //this.isButtonActive = true;
+					this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
+							Constants.TRACKER_LABEL_RECALL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
+					this.gameSurfaceView.recallLetters();
+					if (this.game.getPlayerGames().get(0).getTrayLetters().size() != 7){
+					 		this.bRecall.setClickable(false);
+					 		this.bRecall.setTextColor(Color.parseColor(this.getString(R.color.button_text_color_off)));	
+					 	}
+					this.unfreezeButtons();
+					Logger.d(TAG, "unfreeze recall");
+				} else if (v.getId() == R.id.bPlay) {
+					this.freezeButtons(); //this.isButtonActive = true;
+					this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
+							Constants.TRACKER_LABEL_PLAY_INITIAL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
+					//this.loadPlaySpinner();
+					v.post(new Runnable() {
+					    public void run() {
+					        // Your job here
+					     gameSurfaceView.onPlayClick();
+					    }
+					});
+				} else if (v.getId() == R.id.bSkip) {
+					this.freezeButtons(); //this.isButtonActive = true;
+					this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
 			        			Constants.TRACKER_LABEL_SKIP_INITIAL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-			        	this.gameSurfaceView.onPlayClick();
-						break;
-			       case R.id.bSwap:
-			    	   this.isButtonActive = true;
-			    	   this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
+					this.gameSurfaceView.onPlayClick();
+				} else if (v.getId() == R.id.bSwap) {
+					this.freezeButtons(); //this.isButtonActive = true;
+					this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
 			        			Constants.TRACKER_LABEL_SWAP_INITIAL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-			        	this.onSwapClick();
-						break;
-			   
-			        case R.id.bResign:  
-			        	this.isButtonActive = true;
-			        	 this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
-				        			Constants.TRACKER_LABEL_RESIGN_INITIAL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-			        	this.handleResign();
-						break;
-			        case R.id.bCancel:  
-			        	this.isButtonActive = true;
-			        	this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
-			        			Constants.TRACKER_LABEL_CANCEL_INITIAL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-			        	this.handleCancel();
-						break;
-		    	}
+					this.onSwapClick();
+				} else if (v.getId() == R.id.bResign) {
+					this.freezeButtons(); //this.isButtonActive = true;
+					this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
+								Constants.TRACKER_LABEL_RESIGN_INITIAL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
+					this.handleResign();
+				} else if (v.getId() == R.id.bCancel) {
+					this.freezeButtons(); //this.isButtonActive = true;
+					this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
+							Constants.TRACKER_LABEL_CANCEL_INITIAL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
+					this.handleCancel();
+				}
 	    	}	
 	 }
 	 
@@ -1742,8 +1762,10 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	     
 	    	GameService.cancel(this.getPlayer(), this.game);
 	    	GameStateService.removeGameState(this.game.getId());
-    		Intent intent = new Intent(this, com.riotapps.wordbase.Main.class);
-    		this.startActivity(intent); 
+	    	
+	 		((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_MAIN);
+    	//	Intent intent = new Intent(this, com.riotapps.wordbase.Main.class);
+    	//	this.startActivity(intent); 
         
 	    	//finish this activity so it is removed from history
     		this.finish();
@@ -2162,6 +2184,9 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	    		this.wordHintDialog = new WordHintDialog(this, hints);
 	        	this.wordHintDialog.show();
 	    	}
+	    	else{
+	    		this.unfreezeButtons();
+	    	}
 	    	 Logger.d(TAG, "handlePostWordHintTask placedResultsForWordHints derived=" + this.placedResultsForWordHints.size());
 	    	
 	    }
@@ -2466,11 +2491,9 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 
 			@Override
 			public void onClick(View v) {
-				switch(v.getId()){  
-				case R.id.bOK:
+				if (v.getId() == R.id.bOK) {
 					this.handleOKClick();
-					break;
-				case R.id.tvLetter1:
+				} else if (v.getId() == R.id.tvLetter1) {
 					if (!letter_1){
 						tvLetter1.setBackgroundResource(R.drawable.tray_tile_swap_bg);
 					}
@@ -2478,8 +2501,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 						tvLetter1.setBackgroundResource(R.drawable.tray_tile_bg);
 					}
 					letter_1 = !letter_1;
-					break;
-				case R.id.tvLetter2:
+				} else if (v.getId() == R.id.tvLetter2) {
 					if (!letter_2){
 						tvLetter2.setBackgroundResource(R.drawable.tray_tile_swap_bg);
 					}
@@ -2487,8 +2509,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 						tvLetter2.setBackgroundResource(R.drawable.tray_tile_bg);
 					}
 					letter_2 = !letter_2;
-					break;
-				case R.id.tvLetter3:
+				} else if (v.getId() == R.id.tvLetter3) {
 					if (!letter_3){
 						tvLetter3.setBackgroundResource(R.drawable.tray_tile_swap_bg);
 					}
@@ -2496,8 +2517,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 						tvLetter3.setBackgroundResource(R.drawable.tray_tile_bg);
 					}
 					letter_3 = !letter_3;
-					break;
-				case R.id.tvLetter4:
+				} else if (v.getId() == R.id.tvLetter4) {
 					if (!letter_4){
 						tvLetter4.setBackgroundResource(R.drawable.tray_tile_swap_bg);
 					}
@@ -2505,8 +2525,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 						tvLetter4.setBackgroundResource(R.drawable.tray_tile_bg);
 					}
 					letter_4 = !letter_4;
-					break;
-				case R.id.tvLetter5:
+				} else if (v.getId() == R.id.tvLetter5) {
 					if (!letter_5){
 						tvLetter5.setBackgroundResource(R.drawable.tray_tile_swap_bg);
 					}
@@ -2514,8 +2533,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 						tvLetter5.setBackgroundResource(R.drawable.tray_tile_bg);
 					}
 					letter_5 = !letter_5;
-					break;
-				case R.id.tvLetter6:
+				} else if (v.getId() == R.id.tvLetter6) {
 					if (!letter_6){
 						tvLetter6.setBackgroundResource(R.drawable.tray_tile_swap_bg);
 					}
@@ -2523,8 +2541,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 						tvLetter6.setBackgroundResource(R.drawable.tray_tile_bg);
 					}
 					letter_6 = !letter_6;
-					break;
-				case R.id.tvLetter7:
+				} else if (v.getId() == R.id.tvLetter7) {
 					if (!letter_7){
 						tvLetter7.setBackgroundResource(R.drawable.tray_tile_swap_bg);
 					}
@@ -2532,7 +2549,6 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 						tvLetter7.setBackgroundResource(R.drawable.tray_tile_bg);
 					}
 					letter_7 = !letter_7;
-					break;
 				}
 			}
 	    	

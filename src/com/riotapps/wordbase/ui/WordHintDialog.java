@@ -271,28 +271,22 @@ public class WordHintDialog  extends AlertDialog implements View.OnClickListener
 	 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()){
-			case R.id.llOK:
-				((ICloseDialog)this.parent).dialogClose(Constants.RETURN_CODE_WORD_HINT_CLOSE);
-				break;
-			case R.id.bStore:
-				this.dismiss(); 
-				Intent intent = new Intent(this.parent, com.riotapps.wordbase.Store.class);
-				this.trackEvent(Constants.TRACKER_ACTION_WORD_HINT, Constants.TRACKER_LABEL_WORD_HINTS_GO_TO_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-
-				this.parent.startActivity(intent); 
-				break;
-			case R.id.bNoThanks:
-				this.dismiss();
-				this.trackEvent(Constants.TRACKER_ACTION_WORD_HINT, Constants.TRACKER_LABEL_WORD_HINTS_DECLINE_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-
-				((ICloseDialog)this.parent).dialogClose(Constants.RETURN_CODE_WORD_HINT_CLOSE);
-				break;
-			default:
-				 String placedResultId = v.getTag().toString();
-				 ((ICloseDialog)this.parent).dialogClose(Constants.RETURN_CODE_WORD_HINT_DIALOG_CHOICE_MADE, placedResultId);
-	
-				break;
+	 
+		
+		if (v.getId() == R.id.llOK) {
+			((ICloseDialog)this.parent).dialogClose(Constants.RETURN_CODE_WORD_HINT_CLOSE);
+		} else if (v.getId() == R.id.bStore) {
+			this.dismiss();
+			Intent intent = new Intent(this.parent, com.riotapps.wordbase.Store.class);
+			this.trackEvent(Constants.TRACKER_ACTION_WORD_HINT, Constants.TRACKER_LABEL_WORD_HINTS_GO_TO_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
+			this.parent.startActivity(intent);
+		} else if (v.getId() == R.id.bNoThanks) {
+			this.dismiss();
+			this.trackEvent(Constants.TRACKER_ACTION_WORD_HINT, Constants.TRACKER_LABEL_WORD_HINTS_DECLINE_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
+			((ICloseDialog)this.parent).dialogClose(Constants.RETURN_CODE_WORD_HINT_CLOSE);
+		} else {
+			String placedResultId = v.getTag().toString();
+			((ICloseDialog)this.parent).dialogClose(Constants.RETURN_CODE_WORD_HINT_DIALOG_CHOICE_MADE, placedResultId);
 		}
 	}
 	
