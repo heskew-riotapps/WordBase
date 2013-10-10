@@ -353,11 +353,21 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	 	
 	 	this.captureTime("get game from local starting");
 	 	
-	 	this.gameId = this.getPlayer().getActiveGameId();
+	 	//check to see if we are coming back from a child/downstream activity after game is over
+	 	if (this.game != null && this.game.isCompleted() && !this.gameId.equals("")){
+	 		//just keep gameId that is in context already
+	 	}
+	 	else{
+	 		this.gameId = "";
+	 	}
 	 	
-	 	if (fromCompletedGameList){
-	 		this.gameId = i.getStringExtra(Constants.EXTRA_GAME_ID);
-	 	} 
+	 	if (this.game == null || this.gameId.equals("")){
+		 	this.gameId = this.getPlayer().getActiveGameId();
+		 	
+		 	if (fromCompletedGameList){
+		 		this.gameId = i.getStringExtra(Constants.EXTRA_GAME_ID);
+		 	} 
+	 	}
 	 	
 	 	Logger.d(TAG, "setGameId=" + (this.gameId == null ? "null" : this.gameId));
 	 	
@@ -381,7 +391,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		boolean isRevMob = false; //Constants.INTERSTITIAL_REVMOB;
 		final int useRevMob = 0;
 		
-	 	if (!StoreService.isHideInterstitialAdPurchased())
+	 	if (!StoreService.isHideInterstitialAdPurchased(this))
 	 	{
 	 		//assign either chartboost or revmob randomly
 	 		/*if (isChartBoost && isRevMob){
@@ -591,7 +601,10 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 				    		break;
 				    	case 2:
 				    		if (GameSurface.this.bMoreOptions.getVisibility() == View.VISIBLE){
-				    			bRecall.setVisibility(View.VISIBLE);
+				    			GameSurface.this.bRecall.setVisibility(View.VISIBLE);
+			    				GameSurface.this.bRecall.setClickable(true);
+			    				GameSurface.this.bRecall.setTextColor(Color.parseColor(GameSurface.this.getString(R.color.button_text_color_on)));	
+
 				    			bShuffle.setVisibility(View.GONE);
 				    		}
 				    		break;
@@ -868,6 +881,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		 			bPlayedWords.setVisibility(View.GONE);
 		 		}
 		 		else {
+		 			bPlayedWords.setOnClickListener(this);
 		 			bPlayedWords.setVisibility(View.VISIBLE);
 		 			bPlayedWords.setClickable(true);
 		 			
@@ -1593,7 +1607,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 			int hintsUsed = this.game.getHintsUsed(); 
         	int hintsLastUsedInTurn = this.game.getHintsLastUsedInTurn();
 
-        	if (!StoreService.isWordHintsPurchased() &&  
+        	if (!StoreService.isWordHintsPurchased(this) &&  
     				PlayerService.getRemainingFreeUsesWordHints() == 0 && 
     				hintsUsed == 0){
         		//hints are not allowed
@@ -1610,7 +1624,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	        		GameService.saveGame(this.game);
 	        	}
 	        	
-	        	if (hintsUsed == 0 && !StoreService.isWordHintsPurchased()){
+	        	if (hintsUsed == 0 && !StoreService.isWordHintsPurchased(this)){
 	        		//only do this at the game level, not usage level
 	        		PlayerService.addToToWordHintsPreviewsUsed();
 	        	}
@@ -1623,7 +1637,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		        	this.wordHintDialog.show();
 	        	}
 	        	//upgrade has not been purchased and free uses are over
-	        	else if (!StoreService.isWordHintsPurchased() && 
+	        	else if (!StoreService.isWordHintsPurchased(this) && 
 	        				PlayerService.getRemainingFreeUsesWordHints() == 0 && 
 	        				//this might have been the last game for free usage, this check will tell us that
 	        				//if the turn number has been 
@@ -1644,7 +1658,13 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	        		spinner = new CustomProgressDialog(this);
  		 			spinner.setMessage(this.getString(R.string.progress_word_hint_is_thinking));
  		 			spinner.show(); 
-	        		GameService.autoPlayForPlayer(context, game, GameService.getBoardBaseTilesAndRemovePlacedTiles(this.gameSurfaceView.getTiles()), this.placedResultsForWordHints);
+	        		try {
+						GameService.autoPlayForPlayer(context, game, GameService.getBoardBaseTilesAndRemovePlacedTiles(this.gameSurfaceView.getTiles()), this.placedResultsForWordHints);
+					} catch (PreconditionException e) {
+						// TODO Auto-generated catch block
+						Logger.d(TAG, "handleLoadHints dbc error=" + e.getMessage());
+						//do something here	
+					}
 	        	    this.hasWordHintTaskRunThisTurn = true;
 	        		this.loadHints();
 	         
@@ -2036,7 +2056,13 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	    	//DialogManager.SetupAlert(context, "played", "clicked");
  	    	//this.gameSurfaceView.stopThreadLoop();
 	    //	try { 
-	    		GameService.swap(false, game, swappedLetters);
+	    		try {
+					GameService.swap(false, game, swappedLetters);
+				} catch (PreconditionException e) {
+					// TODO Auto-generated catch block
+					Logger.d(TAG, "handleGameSwapOnClick dbc error=" + e.getMessage());
+					//do something here to start cancel game
+				}
 	    		gameState = GameStateService.clearGameState(game.getId());
 	    		
 	    		//String playerAction = game.getLastActionText(context);
@@ -3109,6 +3135,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		        			Constants.TRACKER_LABEL_CANCEL_CANCEL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
 				   
 				   this.unfreezeButtons();
+				   this.setupButtons();
 				   this.dismissWordHintDialog();
 				   try {
 					this.setHintChoice(returnValue);
@@ -3124,7 +3151,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 			PlacedResult hintChoice = null;
 			Logger.d(TAG, "setHintChoice placedResultId=" + placedResultId);
 			for (PlacedResult placedResult : this.placedResultsForWordHints){
-				Logger.d(TAG, "setHintChoice placedResult id=" + (placedResult == null ? "null" : placedResult.getId()));
+				//Logger.d(TAG, "setHintChoice placedResult id=" + (placedResult == null ? "null" : placedResult.getId()));
 				if (placedResult != null && placedResult.getId() != null && placedResult.getId().equals(placedResultId)){
 					hintChoice = placedResult;
 					break;
@@ -3173,7 +3200,14 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 			 @Override
 			 protected Void doInBackground(Void... params) {
 				 GameSurface.this.lastPlayerActionBeforeAutoplay = GameSurface.this.game.getLastActionText(context);
-		    	 GameService.autoPlayForOpponent(GameSurface.this, GameSurface.this.game,  GameSurface.this.gameSurfaceView.getTiles(), true, GameSurface.this.placedResults);
+		    	 try {
+					GameService.autoPlayForOpponent(GameSurface.this, GameSurface.this.game,  GameSurface.this.gameSurfaceView.getTiles(), true, GameSurface.this.placedResults);
+				} catch (PreconditionException e) {
+
+					e.printStackTrace();
+					Logger.d(TAG, "AutoplayTask dbc error=" + e.getMessage());
+					//do something here
+				}
 				
 		    	 
 		    	 return null;
@@ -3200,7 +3234,13 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 				 GameSurface.this.hasPreAutoPlayRunThisTurn = false;
 				 //while player is thinking, let's gather possible plays for opponent to save time
 				 GameSurface.this.isPreAutoplayTaskRunning = true;
-		     	 GameService.autoPlayForOpponent(GameSurface.this, GameSurface.this.game,  GameService.getBoardBaseTilesAndRemovePlacedTiles(GameSurface.this.gameSurfaceView.getTiles()), false, GameSurface.this.placedResults);
+		     	 try {
+					GameService.autoPlayForOpponent(GameSurface.this, GameSurface.this.game,  GameService.getBoardBaseTilesAndRemovePlacedTiles(GameSurface.this.gameSurfaceView.getTiles()), false, GameSurface.this.placedResults);
+				} catch (PreconditionException e) {
+					// TODO Auto-generated catch block
+					Logger.d(TAG, "PreAutoplayTask dbc error=" + e.getMessage());
+
+				}
 				
 		    	 
 		    	 return null;
@@ -3226,39 +3266,50 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 			 @Override
 			 protected Boolean doInBackground(Void... params) {
 				 
-				 int hintsUsed = GameSurface.this.game.getHintsUsed(); 
-		         int hintsLastUsedInTurn = GameSurface.this.game.getHintsLastUsedInTurn();
- 
-		         GameSurface.this.placedResultsForWordHints.clear();
-				 GameSurface.this.hints.clear();
-		         
-				 //finish the if clause
-				 if (!StoreService.isWordHintsPurchased() &&  
-	        				PlayerService.getRemainingFreeUsesWordHints() == 0 && 
-	        				hintsUsed == 0){
-					 return false;
-				 }
-				/// if (hintsUsed >= Constants.MAX_NUM_HINTS_PER_GAME && hintsLastUsedInTurn != GameSurface.this.game.getTurn()){
-			///		 return false; 
-			///	 }
+				 if (GameSurface.this != null && GameSurface.this.game != null) {
+					 int hintsUsed = GameSurface.this.game.getHintsUsed(); 
+			         int hintsLastUsedInTurn = GameSurface.this.game.getHintsLastUsedInTurn();
 	 
-				 if (hintsUsed > Constants.MAX_NUM_HINTS_PER_GAME ||
-		        			(hintsUsed == Constants.MAX_NUM_HINTS_PER_GAME && hintsLastUsedInTurn != GameSurface.this.game.getTurn())) {
-					 return false;
+			         GameSurface.this.placedResultsForWordHints.clear();
+					 GameSurface.this.hints.clear();
+			         
+					 //finish the if clause
+					 if (!StoreService.isWordHintsPurchased(GameSurface.this) &&  
+		        				PlayerService.getRemainingFreeUsesWordHints() == 0 && 
+		        				hintsUsed == 0){
+						 return false;
+					 }
+					/// if (hintsUsed >= Constants.MAX_NUM_HINTS_PER_GAME && hintsLastUsedInTurn != GameSurface.this.game.getTurn()){
+				///		 return false; 
+				///	 }
+		 
+					 if (hintsUsed > Constants.MAX_NUM_HINTS_PER_GAME ||
+			        			(hintsUsed == Constants.MAX_NUM_HINTS_PER_GAME && hintsLastUsedInTurn != GameSurface.this.game.getTurn())) {
+						 return false;
+					 }
+					 
+					 GameSurface.this.captureTime("PreAutoplayTask STARTING");
+					 GameSurface.this.hasWordHintTaskRunThisTurn = false;
+					 
+					
+					 
+			    		
+					 //while player is thinking, let's gather possible plays for opponent to save time
+					 GameSurface.this.isWordHintTaskRunning = true;
+					 try {
+						GameService.autoPlayForPlayer(GameSurface.this, GameSurface.this.game, GameService.getBoardBaseTilesAndRemovePlacedTiles(GameSurface.this.gameSurfaceView.getTiles()), GameSurface.this.placedResultsForWordHints);
+					} catch (PreconditionException e) {
+						// TODO Auto-generated catch block
+						Logger.d(TAG, "WordHintTask dbc error=" + e.getMessage());
+						//do something here
+					}
+			     	// GameService.autoPlayForPlayer(context, game, GameService.getBoardBaseTilesAndRemovePlacedTiles(GameSurface.this.gameSurfaceView.getTiles()), GameSurface.this.placedResultsForWordHints);
+					
 				 }
-				 
-				 GameSurface.this.captureTime("PreAutoplayTask STARTING");
-				 GameSurface.this.hasWordHintTaskRunThisTurn = false;
-				 
-				
-				 
-		    		
-				 //while player is thinking, let's gather possible plays for opponent to save time
-				 GameSurface.this.isWordHintTaskRunning = true;
-				 GameService.autoPlayForPlayer(GameSurface.this, GameSurface.this.game, GameService.getBoardBaseTilesAndRemovePlacedTiles(GameSurface.this.gameSurfaceView.getTiles()), GameSurface.this.placedResultsForWordHints);
-		     	// GameService.autoPlayForPlayer(context, game, GameService.getBoardBaseTilesAndRemovePlacedTiles(GameSurface.this.gameSurfaceView.getTiles()), GameSurface.this.placedResultsForWordHints);
-				
-		    	 
+				 else 
+				 {
+						Logger.d(TAG, "WordHintTask GAME OR GAMESURFACE IS NULL");
+				 }
 		    	 return true;
 		    	 
 		    	 //return game; 

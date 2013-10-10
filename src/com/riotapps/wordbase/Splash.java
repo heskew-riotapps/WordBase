@@ -56,7 +56,7 @@ public class Splash  extends FragmentActivity {
 		 // compute your public key and store it in base64EncodedPublicKey
 		
 		try{
-        mHelper = new IabHelper(this, StoreService.getIABPublicKey());
+        mHelper = new IabHelper(this, StoreService.getIABPublicKey(this));
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
         	   public void onIabSetupFinished(IabResult result) {
         		   onSetupFinished(result);
@@ -120,7 +120,7 @@ public class Splash  extends FragmentActivity {
 				
 				}
 			};
-			mHelper.queryInventoryAsync(true, StoreService.getAllSkus(), mGotInventoryListener);
+			mHelper.queryInventoryAsync(true, StoreService.getAllSkus(this), mGotInventoryListener);
 
     	  }
     	
@@ -141,7 +141,7 @@ public class Splash  extends FragmentActivity {
 		       } 
 	       else {
 	         // does the user have the premium upgrade?
-	    	   StoreService.syncPurchases(inventory);
+	    	   StoreService.syncPurchases(inventory, this);
 	       }
 		  
 		 // Intent intent;

@@ -30,6 +30,7 @@ import com.riotapps.wordbase.utils.Constants;
 import com.riotapps.wordbase.utils.DesignByContractException;
 import com.riotapps.wordbase.utils.Check;
 import com.riotapps.wordbase.utils.Logger;
+import com.riotapps.wordbase.utils.PreconditionException;
 import com.riotapps.wordbase.utils.Storage;
 import com.riotapps.wordbase.utils.Utils;
 import com.riotapps.wordbase.ui.GameSurfaceView;
@@ -399,7 +400,7 @@ public static void skip(boolean isOpponent, Game game){
 		//return game;	
 	}
 	
-	public static void swap(boolean isOpponent, Game game, List<String> swappedLetters){
+	public static void swap(boolean isOpponent, Game game, List<String> swappedLetters) throws PreconditionException{
 		Logger.d(TAG, "GameService.swap called.  isOpponent=" + isOpponent);
 		Date now = new Date();
 	
@@ -438,6 +439,8 @@ public static void skip(boolean isOpponent, Game game){
 			//take care since the hopper may be near the end
 			if (game.getHopper().size() > 0){
 				//add the first hopper letter to the player's tray
+				
+				Check.Require(game.getPlayerGames().get(isOpponent ? 1 : 0).getTrayLetters().size() <= 7, "too many letters in tray");
 				game.getPlayerGames().get(isOpponent ? 1 : 0).getTrayLetters().add(game.getHopper().get(0));
 				//remove hopper letter that was just added to the player's tray
 				game.getHopper().remove(0);
@@ -471,16 +474,16 @@ public static void skip(boolean isOpponent, Game game){
 
 	}
 	
-	public static void autoPlayForPlayer(Context context, Game game, List<GameTile> boardTiles, List<PlacedResult> tempPlacedResults){
+	public static void autoPlayForPlayer(Context context, Game game, List<GameTile> boardTiles, List<PlacedResult> tempPlacedResults) throws PreconditionException{
 		autoPlay(game.getPlayerGames().get(0), context, game, boardTiles, false, tempPlacedResults);
 	}
 	
 	
-	public static void autoPlayForOpponent(Context context, Game game, List<GameTile> boardTiles, boolean followThroughWithPlay, List<PlacedResult> tempPlacedResults){
+	public static void autoPlayForOpponent(Context context, Game game, List<GameTile> boardTiles, boolean followThroughWithPlay, List<PlacedResult> tempPlacedResults) throws PreconditionException{
 		autoPlay(game.getOpponentGame(), context, game, boardTiles, followThroughWithPlay, tempPlacedResults);
 	}
 	
-	public static void autoPlay(PlayerGame playerGame, Context context, Game game, List<GameTile> boardTiles, boolean followThroughWithPlay, List<PlacedResult> tempPlacedResults){
+	public static void autoPlay(PlayerGame playerGame, Context context, Game game, List<GameTile> boardTiles, boolean followThroughWithPlay, List<PlacedResult> tempPlacedResults) throws PreconditionException{
 		//remove previously placed tiles from boardTiles...this is usually done in resetGameAfterRefresh
   
 		ApplicationContext.captureTime(TAG, "autoplay started starting");
@@ -602,7 +605,7 @@ public static void skip(boolean isOpponent, Game game){
 							if (game.getHopper().size() > 1) { swappedLetters.add(playerGame.getTrayLetters().get(1)); }
 							if (game.getHopper().size() > 1) { swappedLetters.add(playerGame.getTrayLetters().get(2)); }
 							GameService.swap(true, game, swappedLetters);
-							
+							 
 							wordService.finish();
 						    wordService = null;
 						     
@@ -2432,7 +2435,7 @@ public static void skip(boolean isOpponent, Game game){
 		 
 		 tvOpponentName.setText(o.getName()); 
 		 
-		 int opponentImageId = context.getResources().getIdentifier("com.riotapps.word:drawable/" + o.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);
+		 int opponentImageId = context.getResources().getIdentifier(context.getString(R.string.namespace) + ":drawable/" + o.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);
 		 ivOpponent.setImageResource(opponentImageId);
 
 		 

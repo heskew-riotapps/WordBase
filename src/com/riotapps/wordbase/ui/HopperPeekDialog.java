@@ -102,7 +102,7 @@ private Tracker tracker;
 		this.peek_description = (TextView)this.layout.findViewById(R.id.peek_description);
 		this.peek_description.setTypeface(ApplicationContext.getMainFontTypeface());
 		
-		if (!StoreService.isHopperPeekPurchased() && PlayerService.getRemainingFreeUsesHopperPeek() == 0){
+		if (!StoreService.isHopperPeekPurchased(this.parent) && PlayerService.getRemainingFreeUsesHopperPeek() == 0){
 		
 			this.peek_description.setText(this.parent.getString(R.string.hopper_peek_purchase_offer));
 			TableLayout tblLetters =  (TableLayout)this.layout.findViewById(R.id.tblLetters);
@@ -114,7 +114,7 @@ private Tracker tracker;
 			
 			this.loadLetters();	
 			
-			if (!StoreService.isHopperPeekPurchased()){
+			if (!StoreService.isHopperPeekPurchased(this.parent)){
 				tvOK.setVisibility(View.GONE);
 			
 			

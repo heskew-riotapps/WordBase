@@ -104,7 +104,7 @@ public class GameLookup extends FragmentActivity  implements View.OnClickListene
 	     this.setupFonts();
 	     
 	     AdView adView = (AdView)this.findViewById(R.id.adView);
-    	if (StoreService.isHideBannerAdsPurchased()){	
+    	if (StoreService.isHideBannerAdsPurchased(this)){	
 			adView.setVisibility(View.GONE);
 		}
     	else {
@@ -112,7 +112,7 @@ public class GameLookup extends FragmentActivity  implements View.OnClickListene
     	}
 	     
 	 
-	     if (!StoreService.isWordDefinitionLookupPurchased() && PlayerService.getRemainingFreeUsesWordDefinition() == 0){
+	     if (!StoreService.isWordDefinitionLookupPurchased(this) && PlayerService.getRemainingFreeUsesWordDefinition() == 0){
 	    	 this.tvPreviewMessage.setText(this.getString(R.string.word_definition_purchase_offer));
 	   		 this.llDefs.setVisibility(View.GONE);
 	   		 this.tvNotFound.setVisibility(View.GONE);
@@ -120,7 +120,7 @@ public class GameLookup extends FragmentActivity  implements View.OnClickListene
 	   		ivWordnik.setVisibility(View.GONE); 
 	     }
 	     else {
-	    	 if (!StoreService.isWordDefinitionLookupPurchased()){
+	    	 if (!StoreService.isWordDefinitionLookupPurchased(this)){
 					
 					int remainingFreeUses  = PlayerService.removeAFreeUseFromWordDefinition();
 					if (remainingFreeUses > 1){

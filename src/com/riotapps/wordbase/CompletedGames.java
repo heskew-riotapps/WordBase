@@ -57,14 +57,14 @@ public class CompletedGames extends FragmentActivity {
 	        ApplicationContext.captureTime(TAG, "oncreate about to loadlist"); 
 	        this.loadList();
 	        ApplicationContext.captureTime(TAG, "loadlist copleted");
-	    	if (StoreService.isHideBannerAdsPurchased()){
-				AdView adView = (AdView)this.findViewById(R.id.adView);
-				adView.setVisibility(View.GONE);
-			}
-	    	   ApplicationContext.captureTime(TAG, "oncreate completed");
+	    //	if (StoreService.isHideBannerAdsPurchased(this)){
+		//		AdView adView = (AdView)this.findViewById(R.id.adView);
+		//		adView.setVisibility(View.GONE);
+		//	}
+	    //	   ApplicationContext.captureTime(TAG, "oncreate completed");
 	    	   
     	    AdView adView = (AdView)this.findViewById(R.id.adView);
-	    	if (StoreService.isHideBannerAdsPurchased()){	
+	    	if (StoreService.isHideBannerAdsPurchased(this)){	
 				adView.setVisibility(View.GONE);
 			}
 	    	else {

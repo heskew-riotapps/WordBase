@@ -2424,10 +2424,10 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
     		 canvas.drawBitmap(tile.getOriginalBitmapZoomed(),tile.getxPositionZoomed(), tile.getyPositionZoomed(), null);
     	 }
 		
-		 if(tile.getId() == 0 || tile.getId() == 224) {
+	//	 if(tile.getId() == 0 || tile.getId() == 224) {
 			 
-			 Logger.d(TAG, "drawZoomedBoardGuts tile.id=" + tile.getId() + " tile.getxPositionZoomed()=" +  tile.getxPositionZoomed() + " tile.getyPositionZoomed()=" + tile.getyPositionZoomed());
-	 }
+	//		 Logger.d(TAG, "drawZoomedBoardGuts tile.id=" + tile.getId() + " tile.getxPositionZoomed()=" +  tile.getxPositionZoomed() + " tile.getyPositionZoomed()=" + tile.getyPositionZoomed());
+	// }
 	 	 
      //	 if (tile.getCurrentLetter().length() > 0){
 	 //    	 Paint p = new Paint();
@@ -2795,7 +2795,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		for (TrayTile trayTile : this.trayTiles){
 			x += trayTile.getCurrentLetter();
 		}
-		Logger.d(TAG, "setHintLetters after loadTray= " + x);
+		//Logger.d(TAG, "setHintLetters after loadTray= " + x);
 		
 		//this.parent.switchToPlay();
 		//this.parent.switchToRecall();
@@ -3182,18 +3182,18 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 				 //check game object for already played letter
 				 PlayedTile playedTile = this.parent.getGameState().getPlayedTileByPosition(tile.getId());
 				 if (playedTile != null){
-					 if (id == 196){
-						 Logger.d(TAG, "LoadTiles playedTile 196 " + playedTile.getLatestPlayedLetter());
-					 }
+					 //if (id == 196){
+					//	 Logger.d(TAG, "LoadTiles playedTile 196 " + playedTile.getLatestPlayedLetter());
+					 //}
 					  
 					 tile.setOriginalBitmap(bgBaseScaled); //this will change as default bonus and played tiles are incorporated
 					 if (this.isZoomAllowed == true){ tile.setOriginalBitmapZoomed(GameSurfaceView.bgBaseZoomed); }
 	
 					 //tile.setOriginalLetter(playedTile.getLetter());
 					 
-					 if (id == 196){
-						 Logger.d(TAG, "LoadTiles 196 " + playedTile.getLatestPlayedLetter().getLetter());
-					 }
+				//	 if (id == 196){
+				//		 Logger.d(TAG, "LoadTiles 196 " + playedTile.getLatestPlayedLetter().getLetter());
+				//	 }
 					 
 					 tile.setOriginalLetter(playedTile.getLatestPlayedLetter().getLetter());
 
@@ -3231,8 +3231,15 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 						 tile.setOriginalText(this.parent.getString(R.string.tile_2L));
 						 break;
 					 case Starter:
-						 tile.setOriginalBitmap(bgStarterScaled); //this will change as default bonus and played tiles are incorporated
-						 if (this.isZoomAllowed == true){ tile.setOriginalBitmapZoomed(GameSurfaceView.bgStarterZoomed); }
+						 //make starter tiles disappear after first word is on board
+						 if (this.parent.getGame().getPlayedWords().size() == 0){
+							 tile.setOriginalBitmap(bgStarterScaled); //this will change as default bonus and played tiles are incorporated
+							 if (this.isZoomAllowed == true){ tile.setOriginalBitmapZoomed(GameSurfaceView.bgStarterZoomed); }
+						 }
+						 else{
+							 tile.setOriginalBitmap(bgBaseScaled); //this will change as default bonus and played tiles are incorporated
+							 if (this.isZoomAllowed == true){ tile.setOriginalBitmapZoomed(GameSurfaceView.bgBaseZoomed); }							 
+						 }
 						 break;
 					 case None:
 						 tile.setOriginalBitmap(bgBaseScaled); //this will change as default bonus and played tiles are incorporated

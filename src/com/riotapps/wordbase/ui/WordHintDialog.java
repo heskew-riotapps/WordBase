@@ -131,7 +131,7 @@ public class WordHintDialog  extends AlertDialog implements View.OnClickListener
 		tvAlertTitle.setTypeface(ApplicationContext.getMainFontTypeface());
 		
 		//Logger.d(TAG, "free hopper peeks=" + PlayerService.getRemainingFreeUsesHopperPeek());
-		boolean isPurchased = StoreService.isWordHintsPurchased();
+		boolean isPurchased = StoreService.isWordHintsPurchased(this.parent);
 		int remainingFreeUses = PlayerService.getRemainingFreeUsesWordHints();
 		
 	 	this.description = (TextView)this.layout.findViewById(R.id.description);
@@ -292,8 +292,12 @@ public class WordHintDialog  extends AlertDialog implements View.OnClickListener
 	
 	private void loadHints(){
  		
+		 int x = 0; 
 		 for (WordHint hint : this.hints){
 			 this.llHints.addView(getHintView(hint));
+			 x += 1;
+			 //just make double sure that the caller did not send in too many hints
+			 if (x >= Constants.NUM_HINTS_TO_DISPLAY){ break;}
 		 }
 		
 	}

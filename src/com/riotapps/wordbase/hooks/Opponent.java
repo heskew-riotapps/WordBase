@@ -134,7 +134,7 @@ public class Opponent{
 		if (this.smallImage == null){
 		  Context context = ApplicationContext.getAppContext();
 			
-		  int opponentImageId = context.getResources().getIdentifier("com.riotapps.word:drawable/" + this.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_SMALL), null, null);
+		  int opponentImageId = context.getResources().getIdentifier(context.getString(R.string.namespace) + ":drawable/" + this.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_SMALL), null, null);
 		  this.smallImage = BitmapFactory.decodeResource(context.getResources(), opponentImageId);
 		}
 	}

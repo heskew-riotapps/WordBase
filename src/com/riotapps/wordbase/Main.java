@@ -129,7 +129,7 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
 	//	this.loadListTask.execute("");
 		
 		AdView adView = (AdView)this.findViewById(R.id.adView);
-    	if (StoreService.isHideBannerAdsPurchased()){	
+    	if (StoreService.isHideBannerAdsPurchased(this)){	
 			adView.setVisibility(View.GONE);
 		}
     	else {

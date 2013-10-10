@@ -13,6 +13,26 @@
     <string name="app_name">WordSmash</string>
     <string name="anonymous_player_name">You</string>
     
+    <string name="IAB_1">MIIBIjANBgkqhkiG9</string>
+	<string name="IAB_2">w0BAQEFAAOCAQ8AMIIBCgKCAQ</string>
+	<string name="IAB_3">EAjsNPfIZBLfO68j+8rjkMwYi5694</string>
+	<string name="IAB_4">YApXBOcPNfg28djJm07uAcTcqHs</string>
+	<string name="IAB_5">TbuRL/nfcVe1ztMyBuzbuzHwZeHSbrV</string>
+	<string name="IAB_6">u+f5UWCwMHNGi8lmyCDSnaw7yUepzl</string>
+	<string name="IAB_7">E8ZcdEfs1ljznksOLgi1WjzuiiOtWSt</string>
+	<string name="IAB_8">xgoT61MpV6JDBl1oS7neDRy9Tb7t5faLe/dDvlw3</string>
+	<string name="IAB_9">vCeWZYL1qH7mzIaXZIyLGjNdpyv7yEC+</string>
+	<string name="IAB_10">MdPTxn2CjWv9bkY09cFysUDFcFMPC/2J</string>
+	<string name="IAB_11">rvn3fPeTVPpfobpzbHCEq/RCCtnxy</string>
+	<string name="IAB_12">rfUxLNFtJ7TbjaqgIk13Ujl1dB8I50nwOMfR</string>
+	<string name="IAB_13">jWPyYs9aA0e6Y50ozjlkKZqpVxQIDAQAB</string>
+	
+	<string name="SKU_GOOGLE_PLAY_HOPPER_PEEK">riotapps_wordsmash_hopper_peek.a</string>
+	<string name="SKU_GOOGLE_PLAY_PREMIUM_UPGRADE">riotapps_wordsmash_premium_upgrade.a</string>
+	<string name="SKU_GOOGLE_PLAY_WORD_DEFINITIONS">riotapps_wordsmash_word_definitions.a</string>
+	<string name="SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL">riotapps_wordsmash_hide_interstitial.a</string>
+	<string name="SKU_GOOGLE_PLAY_WORD_HINTS">riotapps_wordsmash_word_hints.a</string>
+    
     <string name="header_1_win">1 win</string>
     <string name="header_num_wins">%s wins</string>
     <string name="version_name_display">(%s)</string>

@@ -30,7 +30,24 @@ public class About extends FragmentActivity implements View.OnClickListener{
 	        
 	        PlayerService.loadPlayerInHeader(this);
 	        
-	        TextView tvSupportText = (TextView)this.findViewById(R.id.tvSupportText);
+	        loadViews();
+	        
+	        MenuUtils.hideMenu(this);
+	        MenuUtils.setHeaderTitle(this, this.getString(R.string.header_title_about));
+	        this.setupFonts();
+	        
+	        AdView adView = (AdView)this.findViewById(R.id.adView);
+	    	if (StoreService.isHideBannerAdsPurchased(this)){	
+				adView.setVisibility(View.GONE);
+			}
+	    	else {
+	    		adView.loadAd(new AdRequest());
+	    	}
+	 }
+
+	 
+	 protected void loadViews(){
+	       TextView tvSupportText = (TextView)this.findViewById(R.id.tvSupportText);
 	        TextView tvSupportLink = (TextView)this.findViewById(R.id.tvSupportLink);
 	        TextView tvVersion = (TextView)this.findViewById(R.id.tvVersion);
 	        TextView tvVersionName = (TextView)this.findViewById(R.id.tvVersionName);
@@ -43,18 +60,6 @@ public class About extends FragmentActivity implements View.OnClickListener{
 	        String versionCode = this.getString(R.string.version);
 	        String versionName = this.getString(R.string.versionName);
 	      
-	        /*
-	        try {
-				PackageInfo pinfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
-				versionCode = pinfo.versionCode;
-				versionName = pinfo.versionName;
-				
-			} catch (NameNotFoundException e) {
-				versionCode = 2;
-				versionName = "x";
-			}
-			*/
-	        
 	        tvBuildNumber.setText(String.format(this.getString(R.string.about_build_number), this.getString(R.string.build)));
 	        tvVersion.setText(String.format(this.getString(R.string.about_version), versionCode));	
 	        tvVersionName.setText(String.format(this.getString(R.string.version_name_display),versionName));
@@ -65,22 +70,6 @@ public class About extends FragmentActivity implements View.OnClickListener{
 	        tvSupportText.setOnClickListener(this);
 	        tvSmileyAttribution.setOnClickListener(this);
 	        tvSmileyAttributionLink.setOnClickListener(this);
-	        
-	        MenuUtils.hideMenu(this);
-	        MenuUtils.setHeaderTitle(this, this.getString(R.string.header_title_about));
-	        this.setupFonts();
-	        
-	        AdView adView = (AdView)this.findViewById(R.id.adView);
-	    	if (StoreService.isHideBannerAdsPurchased()){	
-				adView.setVisibility(View.GONE);
-			}
-	    	else {
-	    		adView.loadAd(new AdRequest());
-	    	}
-	 }
-
-	 private void setResources(){
-		 
 	 }
 	 
 	@Override
@@ -113,7 +102,7 @@ public class About extends FragmentActivity implements View.OnClickListener{
 		EasyTracker.getInstance().activityStop(this);
 	}
 	
-	private void setupFonts(){
+	protected void setupFonts(){
 		TextView about_main = (TextView)findViewById(R.id.about_main);	
 		TextView tvVersion = (TextView)findViewById(R.id.tvVersion);	
 		TextView tvVersionName = (TextView)findViewById(R.id.tvVersionName);

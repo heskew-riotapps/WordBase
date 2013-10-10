@@ -3,5 +3,9 @@
 <style
     name="OpponentChooseStyle" >
 	<item name="android:textSize">18sp</item>
+		<item name="android:paddingTop">2dp</item>
+	<item name="android:paddingBottom">2dp</item>
+	<item name="android:background">@color/main_opponent_choose_background</item>
+	<item name="android:textColor">@color/main_opponent_choose_text</item>
 </style>
 </resources>

@@ -64,17 +64,17 @@ public class GameHistory extends FragmentActivity{
 	 	GameService.loadScoreboard(this, this.game);
 	 	
 	  	
-	    this.opponentImageId = context.getResources().getIdentifier("com.riotapps.word:drawable/" + this.game.getOpponent().getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);
+	    this.opponentImageId = context.getResources().getIdentifier(this.getString(R.string.namespace) + ":drawable/" + this.game.getOpponent().getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);
 	    	
 	    this.opponentBM = BitmapFactory.decodeResource(getResources(), this.opponentImageId); 
 	    this.playerBM = BitmapFactory.decodeResource(getResources(), R.drawable.you);
 	     
-	 	this.loadList();
+	 	this.loadList();   
 	 	MenuUtils.hideMenu(this);
 	 	this.setupFonts();
 	 	
 	 	AdView adView = (AdView)this.findViewById(R.id.adView);
-    	if (StoreService.isHideBannerAdsPurchased()){	
+    	if (StoreService.isHideBannerAdsPurchased(this)){	
 			adView.setVisibility(View.GONE);
 		}
     	else {
