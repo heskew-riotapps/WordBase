@@ -2435,7 +2435,7 @@ public static void skip(boolean isOpponent, Game game){
 		 
 		 tvOpponentName.setText(o.getName()); 
 		 
-		 int opponentImageId = context.getResources().getIdentifier(context.getString(R.string.namespace) + ":drawable/" + o.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);
+		 int opponentImageId = context.getResources().getIdentifier(context.getString(R.string.namespace) + ":drawable/" + o.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_SMALL), null, null);
 		 ivOpponent.setImageResource(opponentImageId);
 
 		 

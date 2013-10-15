@@ -277,9 +277,11 @@ public class WordHintDialog  extends AlertDialog implements View.OnClickListener
 			((ICloseDialog)this.parent).dialogClose(Constants.RETURN_CODE_WORD_HINT_CLOSE);
 		} else if (v.getId() == R.id.bStore) {
 			this.dismiss();
-			Intent intent = new Intent(this.parent, com.riotapps.wordbase.Store.class);
+			//Intent intent = new Intent(this.parent, com.riotapps.wordbase.Store.class);
 			this.trackEvent(Constants.TRACKER_ACTION_WORD_HINT, Constants.TRACKER_LABEL_WORD_HINTS_GO_TO_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-			this.parent.startActivity(intent);
+			((ApplicationContext)((Activity) parent).getApplication()).startNewActivity(parent, Constants.ACTIVITY_CLASS_STORE);
+			
+			//this.parent.startActivity(intent);
 		} else if (v.getId() == R.id.bNoThanks) {
 			this.dismiss();
 			this.trackEvent(Constants.TRACKER_ACTION_WORD_HINT, Constants.TRACKER_LABEL_WORD_HINTS_DECLINE_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);

@@ -207,10 +207,11 @@ private Tracker tracker;
 		} else if (v.getId() == R.id.bStore) {
 			this.dismiss();
 			
-			((ApplicationContext)((Activity) parent).getApplication()).startNewActivity(parent, Constants.ACTIVITY_CLASS_STORE);
-			Intent intent = new Intent(this.parent, com.riotapps.wordbase.Store.class);
+			//Intent intent = new Intent(this.parent, com.riotapps.wordbase.Store.class);
 			this.trackEvent(Constants.TRACKER_ACTION_HOPPER_PEEK, Constants.TRACKER_LABEL_HOPPER_PEEK_GO_TO_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);
-			this.parent.startActivity(intent);
+			((ApplicationContext)((Activity) parent).getApplication()).startNewActivity(parent, Constants.ACTIVITY_CLASS_STORE);
+			
+			//	this.parent.startActivity(intent);
 		} else if (v.getId() == R.id.bNoThanks) {
 			this.dismiss();
 			this.trackEvent(Constants.TRACKER_ACTION_HOPPER_PEEK, Constants.TRACKER_LABEL_HOPPER_PEEK_DECLINE_STORE, Constants.TRACKER_DEFAULT_OPTION_VALUE);

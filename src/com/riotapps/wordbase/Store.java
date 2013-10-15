@@ -220,6 +220,12 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 			 bWordDefinitionsPrice.setVisibility(View.GONE);
 			 ivWordDefinitionsPurchased.setVisibility(View.VISIBLE);
 		 }
+		 else if (sku.equals(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS))){
+			 Button bWordHintsPrice = (Button)this.findViewById(R.id.bWordHintsPrice);
+			 ImageView ivWordHintsPurchased = (ImageView)this.findViewById(R.id.ivWordHintsPurchased);
+			 bWordHintsPrice.setVisibility(View.GONE);
+			 ivWordHintsPurchased.setVisibility(View.VISIBLE);
+		 }
 		 else if (sku.equals(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))){
 			 Button bPremiumUpgradePrice = (Button)this.findViewById(R.id.bPremiumUpgradePrice);
 			 ImageView ivPremiumUpgradePurchased = (ImageView)this.findViewById(R.id.ivPremiumUpgradePurchased);
@@ -240,6 +246,11 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 			 ImageView ivWordDefinitionsPurchased = (ImageView)this.findViewById(R.id.ivWordDefinitionsPurchased);
 			 bWordDefinitionsPrice.setVisibility(View.GONE);
 			 ivWordDefinitionsPurchased.setVisibility(View.VISIBLE);
+			 
+			 Button bWordHintsPrice = (Button)this.findViewById(R.id.bWordHintsPrice);
+			 ImageView ivWordHintsPurchased = (ImageView)this.findViewById(R.id.ivWordHintsPurchased);
+			 bWordHintsPrice.setVisibility(View.GONE);
+			 ivWordHintsPurchased.setVisibility(View.VISIBLE);
 		 }
 		 
 		// else if (sku.equals(Constants.SKU_GOOGLE_PLAY_WORD_HINTS)){
@@ -275,6 +286,11 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 		 Button bWordDefinitionsPrice = (Button)this.findViewById(R.id.bWordDefinitionsPrice);
 		 ImageView ivWordDefinitionsPurchased = (ImageView)this.findViewById(R.id.ivWordDefinitionsPurchased);
 		 
+		 TextView tvWordHintsTitle = (TextView)this.findViewById(R.id.tvWordHintsTitle);
+		 TextView tvWordHintsDescription = (TextView)this.findViewById(R.id.tvWordHintsDescription);
+		 Button bWordHintsPrice = (Button)this.findViewById(R.id.bWordHintsPrice);
+		 ImageView ivWordHintsPurchased = (ImageView)this.findViewById(R.id.ivWordHintsPurchased);
+		 
 		 TextView tvHopperPeekTitle = (TextView)this.findViewById(R.id.tvHopperPeekTitle);
 		 TextView tvHopperPeekDescription = (TextView)this.findViewById(R.id.tvHopperPeekDescription);
 		 Button bHopperPeekPrice = (Button)this.findViewById(R.id.bHopperPeekPrice);
@@ -296,7 +312,7 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 		 SkuDetails skuNoAds = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL));
 		 tvNoAdsTitle.setText(this.getString(R.string.store_item_no_ads_title));
 		 tvNoAdsDescription.setText(this.getString(R.string.store_item_no_ads_description));
-		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL))){ // || inventory.hasPurchase(Constants.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE) {
+		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
 			 bNoAdsPrice.setVisibility(View.GONE); 
 			 }
 		 else{
@@ -309,7 +325,7 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 		 SkuDetails skuWordDefinitions = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS));
 		 tvWordDefinitionsTitle.setText(this.getString(R.string.store_item_word_definitions_title));
 		 tvWordDefinitionsDescription.setText(this.getString(R.string.store_item_word_definitions_description));
-		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS))){ // || inventory.hasPurchase(Constants.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE) {
+		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
 			 bWordDefinitionsPrice.setVisibility(View.GONE); 
 			 }
 		 else{
@@ -320,10 +336,24 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 		 }
 		 
 		 
+		 SkuDetails skuWordHints = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS));
+		 tvWordHintsTitle.setText(this.getString(R.string.store_item_word_hints_title));
+		 tvWordHintsDescription.setText(this.getString(R.string.store_item_word_hints_description));
+		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
+			 bWordHintsPrice.setVisibility(View.GONE); 
+			 }
+		 else{
+			 bWordHintsPrice.setText(skuWordHints.getPrice());
+			 bWordHintsPrice.setTag(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS));
+			 bWordHintsPrice.setOnClickListener(this);
+			 ivWordHintsPurchased.setVisibility(View.GONE);
+		 }
+		 
+		 
 		 SkuDetails skuHopperPeek = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK));
 		 tvHopperPeekTitle.setText(this.getString(R.string.store_item_hopper_peek_title));
 		 tvHopperPeekDescription.setText(this.getString(R.string.store_item_hopper_peek_description));
-		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK))){ // || inventory.hasPurchase(Constants.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE) {
+		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
 			 bHopperPeekPrice.setVisibility(View.GONE); 
 			 }
 		 else{
@@ -353,7 +383,8 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 		TextView tvHopperPeekTitle = (TextView)findViewById(R.id.tvHopperPeekTitle);
 		TextView tvHopperPeekDescription = (TextView)findViewById(R.id.tvHopperPeekDescription);
 
-	 	
+		TextView tvWordHintsTitle = (TextView)findViewById(R.id.tvWordHintsTitle);
+		TextView tvWordHintsDescription = (TextView)findViewById(R.id.tvWordHintsDescription);
 
 		tvPremiumUpgradeTitle.setTypeface(ApplicationContext.getMainFontTypeface());
 		tvPremiumUpgradeDescription.setTypeface(ApplicationContext.getMainFontTypeface());
@@ -361,6 +392,9 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 		tvNoAdsDescription.setTypeface(ApplicationContext.getMainFontTypeface());
 		tvWordDefinitionsTitle.setTypeface(ApplicationContext.getMainFontTypeface());
 		tvWordDefinitionsDescription.setTypeface(ApplicationContext.getMainFontTypeface());
+		tvWordHintsTitle.setTypeface(ApplicationContext.getMainFontTypeface());
+		tvWordHintsDescription.setTypeface(ApplicationContext.getMainFontTypeface());
+
 		tvHopperPeekTitle.setTypeface(ApplicationContext.getMainFontTypeface());
 		tvHopperPeekDescription.setTypeface(ApplicationContext.getMainFontTypeface());
 
@@ -369,11 +403,14 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 		Button bPremiumUpgradePrice = (Button)findViewById(R.id.bPremiumUpgradePrice);
 		Button bNoAdsPrice = (Button)findViewById(R.id.bNoAdsPrice);
 		Button bWordDefinitionsPrice = (Button)findViewById(R.id.bWordDefinitionsPrice);
+		Button bWordHintsPrice = (Button)findViewById(R.id.bWordHintsPrice);
 		Button bHopperPeekPrice = (Button)findViewById(R.id.bHopperPeekPrice);
  		
 		bPremiumUpgradePrice.setTypeface(ApplicationContext.getScoreboardButtonFontTypeface());
 		bNoAdsPrice.setTypeface(ApplicationContext.getScoreboardButtonFontTypeface());
 		bWordDefinitionsPrice.setTypeface(ApplicationContext.getScoreboardButtonFontTypeface());
+		bWordHintsPrice.setTypeface(ApplicationContext.getScoreboardButtonFontTypeface());
+
 		bHopperPeekPrice.setTypeface(ApplicationContext.getScoreboardButtonFontTypeface());
 	 	
 	}

@@ -64,7 +64,7 @@ public class GameHistory extends FragmentActivity{
 	 	GameService.loadScoreboard(this, this.game);
 	 	
 	  	
-	    this.opponentImageId = context.getResources().getIdentifier(this.getString(R.string.namespace) + ":drawable/" + this.game.getOpponent().getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);
+	    this.opponentImageId = context.getResources().getIdentifier(this.getString(R.string.namespace) + ":drawable/" + this.game.getOpponent().getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_SMALL), null, null);
 	    	
 	    this.opponentBM = BitmapFactory.decodeResource(getResources(), this.opponentImageId); 
 	    this.playerBM = BitmapFactory.decodeResource(getResources(), R.drawable.you);

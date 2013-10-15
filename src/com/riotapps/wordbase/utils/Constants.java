@@ -238,7 +238,7 @@ public class Constants {
  	public static final String FB_TOKEN = "fb_token";
 	public static final String FB_TOKEN_EXPIRES = "fb_token_expires";
  	
-	public static final int FREE_USES_WORD_HINTS = 30;
+	public static final int FREE_USES_WORD_HINTS = 4;
 	public static final int FREE_USES_HOPPER_PEEK = 4;
 	public static final int FREE_USES_WORD_DEFINITION = 2;
 	

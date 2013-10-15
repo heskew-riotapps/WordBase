@@ -109,7 +109,7 @@
                             The first player to finish his or her letters gets a bonus value added to his or her score.
                             The bonus is equal to the accumulated value of all of the letters left in all of the opponent\'s tray.  For instance, if you finished out the 
                             letters in your tray (and the hopper was empty) and your opponent still had a "K", a "U", and a "B" left in the tray, a bonus of 15 points would be awarded
-                            to the player in addition to the points that the turn earned.  The player with the most points after the bonus is awarded is declared the 
+                            to you in addition to the points that the turn earned.  The player with the most points after the bonus is awarded is declared the 
                             winner.  If you and your opponent have the same score, a draw is declared.</string>
     <string name="full_rules_finish_3">If 2 skips in a row happen by each player, the game is automatically stopped and a winner is determined based on the 
                                 points already earned by the players.  No bonus points are awarded in this situation.  Again, if you and your opponent have the same score, a draw is declared.</string>
@@ -358,7 +358,11 @@
 		<string name="store_item_no_ads_description">Want to get rid of the ads between moves?  This is the upgrade for you.</string>
 	    <string name="store_item_hopper_peek_title">Peek at the Hopper</string>
 		<string name="store_item_hopper_peek_description">At any time, you will be able to see which letters are left in play in the hopper
-		     as well as in your opponent\'s tray.  Unlimited usage.</string>		
+		     as well as in your opponent\'s tray.  Unlimited usage.</string>	
+		     	<string name="store_item_word_hints_title">Ethan\'s Hints</string>
+	<string name="store_item_word_hints_description">Twice per game, tap into Ethan\'s giant vocabulary to help find a word when you are stuck! Unlimited games.</string>
+	
+			
 		<string name="smiley_attribution">Thanks to Codicode for the cool smiley characters!</string>    
 		
 		<string name="about_device_specs">This device is %1$s size with %2$s resolution.</string>    
