@@ -3135,10 +3135,11 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		        			Constants.TRACKER_LABEL_CANCEL_CANCEL, Constants.TRACKER_DEFAULT_OPTION_VALUE);
 				   
 				   this.unfreezeButtons();
-				   this.setupButtons();
+				   //this.setupButtons();
 				   this.dismissWordHintDialog();
 				   try {
 					this.setHintChoice(returnValue);
+					   this.setupButtons();
 				} catch (PreconditionException e) {
 					// TODO Auto-generated catch block
 					Logger.d(TAG, "dialogClose wordHints placedResult not found by id");

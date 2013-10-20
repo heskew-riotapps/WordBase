@@ -24,13 +24,8 @@
 	>
     <TextView
          android:id="@+id/alert_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		style="@style/TextStyle"
+		style="@style/SwapTitleStyle"
 		android:text="@string/gameboard_swap_dialog_title_text"
-		android:textSize="14dp"
-        android:layout_centerHorizontal="true"
-		android:layout_marginTop="10dp"
     />
    <ImageView
         android:id="@+id/img_close"
@@ -52,192 +47,102 @@
         android:id="@+id/rlLetters"
     >
      <RelativeLayout
-        android:layout_width="42dp"
-        android:layout_height="wrap_content" 
+        style="@style/SwapTileStyle" 
         android:id="@+id/rlLetter1"   
         android:layout_marginLeft="5dp"     
      >
         <TextView 
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:background="@drawable/tray_tile_bg"
+            style="@style/SwapLetterStyle"
             android:id="@+id/tvLetter1"
-            android:textSize="32dp"
-            android:gravity="center"
-            android:paddingRight="4dp"
              />
           <TextView 
- 			android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"  
+ 			style="@style/SwapValueStyle"  
         	android:id="@+id/tvValue1" 
-        	android:textSize="10dp"
-   
-        	android:layout_marginRight="1dp"
-        	android:layout_marginTop=".5dp"
-            android:layout_alignParentRight="true" 
              />
      </RelativeLayout>
       <RelativeLayout
-        android:layout_width="42dp"
-        android:layout_height="wrap_content"  
+        style="@style/SwapTileStyle"  
         android:id="@+id/rlLetter2" 
         android:layout_toRightOf="@id/rlLetter1"   
-        android:layout_marginLeft="2dp"
      >
          <TextView 
-              android:layout_width="42dp"
-             android:layout_height="42dp"
-              android:background="@drawable/tray_tile_bg"
+              style="@style/SwapLetterStyle"
               android:id="@+id/tvLetter2"
-             android:textSize="32dp"
-            android:gravity="center"
-            android:paddingRight="4dp"
              />
           <TextView 
- 			android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"  
+ 			style="@style/SwapValueStyle" 
         	android:id="@+id/tvValue2" 
-        	android:textSize="10dp"
-        	 
-        	android:layout_marginRight="1dp"
-        	android:layout_marginTop=".5dp"
-            android:layout_alignParentRight="true" 
              />
      </RelativeLayout>
       <RelativeLayout
-        android:layout_width="42dp"
-        android:layout_height="wrap_content"  
+        style="@style/SwapTileStyle"  
         android:id="@+id/rlLetter3" 
         android:layout_toRightOf="@id/rlLetter2"   
-        android:layout_marginLeft="2dp"
      >
          <TextView 
-              android:layout_width="42dp"
-             android:layout_height="42dp"
-              android:background="@drawable/tray_tile_bg"
+             style="@style/SwapLetterStyle"
               android:id="@+id/tvLetter3"
-             android:textSize="32dp"
-            android:gravity="center"
-            android:paddingRight="4dp"
              />
           <TextView 
- 			android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"  
+ 			style="@style/SwapValueStyle"
         	android:id="@+id/tvValue3" 
-        	android:textSize="10dp"
-      
-        	android:layout_marginRight="1dp"
-        	android:layout_marginTop=".5dp"
-            android:layout_alignParentRight="true" 
              />
      </RelativeLayout>  
       <RelativeLayout
-        android:layout_width="42dp"
-        android:layout_height="wrap_content"  
+        style="@style/SwapTileStyle" 
         android:id="@+id/rlLetter4" 
         android:layout_toRightOf="@id/rlLetter3"   
-        android:layout_marginLeft="2dp"
      >
          <TextView 
-              android:layout_width="42dp"
-             android:layout_height="42dp"
-              android:background="@drawable/tray_tile_bg"
+             style="@style/SwapLetterStyle"
               android:id="@+id/tvLetter4"
-             android:textSize="32dp"
-             android:gravity="center"
-             android:paddingRight="4dp"
              />
           <TextView 
- 			android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"  
+ 			style="@style/SwapValueStyle" 
         	android:id="@+id/tvValue4" 
-        	android:textSize="10dp"
-         
-        	android:layout_marginRight="1dp"
-        	android:layout_marginTop=".5dp"
-            android:layout_alignParentRight="true" 
              />
      </RelativeLayout> 
          <RelativeLayout
-        android:layout_width="42dp"
-        android:layout_height="wrap_content"  
+    	style="@style/SwapTileStyle"
         android:id="@+id/rlLetter5" 
         android:layout_toRightOf="@id/rlLetter4"   
-        android:layout_marginLeft="2dp"
      >
          <TextView 
-              android:layout_width="42dp"
-             android:layout_height="42dp"
-              android:background="@drawable/tray_tile_bg"
+             style="@style/SwapLetterStyle"
               android:id="@+id/tvLetter5"
-             android:textSize="32dp"
-             android:gravity="center"
-             android:paddingRight="4dp"
              />
           <TextView 
- 			android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"  
+ 			style="@style/SwapValueStyle"  
         	android:id="@+id/tvValue5" 
-        	android:textSize="10dp"
-          
-        	android:layout_marginRight="1dp"
-        	android:layout_marginTop=".5dp"
-            android:layout_alignParentRight="true" 
              />
      </RelativeLayout>
            <RelativeLayout
-        android:layout_width="42dp"
-        android:layout_height="wrap_content"  
+        style="@style/SwapTileStyle"  
         android:id="@+id/rlLetter6" 
         android:layout_toRightOf="@id/rlLetter5"   
-        android:layout_marginLeft="2dp"
      >
          <TextView 
-              android:layout_width="42dp"
-             android:layout_height="42dp"
-              android:background="@drawable/tray_tile_bg"
+              style="@style/SwapLetterStyle"
               android:id="@+id/tvLetter6"
-             android:textSize="32dp"
-             android:gravity="center"
-             android:paddingRight="4dp"
              />
          <TextView 
- 			android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"  
+ 			style="@style/SwapValueStyle" 
         	android:id="@+id/tvValue6" 
-        	android:textSize="10dp"
-         
-        	android:layout_marginRight="1dp"
-        	android:layout_marginTop=".5dp"
-            android:layout_alignParentRight="true" 
              />
      </RelativeLayout>        
          
     <RelativeLayout
-        android:layout_width="42dp"
-        android:layout_height="wrap_content"  
+        style="@style/SwapTileStyle"  
         android:id="@+id/rlLetter7" 
         android:layout_toRightOf="@id/rlLetter6"   
-        android:layout_marginLeft="2dp"
      >
          <TextView 
-              android:layout_width="42dp"
-             android:layout_height="42dp"
-              android:background="@drawable/tray_tile_bg"
+              style="@style/SwapLetterStyle"
               android:id="@+id/tvLetter7"
-             android:textSize="32dp"
-             android:gravity="center"
-             android:paddingRight="4dp"
              />
          <TextView 
- 			android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"  
+ 			style="@style/SwapValueStyle"
         	android:id="@+id/tvValue7" 
-        	android:textSize="10dp"
-          
-        	android:layout_marginRight="1dp"
-        	android:layout_marginTop=".5dp"
-            android:layout_alignParentRight="true" 
              />
          
      </RelativeLayout>        

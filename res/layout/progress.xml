@@ -15,21 +15,13 @@
 	>
 	
   <ProgressBar
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-		android:background="@drawable/custom_progress"
          android:id="@+id/progress_spinner"
-         style="@android:style/Widget.ProgressBar.Small"
-         android:indeterminate="true"
+         style="ProgressBarStyle"
          />
     <TextView
+        style="@style/ProgressTextStyle"
          android:id="@+id/dialog_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		android:textColor="@color/progress_text_color"
-		android:textSize="12dp"
 		android:layout_alignBottom="@id/progress_spinner"
-		android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/progress_spinner"
     />
    </RelativeLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SwapLetterStyle">
+	    <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@drawable/tray_tile_bg</item>
+        <item name="android:textSize">38sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingRight">4dp</item>
+    </style>
+</resources>
