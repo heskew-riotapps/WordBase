@@ -2,13 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
    
     android:id="@+id/progress_root"
-    style="@style/DialogStyle"
-    android:background="@drawable/dialog_background"
+    style="@style/HintDialogStyle"
 	>
  <RelativeLayout  
-        android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-	style="@style/DialogInnerStyle"
+	style="@style/HintDialogInnerStyle"
     android:id="@+id/alert_top"
 	>
 	

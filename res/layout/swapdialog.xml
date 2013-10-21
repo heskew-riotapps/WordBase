@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="1dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/progress_root"
-    style="@style/DialogStyle"
-    android:background="@drawable/dialog_background"
+    style="@style/SwapDialogStyle"
 	>
  <RelativeLayout  
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/progress_inner_background"
+    style="@style/SwapDialogInnerStyle"
     android:id="@+id/alert_top"
 	>
 	
@@ -148,11 +142,12 @@
      </RelativeLayout>        
            
     </RelativeLayout>
-   
-     <LinearLayout  
-    android:layout_width="fill_parent"
+   <RelativeLayout  
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/rlLetters"
+    >
+     <LinearLayout  
     style="@style/FormButtonAreaStyle"
     >
 	     
@@ -172,6 +167,7 @@
 	    />
 	  
     </LinearLayout>
+    </RelativeLayout>
   </RelativeLayout>
    </RelativeLayout>
- </RelativeLayout>
+ </LinearLayout>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <style
-    name="DialogStyle" 
-    parent="android:Theme.Dialog">
+    name="HopperPeekDialogStyle" >
   
     <item name="android:windowBackground">@android:color/transparent</item>
     <item name="android:windowNoTitle">true</item>
     <item name="android:backgroundDimEnabled">true</item>
-	<item name="android:layout_width">275dp</item>
+	<item name="android:layout_width">440dp</item>
 	<item name="android:layout_height">wrap_content</item>    
-    <item name="android:padding">1.5dp</item>
-  
+    <item name="android:padding">2dp</item>
+     <item name="android:background">@drawable/dialog_background</item>
+ 
 </style>
 </resources>

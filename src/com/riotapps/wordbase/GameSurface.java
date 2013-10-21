@@ -2331,7 +2331,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 			public SwapDialog(Context context, List<String> letters) {
 	    		super(context);
 	    	    this.context = context;
-	    	    Display display = getWindowManager().getDefaultDisplay();
+	    	/*   Display display = getWindowManager().getDefaultDisplay();
 	    	    Point size = new Point();
 	    		 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
 	    			 display.getSize(size);
@@ -2350,7 +2350,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	    	    }
 	    	    	
 	    	    textSize = Math.round(this.tileSize * .75f);
-	    	    
+	    	*/    
 	    	    this.letters = letters;
 	    	//	this.dialog = new Dialog(ctx, R.style.DialogStyle);
 	    	//	this.dialog.setContentView(R.layout.swapdialog);

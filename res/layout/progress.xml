@@ -16,13 +16,19 @@
 	
   <ProgressBar
          android:id="@+id/progress_spinner"
-         style="ProgressBarStyle"
+ 		android:layout_width="wrap_content"
+         android:layout_height="30dp"
+         style="@android:style/Widget.ProgressBar.Small"
+         android:layout_alignParentLeft="true"
+         android:layout_centerVertical="true"
          />
     <TextView
         style="@style/ProgressTextStyle"
          android:id="@+id/dialog_text"
 		android:layout_alignBottom="@id/progress_spinner"
         android:layout_toRightOf="@id/progress_spinner"
+        android:layout_centerVertical="true"
+        
     />
    </RelativeLayout>
  </RelativeLayout>
