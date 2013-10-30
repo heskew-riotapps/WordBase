@@ -147,6 +147,7 @@ public class Constants {
 	public static final String TRACKER_LABEL_RESIGN_CANCEL = "resign_cancel";
 	public static final String TRACKER_LABEL_RESIGN_DISMISS = "resign_dismiss";
 	public static final String TRACKER_LABEL_RESIGN_OK = "resign_ok";
+	public static final String TRACKER_LABEL_RESIGN_1_OK = "resign_1_ok";
 	public static final String TRACKER_LABEL_REMATCH_INITIAL = "rematch_initial";
 	public static final String TRACKER_LABEL_REMATCH_CANCEL = "rematch_cancel";
 	public static final String TRACKER_LABEL_REMATCH_DISMISS = "rematch_dismiss";
@@ -411,6 +412,7 @@ public class Constants {
 	public static final int RETURN_CODE_CUSTOM_DIALOG_GAME_CONFIRMATION_CANCEL_CLICKED = 118;	
 	public static final int RETURN_CODE_WORD_HINT_DIALOG_CHOICE_MADE = 119;	
 	public static final int RETURN_CODE_WORD_HINT_CLOSE = 120;
+	public static final int RETURN_CODE_CUSTOM_DIALOG_RESIGN_OK_1_CLICKED = 121;	
 	
 	/**=============================================
 	 * directions 

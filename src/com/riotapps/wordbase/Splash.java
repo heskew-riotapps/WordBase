@@ -144,18 +144,15 @@ public class Splash  extends FragmentActivity {
 	    	   StoreService.syncPurchases(inventory, this);
 	       }
 		  
-		 // Intent intent;
+	 
 	      	if (appContext.getPlayer().getActiveGameId().length() > 0){
-				((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_GAME_SURFACE);
-	      		
-	      	//	intent = new Intent(Splash.this, com.riotapps.wordbase.GameSurface.class);
+			 	((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_GAME_SURFACE);
+ 
 	       	}
 	      	else{
-				((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_MAIN);
-	      //		intent = new Intent(Splash.this, com.riotapps.wordbase.Main.class);
+			 	((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_MAIN);
 	      	}
-	      	//intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-	      //	Splash.this.startActivity(intent); 
+ 
 	 }
 	    
     private void startBackgroundService(){

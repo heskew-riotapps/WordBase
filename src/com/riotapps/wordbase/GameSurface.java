@@ -1798,7 +1798,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	    			this.getString(R.string.game_surface_resign_game_confirmation_text),
 	    			this.getString(R.string.yes),
 	    			this.getString(R.string.no),
-	    			Constants.RETURN_CODE_CUSTOM_DIALOG_RESIGN_OK_CLICKED,
+	    			Constants.RETURN_CODE_CUSTOM_DIALOG_RESIGN_OK_1_CLICKED,
 					Constants.RETURN_CODE_CUSTOM_DIALOG_RESIGN_CANCEL_CLICKED,
 					Constants.RETURN_CODE_CUSTOM_DIALOG_RESIGN_CLOSE_CLICKED);
 	    	
@@ -1807,6 +1807,21 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	    	this.customDialog.show();	
 	    }
 
+	    private void handleSecondResign(){
+	    	this.customDialog = new CustomButtonDialog(this, 
+	    			this.getString(R.string.game_surface_resign_game_confirmation_title_2), 
+	    			this.getString(R.string.game_surface_resign_game_confirmation_text_2),
+	    			this.getString(R.string.yes),
+	    			this.getString(R.string.no),
+	    			Constants.RETURN_CODE_CUSTOM_DIALOG_RESIGN_OK_CLICKED,
+					Constants.RETURN_CODE_CUSTOM_DIALOG_RESIGN_CANCEL_CLICKED,
+					Constants.RETURN_CODE_CUSTOM_DIALOG_RESIGN_CLOSE_CLICKED);
+	    	
+	    	
+			 
+	    	this.customDialog.show();	
+	    }
+	    
 	    
 	    private void handleGameResignOnClick(){
 	    	//stop thread first
@@ -3078,6 +3093,13 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 					
 					this.unfreezeButtons();
 					break;
+			   case Constants.RETURN_CODE_CUSTOM_DIALOG_RESIGN_OK_1_CLICKED:
+				    this.dismissCustomDialog(); 
+		 			this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,
+			        			Constants.TRACKER_LABEL_RESIGN_1_OK, Constants.TRACKER_DEFAULT_OPTION_VALUE);
+		 			
+		 			this.handleSecondResign();
+		 			break;
 			   case Constants.RETURN_CODE_CUSTOM_DIALOG_RESIGN_OK_CLICKED:
 				    this.dismissCustomDialog(); 
 		 			this.trackEvent(Constants.TRACKER_CATEGORY_GAMEBOARD, Constants.TRACKER_ACTION_BUTTON_TAPPED,

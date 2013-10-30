@@ -207,6 +207,8 @@
 	   <string name="game_surface_cancel_game_confirmation_text">are you sure?</string>
 	   <string name="game_surface_resign_game_confirmation_title">concede this game</string>
 	   <string name="game_surface_resign_game_confirmation_text">are you sure?</string>
+	   <string name="game_surface_resign_game_confirmation_title_2">concede this game</string>
+	   <string name="game_surface_resign_game_confirmation_text_2">just to be certain&#8230;\nare you really sure?</string>
 	   <string name="game_last_action_started_context">You started the game.  Have fun and thanks for playing!</string>
 	   <string name="game_last_action_started">%s started the game</string>
 	   <string name="game_last_action_undetermined">The last action is undetermined.</string>
