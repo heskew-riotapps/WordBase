@@ -424,7 +424,7 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
     	
     	this.customDialog = new CustomButtonDialog(this, 
     			this.getString(R.string.main_game_start_prompt_title), 
-    			String.format(this.getString(R.string.main_game_start_prompt), o.getName()),
+    			String.format(this.getString(R.string.main_game_start_prompt), o.getName(), o.getSkillLevelTextLCase(this)),
     			this.getString(R.string.yes),
     			this.getString(R.string.no),
     			Constants.RETURN_CODE_CUSTOM_DIALOG_GAME_CONFIRMATION_OK_CLICKED,

@@ -121,6 +121,24 @@ public class Opponent{
 		return Constants.EMPTY_STRING;
 	}
 
+	public String getSkillLevelTextLCase(Context context){	
+		switch (this.skillLevel){
+		case 1:
+			return context.getString(R.string.skill_level_lcase_1);
+		case 2:
+			return context.getString(R.string.skill_level_lcase_2);
+		case 3:
+			return context.getString(R.string.skill_level_lcase_3);
+		case 4:
+			return context.getString(R.string.skill_level_lcase_4);
+		case 5:
+			return context.getString(R.string.skill_level_lcase_5);
+		case 6:
+			return context.getString(R.string.skill_level_lcase_6);
+		}
+		return Constants.EMPTY_STRING;
+	}
+	
 	public Bitmap getSmallBitmap(){
 		if (this.smallImage == null){
 		 this.preloadBitmaps();

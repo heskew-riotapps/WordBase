@@ -306,8 +306,14 @@
 		<string name="skill_level_4">Professional</string>
 		<string name="skill_level_5">Expert</string>
 		<string name="skill_level_6">Master</string>
+		<string name="skill_level_lcase_1">novice</string>		
+		<string name="skill_level_lcase_2">amateur</string>
+		<string name="skill_level_lcase_3">semi-pro</string>
+		<string name="skill_level_lcase_4">professional</string>
+		<string name="skill_level_lcase_5">expert</string>
+		<string name="skill_level_lcase_6">master</string>
 		<string name="main_choose">Tap an opponent to start a game</string>
-		<string name="main_game_start_prompt">%s is ready to play.  Are you ready?</string>
+		<string name="main_game_start_prompt">%1$s (%2$s skill level) is ready to play.  Are you ready?</string>
 		<string name="main_game_start_prompt_title">start a game</string>
 		<string name="main_menu_about">About WordSmash</string>
 		<string name="main_menu_completed_games">Completed Games</string>
