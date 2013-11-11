@@ -51,6 +51,7 @@
 	     	<TextView
 	            android:id="@+id/tvNumPoints"
 				style="@style/ScoreboardNumPointsStyle"
+				 android:layout_below="@id/tvLettersLeft"  
  
 	         />
 	    </RelativeLayout>

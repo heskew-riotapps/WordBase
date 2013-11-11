@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
@@ -275,4 +276,10 @@ public class Utils {
 		}
     	return "";
     }
+    
+    public static <T> T[] concatArrays(T[] first, T[] second) {
+    	  T[] result = Arrays.copyOf(first, first.length + second.length);
+    	  System.arraycopy(second, 0, result, first.length, second.length);
+    	  return result;
+    	}
 }

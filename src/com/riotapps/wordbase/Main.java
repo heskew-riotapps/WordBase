@@ -157,7 +157,7 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
     
   
     
-    private void trackEvent(String action, String label, long value){
+    protected void trackEvent(String action, String label, long value){
   		try{
   			Logger.d(TAG, "trackEvent this.tracker is null=" + (this.tracker == null));
   			this.getTracker().sendEvent(Constants.TRACKER_CATEGORY_MAIN_LANDING, action,label, value);
@@ -395,7 +395,7 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
 		   case Constants.RETURN_CODE_CUSTOM_DIALOG_GAME_CONFIRMATION_OK_CLICKED:
 			   this.dismissCustomDialog();
 	 
-			   this.handleGameStartOnClick();
+			   this.handleGameStartOnClick(this.context, this.player, this.chosenOpponentId);
 			   break;
 		   case Constants.RETURN_CODE_CUSTOM_DIALOG_GAME_CONFIRMATION_CLOSE_CLICKED:
 			   this.dismissCustomDialog();
@@ -437,14 +437,14 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
     
     
 
-    private void handleGameStartOnClick(){
+    protected void handleGameStartOnClick(Context context, Player player, int opponentId){
     	//start game and go to game surface
     	try {
 		
     		
-			Game game = GameService.createGame(context, player, chosenOpponentId);
+			Game game = GameService.createGame(context, player, opponentId);
 
-			this.trackEvent(Constants.TRACKER_ACTION_GAME_STARTED,String.format(Constants.TRACKER_LABEL_OPPONENT_WITH_ID, chosenOpponentId), (int) Constants.TRACKER_SINGLE_VALUE);
+			this.trackEvent(Constants.TRACKER_ACTION_GAME_STARTED,String.format(Constants.TRACKER_LABEL_OPPONENT_WITH_ID, opponentId), (int) Constants.TRACKER_SINGLE_VALUE);
 			
 			//this.llOpponents.removeAllViews();
 			//this.llOpponents = null;
@@ -471,7 +471,7 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
 		   case Constants.RETURN_CODE_CUSTOM_DIALOG_GAME_CONFIRMATION_OK_CLICKED:
 			   this.dismissCustomDialog();
 	 
-			   this.handleGameStartOnClick();
+			   this.handleGameStartOnClick(this.context, this.player, this.chosenOpponentId);
 			   break;
 		   case Constants.RETURN_CODE_CUSTOM_DIALOG_GAME_CONFIRMATION_CLOSE_CLICKED:
 			   this.dismissCustomDialog();

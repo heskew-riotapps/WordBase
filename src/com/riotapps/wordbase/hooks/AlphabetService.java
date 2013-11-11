@@ -107,6 +107,36 @@ public class AlphabetService {
 		return list;	
 	}
 	
+	
+	public static List<String> getRaceLetters(){
+		//ApplicationContext appContext = (ApplicationContext)ApplicationContext.getAppContext().getApplicationContext();
+		
+		String[] consonants = getConsonants();
+		String[] consonants2 = getConsonants();
+		String[] vowels = getVowels(); //appContext.getResources().getStringArray(R.array.alphabet_consonants);
+		String[] vowels2 = getVowels();
+		
+		String [] consonantsAll = Utils.concatArrays(consonants, consonants2);
+		String [] vowelsAll = Utils.concatArrays(vowels, vowels2);
+		 
+		//up to two of any letter
+		Utils.shuffleArray(consonantsAll);
+		Utils.shuffleArray(vowelsAll);
+		
+		List<String> list = new ArrayList<String>();
+		
+		for (int x = 0; x < 7; x++){
+			list.add(consonantsAll[x]);
+		}
+		for (int x = 0; x < 5; x++){
+			list.add(vowelsAll[x]);
+		}
+	 
+		Collections.shuffle(list);
+		
+		return list;
+	}
+	
 	public static List<String> getHopper(String randomVowel, List<String> randomConsonants){
 		ApplicationContext appContext = (ApplicationContext)ApplicationContext.getAppContext().getApplicationContext();
 		/*
