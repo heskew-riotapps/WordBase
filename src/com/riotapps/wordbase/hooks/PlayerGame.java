@@ -225,9 +225,10 @@ public class PlayerGame implements Parcelable{
 			 //return all x letters as the single set to be returned
 			 List<String> letterSet = new ArrayList<String>();
 				
-				for (int j = 0; j < setLength; j ++){
-					letterSet.add(this.trayLetters.get(j));	
-				}
+			for (int j = 0; j < setLength; j ++){
+				letterSet.add(this.trayLetters.get(j));	
+			}
+			Collections.sort(letterSet);
 			letterSets.add(letterSet);
 			return letterSets;
 		 }

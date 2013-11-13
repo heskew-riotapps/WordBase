@@ -133,6 +133,9 @@ public class Constants {
 	public static final String TRACKER_LABEL_SKIP_CANCEL = "skip_cancel";
 	public static final String TRACKER_LABEL_SKIP_DISMISS = "skip_dismiss";
 	public static final String TRACKER_LABEL_SKIP_OK = "skip_ok";
+	public static final String TRACKER_LABEL_START_CANCEL = "start_cancel";
+	public static final String TRACKER_LABEL_START_DISMISS = "start_dismiss";
+	public static final String TRACKER_LABEL_START_OK = "start_ok";
 	public static final String TRACKER_LABEL_SWAP_INITIAL = "swap_initial";
 	public static final String TRACKER_LABEL_SWAP_CANCEL = "swap_cancel";
 	public static final String TRACKER_LABEL_SWAP_DISMISS = "swap_dismiss";
@@ -413,6 +416,9 @@ public class Constants {
 	public static final int RETURN_CODE_WORD_HINT_DIALOG_CHOICE_MADE = 119;	
 	public static final int RETURN_CODE_WORD_HINT_CLOSE = 120;
 	public static final int RETURN_CODE_CUSTOM_DIALOG_RESIGN_OK_1_CLICKED = 121;	
+	public static final int RETURN_CODE_CUSTOM_DIALOG_START_OK_CLICKED = 122;	
+	public static final int RETURN_CODE_CUSTOM_DIALOG_START_CANCEL_CLICKED = 123;	
+	public static final int RETURN_CODE_CUSTOM_DIALOG_START_CLOSE_CLICKED = 124;	
 	
 	/**=============================================
 	 * directions 

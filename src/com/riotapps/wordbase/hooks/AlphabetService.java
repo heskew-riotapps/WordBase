@@ -125,10 +125,10 @@ public class AlphabetService {
 		
 		List<String> list = new ArrayList<String>();
 		
-		for (int x = 0; x < 7; x++){
+		for (int x = 0; x < 6; x++){
 			list.add(consonantsAll[x]);
 		}
-		for (int x = 0; x < 5; x++){
+		for (int x = 0; x < 4; x++){
 			list.add(vowelsAll[x]);
 		}
 	 

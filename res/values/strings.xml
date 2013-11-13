@@ -67,6 +67,7 @@
  	<string name="progress_almost_ready">please support our advertisers&#8230;</string>
  	<string name="progress_opponent_thinking">%s is thinking&#8230;</string>
  	<string name="progress_saving">saving&#8230;</string>
+ 	<string name="progress_loading">loading&#8230;</string>
 
  	<string name="full_rules_1">The idea is to score more points than your opponent by forming valid words out of the letters in your tray combined with the letters 
  	    		   on the board.  Letters must be placed on the board in a single axis, either horizontally or vertically.  Letters can played played on top of previously played letters.</string>
@@ -188,6 +189,7 @@
  	<string name="scoreboard_num_points_scored">%s points scored</string>
  	<string name="gameboard_recall_button_text">RECALL</string>
  	<string name="gameboard_shuffle_button_text">SHUFFLE</string>
+ 	<string name="gameboard_start_button_text">START</string>
  	<string name="gameboard_play_button_text">PLAY</string>
  	<string name="gameboard_more_button_text">MORE &gt;&gt;</string>
  	<string name="gameboard_back_button_text">&lt;&lt; BACK</string>
