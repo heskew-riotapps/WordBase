@@ -499,16 +499,16 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		  
 		
 		 if (GameSurfaceView.bgTrayBaseScaled == null) {
-				//GameSurfaceView.bgTrayBaseScaled = BitmapFactory.decodeResource(getResources(), R.drawable.tray_tile_bg);//decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_bg, this.trayTileSize,this.trayTileSize);
+				//GameSurfaceView.bgTrayBaseScaled = BitmapFactory.decodeResource(getResources(), R.drawable.tray_tile_bg);//ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_bg, this.trayTileSize,this.trayTileSize);
 				
-			GameSurfaceView.bgTrayBaseScaled = decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_bg, this.trayTileSize,this.trayTileSize);
+			GameSurfaceView.bgTrayBaseScaled = ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_bg, this.trayTileSize,this.trayTileSize);
 			//GameSurfaceView.bgTrayBaseScaled = Bitmap.createScaledBitmap(GameSurfaceView.bgTrayBaseScaled, this.trayTileSize , this.trayTileSize, false);
  
 			 GameSurfaceView.bgTrayBaseScaled = ImageHelper.getResizedBitmap(GameSurfaceView.bgTrayBaseScaled, this.trayTileSize, this.trayTileSize); 			 
 		 }
 		 this.parent.captureTime("SetDerivedValues bgTrayBaseDragging start load resized");
 		 if (GameSurfaceView.bgTrayBaseDragging == null) {
-		 	GameSurfaceView.bgTrayBaseDragging = decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_bg, this.draggingTileSize,this.draggingTileSize);
+		 	GameSurfaceView.bgTrayBaseDragging = ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_bg, this.draggingTileSize,this.draggingTileSize);
 		//	GameSurfaceView.bgTrayBaseDragging = Bitmap.createScaledBitmap(GameSurfaceView.bgTrayBaseDragging, this.draggingTileSize , this.draggingTileSize, false);
 
 			///GameSurfaceView.bgTrayBaseDragging = BitmapFactory.decodeResource(getResources(), R.drawable.tray_tile_bg);
@@ -519,7 +519,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		 this.parent.captureTime("SetDerivedValues bgTrayBackground start load resized");
 	/*  if (GameSurfaceView.bgTrayBackground == null) {
 			// GameSurfaceView.bgTrayBackground = BitmapFactory.decodeResource(getResources(), R.drawable.sbd_bg);
-			 GameSurfaceView.bgTrayBackground = decodeSampledBitmapFromResource(getResources(), R.drawable.gameboard_tray_bg, this.fullWidth,this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2));
+			 GameSurfaceView.bgTrayBackground = ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.gameboard_tray_bg, this.fullWidth,this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2));
 			//  GameSurfaceView.bgTrayBackground = Bitmap.createScaledBitmap(GameSurfaceView.bgTrayBackground, this.fullWidth, this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2), false);
 
 			  GameSurfaceView.bgTrayBackground = ImageHelper.getResizedBitmap(GameSurfaceView.bgTrayBackground, this.fullWidth, this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2));
@@ -527,9 +527,9 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		*/ 
 		 this.parent.captureTime("SetDerivedValues bgTrayEmptyScaled start load resized");
 		 if (GameSurfaceView.bgTrayEmptyScaled == null) {
-				//GameSurfaceView.bgTrayEmptyScaled = BitmapFactory.decodeResource(getResources(), R.drawable.tray_tile_empty_bg); //decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_empty_bg, this.trayTileSize,this.trayTileSize);
+				//GameSurfaceView.bgTrayEmptyScaled = BitmapFactory.decodeResource(getResources(), R.drawable.tray_tile_empty_bg); //ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_empty_bg, this.trayTileSize,this.trayTileSize);
 				
-			GameSurfaceView.bgTrayEmptyScaled = decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_empty_bg, this.trayTileSize,this.trayTileSize);
+			GameSurfaceView.bgTrayEmptyScaled = ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tray_tile_empty_bg, this.trayTileSize,this.trayTileSize);
 		 	//GameSurfaceView.bgTrayEmptyScaled = Bitmap.createScaledBitmap(GameSurfaceView.bgTrayEmptyScaled, this.trayTileSize , this.trayTileSize, false);
 		
 			 GameSurfaceView.bgTrayEmptyScaled = ImageHelper.getResizedBitmap(GameSurfaceView.bgTrayEmptyScaled, this.trayTileSize, this.trayTileSize);
@@ -537,8 +537,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		 this.parent.captureTime("SetDerivedValues bgPlacedTileZoomed start load resized");
 		
 		 if (GameSurfaceView.bgPlacedTileZoomed == null){
-			//GameSurfaceView.bgPlacedTileZoomed =  BitmapFactory.decodeResource(getResources(), R.drawable.tile_placed_bg); //decodeSampledBitmapFromResource(getResources(), R.drawable.tile_placed_bg, this.zoomedTileWidth,this.zoomedTileWidth);
-			GameSurfaceView.bgPlacedTileZoomed =   decodeSampledBitmapFromResource(getResources(), R.drawable.tile_placed_bg, this.zoomedTileWidth,this.zoomedTileWidth);
+			//GameSurfaceView.bgPlacedTileZoomed =  BitmapFactory.decodeResource(getResources(), R.drawable.tile_placed_bg); //ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_placed_bg, this.zoomedTileWidth,this.zoomedTileWidth);
+			GameSurfaceView.bgPlacedTileZoomed =   ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_placed_bg, this.zoomedTileWidth,this.zoomedTileWidth);
 			
 			//GameSurfaceView.bgPlacedTileZoomed = Bitmap.createScaledBitmap(GameSurfaceView.bgPlacedTileZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1, false);
 			
@@ -553,8 +553,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		 } 
 		 this.parent.captureTime("SetDerivedValues bgLastPlayedTileZoomed start load resized");
 		 if (GameSurfaceView.bgLastPlayedTileZoomed == null) {
-			//GameSurfaceView.bgLastPlayedTileZoomed = BitmapFactory.decodeResource(getResources(), R.drawable.tile_last_played_bg); //decodeSampledBitmapFromResource(getResources(), R.drawable.tile_last_played_bg, this.zoomedTileWidth,this.zoomedTileWidth);
-			GameSurfaceView.bgLastPlayedTileZoomed = decodeSampledBitmapFromResource(getResources(), R.drawable.tile_last_played_bg, this.zoomedTileWidth,this.zoomedTileWidth);
+			//GameSurfaceView.bgLastPlayedTileZoomed = BitmapFactory.decodeResource(getResources(), R.drawable.tile_last_played_bg); //ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_last_played_bg, this.zoomedTileWidth,this.zoomedTileWidth);
+			GameSurfaceView.bgLastPlayedTileZoomed = ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_last_played_bg, this.zoomedTileWidth,this.zoomedTileWidth);
 
 			//GameSurfaceView.bgLastPlayedTileZoomed = Bitmap.createScaledBitmap(GameSurfaceView.bgLastPlayedTileZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1, false);
 	 
@@ -568,8 +568,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		 }
 		 this.parent.captureTime("SetDerivedValues bgPlayedTileZoomed start load");
 		 if (GameSurfaceView.bgPlayedTileZoomed == null) {
-			//GameSurfaceView.bgPlayedTileZoomed =  BitmapFactory.decodeResource(getResources(), R.drawable.tile_played_bg); //decodeSampledBitmapFromResource(getResources(), R.drawable.tile_played_bg, this.zoomedTileWidth,this.zoomedTileWidth);
-			GameSurfaceView.bgPlayedTileZoomed = decodeSampledBitmapFromResource(getResources(), R.drawable.tile_played_bg, this.zoomedTileWidth,this.zoomedTileWidth);
+			//GameSurfaceView.bgPlayedTileZoomed =  BitmapFactory.decodeResource(getResources(), R.drawable.tile_played_bg); //ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_played_bg, this.zoomedTileWidth,this.zoomedTileWidth);
+			GameSurfaceView.bgPlayedTileZoomed = ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_played_bg, this.zoomedTileWidth,this.zoomedTileWidth);
 			
 			//GameSurfaceView.bgPlayedTileZoomed = Bitmap.createScaledBitmap(GameSurfaceView.bgPlayedTileZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1, false);
 
@@ -605,13 +605,13 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	     
 //		 final BitmapFactory.Options boardTileOptions = new BitmapFactory.Options();
 //		 boardTileOptions.inSampleSize = 
-//				 decodeSampledBitmapFromResource(getResources(), R.id.myimage, 100, 100));
+//				 ImageHelper.decodeSampledBitmapFromResource(getResources(), R.id.myimage, 100, 100));
 		 //Bitmap bgBase = BitmapFactory.decodeResource(getResources(), R.drawable.blank_tile_bg);
 			this.parent.captureTime("SetDerivedValues bgBaseZoomed start load");
 		if (GameSurfaceView.bgBaseZoomed == null) {
-			//GameSurfaceView.bgBaseZoomed = BitmapFactory.decodeResource(getResources(), R.drawable.blank_tile_bg); //decodeSampledBitmapFromResource(getResources(), R.drawable.blank_tile_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			//GameSurfaceView.bgBaseZoomed = BitmapFactory.decodeResource(getResources(), R.drawable.blank_tile_bg); //ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.blank_tile_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
 
-			GameSurfaceView.bgBaseZoomed = decodeSampledBitmapFromResource(getResources(), R.drawable.blank_tile_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			GameSurfaceView.bgBaseZoomed = ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.blank_tile_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
 			//GameSurfaceView.bgBaseZoomed = Bitmap.createScaledBitmap(GameSurfaceView.bgBaseZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1, false);
 
 			 GameSurfaceView.bgBaseZoomed = ImageHelper.getResizedBitmap(GameSurfaceView.bgBaseZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
@@ -624,8 +624,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		}
 		this.parent.captureTime("SetDerivedValues bg4LZoomed start load");
 		if (GameSurfaceView.bg4LZoomed == null) {
-			//GameSurfaceView.bg4LZoomed = BitmapFactory.decodeResource(getResources(), R.drawable.tile_4l_bg); //decodeSampledBitmapFromResource(getResources(), R.drawable.tile_4l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
-			GameSurfaceView.bg4LZoomed =  decodeSampledBitmapFromResource(getResources(), R.drawable.tile_4l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			//GameSurfaceView.bg4LZoomed = BitmapFactory.decodeResource(getResources(), R.drawable.tile_4l_bg); //ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_4l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			GameSurfaceView.bg4LZoomed =  ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_4l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
 
 			//GameSurfaceView.bg4LZoomed = Bitmap.createScaledBitmap(GameSurfaceView.bg4LZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1, false);
 
@@ -641,8 +641,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		 this.parent.captureTime("SetDerivedValues bg3LZoomed start load"); 
 		 if (GameSurfaceView.bg3LZoomed == null){
 		// Bitmap bg3L = BitmapFactory.decodeResource(getResources(), R.drawable.tile_3l_bg);
-			 GameSurfaceView.bg3LZoomed = decodeSampledBitmapFromResource(getResources(), R.drawable.tile_3l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
-			// GameSurfaceView.bg3LZoomed = decodeSampledBitmapFromResource(getResources(), R.drawable.tile_3l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			 GameSurfaceView.bg3LZoomed = ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_3l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			// GameSurfaceView.bg3LZoomed = ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_3l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
 
 			 // GameSurfaceView.bg3LZoomed = Bitmap.createScaledBitmap(GameSurfaceView.bg3LZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1, false);
 		 
@@ -660,8 +660,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		 this.parent.captureTime("SetDerivedValues bg3WZoomed start load");
 	//	 Bitmap bg3W = BitmapFactory.decodeResource(getResources(), R.drawable.tile_3w_bg);
 		 if ( GameSurfaceView.bg3WZoomed == null){
-			 GameSurfaceView.bg3WZoomed =   decodeSampledBitmapFromResource(getResources(), R.drawable.tile_3w_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
-			// GameSurfaceView.bg3WZoomed =  BitmapFactory.decodeResource(getResources(), R.drawable.tile_3w_bg); //decodeSampledBitmapFromResource(getResources(), R.drawable.tile_3w_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			 GameSurfaceView.bg3WZoomed =   ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_3w_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			// GameSurfaceView.bg3WZoomed =  BitmapFactory.decodeResource(getResources(), R.drawable.tile_3w_bg); //ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_3w_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
 			//		 GameSurfaceView.bg3WZoomed = Bitmap.createScaledBitmap(GameSurfaceView.bg3WZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1, false);
 
 			  GameSurfaceView.bg3WZoomed = ImageHelper.getResizedBitmap(GameSurfaceView.bg3WZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
@@ -678,8 +678,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 
 		 this.parent.captureTime("SetDerivedValues bg2LZoomed start load");
 		 if (GameSurfaceView.bg2LZoomed == null) {
-			 GameSurfaceView.bg2LZoomed =  decodeSampledBitmapFromResource(getResources(), R.drawable.tile_2l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
-			// GameSurfaceView.bg2LZoomed =  BitmapFactory.decodeResource(getResources(), R.drawable.tile_2l_bg); //decodeSampledBitmapFromResource(getResources(), R.drawable.tile_2l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			 GameSurfaceView.bg2LZoomed =  ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_2l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			// GameSurfaceView.bg2LZoomed =  BitmapFactory.decodeResource(getResources(), R.drawable.tile_2l_bg); //ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_2l_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
 					//  GameSurfaceView.bg2LZoomed = Bitmap.createScaledBitmap(GameSurfaceView.bg2LZoomed, this.zoomedTileWidth + 1 , this.zoomedTileWidth + 1, false);
 		 
 			  GameSurfaceView.bg2LZoomed = ImageHelper.getResizedBitmap(GameSurfaceView.bg2LZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
@@ -695,8 +695,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		 this.parent.captureTime("SetDerivedValues bg2WZoomed start load");
 		 if (GameSurfaceView.bg2WZoomed == null) {
 			 //this.bg2WZoomed = BitmapFactory.decodeResource(getResources(), R.drawable.tile_2w_bg);
-			// GameSurfaceView.bg2WZoomed = BitmapFactory.decodeResource(getResources(), R.drawable.tile_2w_bg); // decodeSampledBitmapFromResource(getResources(), R.drawable.tile_2w_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
-			 GameSurfaceView.bg2WZoomed =  decodeSampledBitmapFromResource(getResources(), R.drawable.tile_2w_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			// GameSurfaceView.bg2WZoomed = BitmapFactory.decodeResource(getResources(), R.drawable.tile_2w_bg); // ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_2w_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			 GameSurfaceView.bg2WZoomed =  ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_2w_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
 
 			// GameSurfaceView.bg2WZoomed = Bitmap.createScaledBitmap(GameSurfaceView.bg2WZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1, false);
 		 
@@ -715,10 +715,10 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 //		 }
 		 this.parent.captureTime("SetDerivedValues bgStarterZoomed start load");
 		 if (GameSurfaceView.bgStarterZoomed == null) {
-			 GameSurfaceView.bgStarterZoomed =  decodeSampledBitmapFromResource(getResources(), R.drawable.tile_starter_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			 GameSurfaceView.bgStarterZoomed =  ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_starter_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
 
 			 //GameSurfaceView.bgStarterZoomed = BitmapFactory.decodeResource(getResources(), R.drawable.tile_starter_bg);
-			// this.bgStarterZoomed =  decodeSampledBitmapFromResource(getResources(), R.drawable.tile_starter_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
+			// this.bgStarterZoomed =  ImageHelper.decodeSampledBitmapFromResource(getResources(), R.drawable.tile_starter_bg, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1);
 			 GameSurfaceView.bgStarterZoomed = ImageHelper.getResizedBitmap(GameSurfaceView.bgStarterZoomed, this.zoomedTileWidth + 1, this.zoomedTileWidth + 1); 	
 //			 GameSurfaceView.bgStarterZoomed = Bitmap.createScaledBitmap( GameSurfaceView.bgStarterZoomed, this.zoomedTileWidth + 1 , this.zoomedTileWidth + 1, false);
 		 }
@@ -743,47 +743,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	    //t.show();
 	}
 	
-	public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
-	        int reqWidth, int reqHeight) {
- 
-	    // First decode with inJustDecodeBounds=true to check dimensions
-	    final BitmapFactory.Options options = new BitmapFactory.Options();
-	    options.inJustDecodeBounds = true;
-	    BitmapFactory.decodeResource(res, resId, options);
 
-	    // Calculate inSampleSize
-	    options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-	 
-	    
-	    // Decode bitmap with inSampleSize set
-	    options.inJustDecodeBounds = false;
-	    return BitmapFactory.decodeResource(res, resId, options);
-
-	}
-	
-	public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-    // Raw height and width of image
-    final int height = options.outHeight;
-    final int width = options.outWidth;
-    int inSampleSize = 1;
-
-   // Logger.d(TAG, "calculateInSampleSize height=" + height + " reqHeight=" + reqHeight + " width=" + width + " reqWidth=" + reqWidth);
-    
-    if (height > reqHeight || width > reqWidth) {
-
-        // Calculate ratios of height and width to requested height and width
-        final int heightRatio = Math.round((float) height / (float) reqHeight);
-        final int widthRatio = Math.round((float) width / (float) reqWidth);
-
-        // Choose the smallest ratio as inSampleSize value, this will guarantee
-        // a final image with both dimensions larger than or equal to the
-        // requested height and width.
-        inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
-    }
-   // Logger.d(TAG, "calculateInSampleSize inSampleSize=" + inSampleSize);
-    return inSampleSize;
-}
 	
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {

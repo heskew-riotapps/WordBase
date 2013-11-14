@@ -282,4 +282,9 @@ public class Utils {
     	  System.arraycopy(second, 0, result, first.length, second.length);
     	  return result;
     	}
+    
+    public static int getResourceId(Context context, String drawableFileName){
+	    return context.getResources().getIdentifier(context.getString(R.string.namespace) + ":drawable/" + drawableFileName, null, null);	
+    }
+    
 }
