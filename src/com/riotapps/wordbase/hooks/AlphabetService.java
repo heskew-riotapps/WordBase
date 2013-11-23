@@ -112,12 +112,26 @@ public class AlphabetService {
 		//ApplicationContext appContext = (ApplicationContext)ApplicationContext.getAppContext().getApplicationContext();
 		
 		String[] consonants = getConsonants();
-		String[] consonants2 = getConsonants();
-		String[] vowels = getVowels(); //appContext.getResources().getStringArray(R.array.alphabet_consonants);
-		String[] vowels2 = getVowels();
+		List<String> consonants2  = new ArrayList<String>();
+		//remove U from second array, leaving the possibility of only one Q in the mix
+		for (String consonant : consonants){
+			if (!consonant.equals("Q")){
+				consonants2.add(consonant);
+			}
+		}
 		
-		String [] consonantsAll = Utils.concatArrays(consonants, consonants2);
-		String [] vowelsAll = Utils.concatArrays(vowels, vowels2);
+		
+		String[] vowels = getVowels(); //appContext.getResources().getStringArray(R.array.alphabet_consonants); 
+		List<String> vowels2  = new ArrayList<String>();
+		//remove U from second array, leaving the possibility of only one u in the mix
+		for (String vowel : vowels){
+			if (!vowel.equals("U")){
+				vowels2.add(vowel);
+			}
+		}
+		
+		String [] consonantsAll = Utils.concatArrays(consonants, consonants2.toArray(new String[consonants2.size()]));
+		String [] vowelsAll = Utils.concatArrays(vowels, vowels2.toArray(new String[vowels2.size()]));
 		 
 		//up to two of any letter
 		Utils.shuffleArray(consonantsAll);

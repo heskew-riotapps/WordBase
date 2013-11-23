@@ -484,5 +484,8 @@ public class Constants {
 	public static final int WORD_HINTS_NO_MORE_PREVIEWS = 1; 
 	public static final int WORD_HINTS_MAX_USED_FOR_GAME = 2;
 	
+	public static final boolean GAME_SURFACE_SKIP_PRE_PLAY_PROMPT = true;
+	public static final boolean GAME_SURFACE_SKIP_POST_PLAY_PROMPT = true;
+	
 }//end class Constants
  

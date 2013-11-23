@@ -52,6 +52,9 @@
     <color name="sub_text_color">#fff5ee</color> 
     <color name="progress_background_color">#3366dd</color>
     <color name="progress_text_color">#ffffff</color>
+     <color name="toast_background_color">#e4407d</color>
+     <color name="toast_inner_background_color">#3366dd</color>
+    <color name="toast_text_color">#ffffff</color>
     <color name="dialog_background_color">#3366dd</color>
     
     <color name="button_text_color">#fff5ee</color>

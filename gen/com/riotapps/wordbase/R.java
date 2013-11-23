@@ -33,20 +33,20 @@ containing a value of this type.
         public static int isTablet=0x7f070002;
     }
     public static final class color {
-        public static int alert_background_color=0x7f080038;
-        public static int alert_text_button_color=0x7f080037;
+        public static int alert_background_color=0x7f08003b;
+        public static int alert_text_button_color=0x7f08003a;
         public static int button_area_background=0x7f080000;
         public static int button_area_background_color=0x7f080027;
-        public static int button_text_color=0x7f08002c;
+        public static int button_text_color=0x7f08002f;
         public static int button_text_color_off=0x7f080007;
         public static int button_text_color_on=0x7f080003;
         public static int content_area_background_color=0x7f08001c;
         public static int content_area_background_pressed_color=0x7f08001d;
         public static int content_area_font_color=0x7f08001b;
         public static int content_font_color=0x7f08001e;
-        public static int dialog_background_color=0x7f08002b;
+        public static int dialog_background_color=0x7f08002e;
         public static int field_background=0x7f080004;
-        public static int field_button_text_color=0x7f08002e;
+        public static int field_button_text_color=0x7f080031;
         public static int form_background_color=0x7f080019;
         public static int form_border_color=0x7f08001f;
         public static int form_header_background_color=0x7f080026;
@@ -67,19 +67,19 @@ containing a value of this type.
         public static int game_board_tray_border=0x7f08000d;
         public static int game_board_tray_tile_letter=0x7f08000e;
         public static int game_board_tray_tile_value=0x7f08000f;
-        public static int game_surface_fill_color=0x7f080031;
-        public static int header_bottom_border_color=0x7f080035;
-        public static int header_text_color=0x7f080033;
-        public static int inline_header_text_color=0x7f080039;
-        public static int list_text_background_color=0x7f080032;
+        public static int game_surface_fill_color=0x7f080034;
+        public static int header_bottom_border_color=0x7f080038;
+        public static int header_text_color=0x7f080036;
+        public static int inline_header_text_color=0x7f08003c;
+        public static int list_text_background_color=0x7f080035;
         public static int logo_area_bottom_background_color=0x7f080023;
         public static int main_opponent_choose_background=0x7f080005;
         public static int main_opponent_choose_text=0x7f080006;
         /** custom color for pressed state 
          */
         public static int normal_color=0x7f080018;
-        public static int player_image_background_color=0x7f080030;
-        public static int player_image_border_color=0x7f08002f;
+        public static int player_image_background_color=0x7f080033;
+        public static int player_image_border_color=0x7f080032;
         public static int pressed_color=0x7f080017;
         public static int progress_background_color=0x7f080029;
         public static int progress_text_color=0x7f08002a;
@@ -88,14 +88,17 @@ containing a value of this type.
          */
         public static int scoreboard_text_color=0x7f080021;
         public static int scoreboard_text_last_played_color=0x7f080022;
-        public static int secondary_button_text_color=0x7f08002d;
-        public static int store_item_divider_color=0x7f080034;
-        public static int store_item_title_color=0x7f080036;
+        public static int secondary_button_text_color=0x7f080030;
+        public static int store_item_divider_color=0x7f080037;
+        public static int store_item_title_color=0x7f080039;
         public static int sub_text_color=0x7f080028;
         public static int tab_background_color=0x7f08001a;
         /**  previously 3366dd 
          */
         public static int title_bar_background_color=0x7f080020;
+        public static int toast_background_color=0x7f08002b;
+        public static int toast_inner_background_color=0x7f08002c;
+        public static int toast_text_color=0x7f08002d;
         public static int tray_background=0x7f080002;
     }
     public static final class drawable {
@@ -176,16 +179,18 @@ containing a value of this type.
         public static int tile_placed_bg=0x7f02004a;
         public static int tile_played_bg=0x7f02004b;
         public static int tile_starter_bg=0x7f02004c;
-        public static int top_bg=0x7f02004d;
-        public static int top_logo=0x7f02004e;
-        public static int tray_tile_bg=0x7f02004f;
-        public static int tray_tile_empty_bg=0x7f020050;
-        public static int tray_tile_swap_bg=0x7f020051;
-        public static int turn_arrow=0x7f020052;
-        public static int wordnik_badge_a1=0x7f020053;
-        public static int wordsmash_logo7=0x7f020054;
-        public static int wordsmash_logo8=0x7f020055;
-        public static int you=0x7f020056;
+        public static int toast_background=0x7f02004d;
+        public static int toast_inner_background=0x7f02004e;
+        public static int top_bg=0x7f02004f;
+        public static int top_logo=0x7f020050;
+        public static int tray_tile_bg=0x7f020051;
+        public static int tray_tile_empty_bg=0x7f020052;
+        public static int tray_tile_swap_bg=0x7f020053;
+        public static int turn_arrow=0x7f020054;
+        public static int wordnik_badge_a1=0x7f020055;
+        public static int wordsmash_logo7=0x7f020056;
+        public static int wordsmash_logo8=0x7f020057;
+        public static int you=0x7f020058;
     }
     public static final class id {
         public static int about_main=0x7f0b0002;
@@ -226,15 +231,15 @@ containing a value of this type.
         public static int bonus4l=0x7f0b0060;
         public static int bonus4l_img=0x7f0b0061;
         public static int bottomBorder=0x7f0b00c8;
-        public static int description=0x7f0b00fb;
+        public static int description=0x7f0b00fc;
         public static int dialog_text=0x7f0b00be;
-        public static int fullLogoArea=0x7f0b00f7;
+        public static int fullLogoArea=0x7f0b00f8;
         public static int gameSurface=0x7f0b0086;
         public static int header=0x7f0b000d;
         public static int header_wrapper=0x7f0b0094;
         public static int hyphen1=0x7f0b00b7;
         public static int hyphen2=0x7f0b00b9;
-        public static int imgHinter=0x7f0b00fd;
+        public static int imgHinter=0x7f0b00fe;
         public static int img_close=0x7f0b000f;
         public static int ivHopperPeekPurchased=0x7f0b00e6;
         public static int ivNoAdsPurchased=0x7f0b00d4;
@@ -247,7 +252,7 @@ containing a value of this type.
         public static int llBottomBorder=0x7f0b0018;
         public static int llButtons=0x7f0b0087;
         public static int llDefs=0x7f0b007d;
-        public static int llHints=0x7f0b00fe;
+        public static int llHints=0x7f0b00ff;
         public static int llHopperPeekPriceWrapper=0x7f0b00e4;
         public static int llItem=0x7f0b0012;
         public static int llNoAdsPriceWrapper=0x7f0b00d2;
@@ -258,7 +263,7 @@ containing a value of this type.
         public static int llWordDefinitionsPriceWrapper=0x7f0b00d8;
         public static int llWordHintsPriceWrapper=0x7f0b00de;
         public static int logo=0x7f0b00c9;
-        public static int logoArea=0x7f0b00f8;
+        public static int logoArea=0x7f0b00f9;
         public static int lookup_item_id=0x7f0b0082;
         public static int lvGames=0x7f0b0019;
         public static int lvWords=0x7f0b0074;
@@ -266,7 +271,7 @@ containing a value of this type.
         public static int peek_description=0x7f0b0096;
         public static int progress_root=0x7f0b000b;
         public static int progress_spinner=0x7f0b00bd;
-        public static int rlContent=0x7f0b00fc;
+        public static int rlContent=0x7f0b00fd;
         public static int rlHopperPeek=0x7f0b00e2;
         public static int rlItem=0x7f0b0013;
         public static int rlLetter1=0x7f0b00e9;
@@ -286,8 +291,9 @@ containing a value of this type.
         public static int scoreboardNumbers=0x7f0b00c4;
         public static int scroller=0x7f0b007c;
         public static int tblLetters=0x7f0b0097;
+        public static int toast_root=0x7f0b00f7;
         public static int topAreaLayout=0x7f0b0001;
-        public static int tvActivityTitle=0x7f0b00f9;
+        public static int tvActivityTitle=0x7f0b00fa;
         public static int tvAlertTitle=0x7f0b0095;
         public static int tvAttribution=0x7f0b0085;
         public static int tvBuildNumber=0x7f0b0005;
@@ -375,7 +381,7 @@ containing a value of this type.
         public static int tvFullRulesScoring_7=0x7f0b006b;
         public static int tvHopperPeekDescription=0x7f0b00e7;
         public static int tvHopperPeekTitle=0x7f0b00e3;
-        public static int tvInstructions=0x7f0b00ff;
+        public static int tvInstructions=0x7f0b0100;
         public static int tvLetter1=0x7f0b0098;
         public static int tvLetter10=0x7f0b00a1;
         public static int tvLetter11=0x7f0b00a2;
@@ -408,14 +414,14 @@ containing a value of this type.
         public static int tvNotFound=0x7f0b007b;
         public static int tvNum=0x7f0b0083;
         public static int tvNumPoints=0x7f0b00c7;
-        public static int tvNumWins=0x7f0b00fa;
+        public static int tvNumWins=0x7f0b00fb;
         public static int tvOK=0x7f0b007f;
         public static int tvOpponent=0x7f0b0015;
         public static int tvOpponentName=0x7f0b00c0;
         public static int tvOpponentScore=0x7f0b00c1;
         public static int tvPlayerName=0x7f0b00c2;
         public static int tvPlayerScore=0x7f0b00c3;
-        public static int tvPoints=0x7f0b0100;
+        public static int tvPoints=0x7f0b0101;
         public static int tvPremiumUpgradeDescription=0x7f0b00cf;
         public static int tvPremiumUpgradeTitle=0x7f0b00cb;
         public static int tvPreviewMessage=0x7f0b007a;
@@ -478,10 +484,11 @@ containing a value of this type.
         public static int splash=0x7f030010;
         public static int store=0x7f030011;
         public static int swapdialog=0x7f030012;
-        public static int toparealayout=0x7f030013;
-        public static int twobuttondialog=0x7f030014;
-        public static int wordhintdialog=0x7f030015;
-        public static int wordhintitem=0x7f030016;
+        public static int toast=0x7f030013;
+        public static int toparealayout=0x7f030014;
+        public static int twobuttondialog=0x7f030015;
+        public static int wordhintdialog=0x7f030016;
+        public static int wordhintitem=0x7f030017;
     }
     public static final class raw {
         public static int alphabet=0x7f040000;
@@ -945,11 +952,12 @@ containing a value of this type.
         public static int TextLineItemStyle=0x7f050057;
         public static int TextMiniStyle=0x7f050058;
         public static int TextStyle=0x7f050059;
-        public static int TopLogoAreaBottomStyle=0x7f05005a;
-        public static int TopLogoAreaStyle=0x7f05005b;
-        public static int TopLogoBoardStyle=0x7f05005c;
-        public static int TopLogoNoContextStyle=0x7f05005d;
-        public static int TopLogoStyle=0x7f05005e;
+        public static int ToastTextStyle=0x7f05005a;
+        public static int TopLogoAreaBottomStyle=0x7f05005b;
+        public static int TopLogoAreaStyle=0x7f05005c;
+        public static int TopLogoBoardStyle=0x7f05005d;
+        public static int TopLogoNoContextStyle=0x7f05005e;
+        public static int TopLogoStyle=0x7f05005f;
     }
     public static final class styleable {
         /** Attributes that can be used with a TypefacedTextView.

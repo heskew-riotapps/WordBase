@@ -1866,36 +1866,46 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 			
 			//this.parent.handleGamePlayOnClick(placedResult);
 			
-			//if (placedResult.getPlacedTiles().size() == 800){
-			if (placedResult.getPlacedTiles().size() == 0){
-				
-					//user is skipping this turn
-					this.customDialog = new CustomButtonDialog(this, 
-							this.getString(R.string.game_play_skip_title), 
-							this.getString(R.string.game_play_skip_confirmation_text),
-							this.getString(R.string.yes),
-							this.getString(R.string.no), 
-							Constants.RETURN_CODE_CUSTOM_DIALOG_SKIP_CLICKED,
-							Constants.RETURN_CODE_CUSTOM_DIALOG_SKIP_CANCEL_CLICKED,
-							Constants.RETURN_CODE_CUSTOM_DIALOG_SKIP_CLOSE_CLICKED);
-		 	    	
-					this.customDialog.show();
+			if (Constants.GAME_SURFACE_SKIP_PRE_PLAY_PROMPT){
+				if (placedResult.getPlacedTiles().size() == 0){
+					this.handleGameSkipOnClick(); 
 				}
-				else{
-					//loop through placed words and show confirmation messages 
-					this.placedResult = placedResult;
-					this.customDialog = new CustomButtonDialog(this, 
-							this.getString(R.string.game_play_title), 
-							GameService.getPlacedWordsMessage(this, placedResult.getPlacedWords()),
-							this.getString(R.string.yes),
-							this.getString(R.string.no), 
-							Constants.RETURN_CODE_CUSTOM_DIALOG_PLAY_CLICKED,
-							Constants.RETURN_CODE_CUSTOM_DIALOG_PLAY_CANCEL_CLICKED,
-							Constants.RETURN_CODE_CUSTOM_DIALOG_PLAY_CLOSE_CLICKED,
-							R.layout.played_word_dialog);
-		 	    	
-					this.customDialog.show();
-	
+				else {
+					this.handleGamePlayOnClick(placedResult);
+				}
+			}
+			else {
+			//if (placedResult.getPlacedTiles().size() == 800){
+				if (placedResult.getPlacedTiles().size() == 0){
+					
+						//user is skipping this turn
+						this.customDialog = new CustomButtonDialog(this, 
+								this.getString(R.string.game_play_skip_title), 
+								this.getString(R.string.game_play_skip_confirmation_text),
+								this.getString(R.string.yes),
+								this.getString(R.string.no), 
+								Constants.RETURN_CODE_CUSTOM_DIALOG_SKIP_CLICKED,
+								Constants.RETURN_CODE_CUSTOM_DIALOG_SKIP_CANCEL_CLICKED,
+								Constants.RETURN_CODE_CUSTOM_DIALOG_SKIP_CLOSE_CLICKED);
+			 	    	
+						this.customDialog.show();
+					}
+					else{
+						//loop through placed words and show confirmation messages 
+						this.placedResult = placedResult;
+						this.customDialog = new CustomButtonDialog(this, 
+								this.getString(R.string.game_play_title), 
+								GameService.getPlacedWordsMessage(this, placedResult.getPlacedWords()),
+								this.getString(R.string.yes),
+								this.getString(R.string.no), 
+								Constants.RETURN_CODE_CUSTOM_DIALOG_PLAY_CLICKED,
+								Constants.RETURN_CODE_CUSTOM_DIALOG_PLAY_CANCEL_CLICKED,
+								Constants.RETURN_CODE_CUSTOM_DIALOG_PLAY_CLOSE_CLICKED,
+								R.layout.played_word_dialog);
+			 	    	
+						this.customDialog.show();
+		
+					}
 				}
 			//}
 		}
@@ -2246,10 +2256,14 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
     		 		spinner.dismiss();
     		 		spinner = null;
     		 	}
-    		 	DialogManager.SetupAlert(context, this.postTurnTitle , this.postTurnMessage);
+    		 //	DialogManager.SetupAlert(context, this.postTurnTitle , this.postTurnMessage);
     		 	
     		 	//lets prime the pump for the next play
     		 	if (this.game.isActive()){
+    		 		
+    		 		if (!Constants.GAME_SURFACE_SKIP_POST_PLAY_PROMPT){
+    		 			DialogManager.SetupAlert(context, this.postTurnTitle , this.postTurnMessage);
+    		 		}
     		 		this.preAutoplayTask = new PreAutoplayTask();
     		 		this.preAutoplayTask.execute();
     		 		
@@ -2262,6 +2276,8 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
     		 		this.wordHintTask.execute();
     		 	}
     		 	else if (this.game.isCompleted()){
+    		 		DialogManager.SetupAlert(context, this.postTurnTitle , this.postTurnMessage);
+    		 		
     		 		//save completed event
     		 		if (this.game.getPlayerGames().get(0).getScore() == this.game.getPlayerGames().get(1).getScore()){
     		 			this.trackEvent(Constants.TRACKER_ACTION_GAME_COMPLETED, String.format(Constants.TRACKER_LABEL_OPPONENT_WITH_ID_DRAW, this.game.getOpponentId()), (int) Constants.TRACKER_SINGLE_VALUE);
