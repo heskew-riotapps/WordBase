@@ -109,23 +109,37 @@ public class AlphabetService {
 	
 	
 	public static List<String> getRaceLetters(){
-		//ApplicationContext appContext = (ApplicationContext)ApplicationContext.getAppContext().getApplicationContext();
+		ApplicationContext appContext = (ApplicationContext)ApplicationContext.getAppContext().getApplicationContext();
 		
+		
+		String[] noDupConsonants = appContext.getResources().getStringArray(R.array.race_tray_no_duplicate_consonants);
 		String[] consonants = getConsonants();
 		List<String> consonants2  = new ArrayList<String>();
 		//remove U from second array, leaving the possibility of only one Q in the mix
 		for (String consonant : consonants){
-			if (!consonant.equals("Q")){
+			boolean include = true;
+			for (String skip : noDupConsonants){
+				if (consonant.equals(skip)){
+					include = false;
+				}
+			}
+			if (include){
 				consonants2.add(consonant);
 			}
 		}
-		
-		
+
+		String[] noDupVowels = appContext.getResources().getStringArray(R.array.race_tray_no_duplicate_vowels);
 		String[] vowels = getVowels(); //appContext.getResources().getStringArray(R.array.alphabet_consonants); 
 		List<String> vowels2  = new ArrayList<String>();
-		//remove U from second array, leaving the possibility of only one u in the mix
+	 
 		for (String vowel : vowels){
-			if (!vowel.equals("U")){
+			boolean include = true;
+			for (String skip : noDupVowels){
+				if (vowel.equals(skip)){
+					include = false;
+				}
+			}
+			if (include){
 				vowels2.add(vowel);
 			}
 		}

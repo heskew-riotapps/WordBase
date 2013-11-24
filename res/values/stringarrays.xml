@@ -133,5 +133,17 @@
 		     <item>Y</item>
 		     <item>Z</item>
 		 </string-array>
-		 
+		 <string-array name="race_tray_no_duplicate_vowels">
+        	<item>I</item>
+        	<item>U</item>
+    	 </string-array>
+    	 <string-array name="race_tray_no_duplicate_consonants"> 
+        	<item>J</item>
+        	<item>K</item>
+        	<item>L</item>
+        	<item>Q</item>
+        	<item>V</item>
+            <item>Y</item>
+            <item>Z</item>
+    	 </string-array>
  </resources>   	 

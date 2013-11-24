@@ -12,6 +12,8 @@ public final class R {
         public static int alphabet_consonants=0x7f0a0001;
         public static int alphabet_spread=0x7f0a0002;
         public static int alphabet_vowels=0x7f0a0000;
+        public static int race_tray_no_duplicate_consonants=0x7f0a0004;
+        public static int race_tray_no_duplicate_vowels=0x7f0a0003;
     }
     public static final class attr {
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.

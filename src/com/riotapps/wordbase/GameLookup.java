@@ -81,10 +81,11 @@ public class GameLookup extends FragmentActivity  implements View.OnClickListene
 	 	String gameId = i.getStringExtra(Constants.EXTRA_GAME_ID);
 	 	this.word = i.getStringExtra(Constants.EXTRA_WORD_LOOKUP);
 	 	
-	 	this.game = GameService.getGame(gameId); 
+	 //	this.game = GameService.getGame(gameId); 
 	 	this.appContext = (ApplicationContext)this.getApplicationContext(); 
 	    this.player = this.appContext.getPlayer(); 
-	 	GameService.loadScoreboard(this, this.game);
+	 //	GameService.loadScoreboard(this, this.game);
+	 	this.loadGame(gameId);
 	     
 	     TextView tvWord = (TextView)this.findViewById(R.id.tvWord);
 	     tvWord.setText(word);
@@ -175,6 +176,11 @@ public class GameLookup extends FragmentActivity  implements View.OnClickListene
     	 }
 	     this.trackEvent(Constants.TRACKER_ACTION_WORD_LOOKED_UP, this.word, Constants.TRACKER_DEFAULT_OPTION_VALUE);
 	     
+	}
+
+ 
+	protected void loadGame(String gameId){
+	 	GameService.loadScoreboard(this, GameService.getGame(gameId));
 	}
 	
 	public void trackEvent(String action, String label, long value){
