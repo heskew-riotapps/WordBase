@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+     
     <string name="version">1.0</string>
     <string name="versionName">Apple Pie</string>
     <string name="build">101</string>
@@ -32,6 +33,8 @@
 	<string name="SKU_GOOGLE_PLAY_WORD_DEFINITIONS">riotapps_wordsmash_word_definitions.a</string>
 	<string name="SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL">riotapps_wordsmash_hide_interstitial.a</string>
 	<string name="SKU_GOOGLE_PLAY_WORD_HINTS">riotapps_wordsmash_word_hints.a</string>
+	<string name="SKU_GOOGLE_PLAY_DOUBLE_TIME">riotapps_rwe_double_time.a</string>
+	<string name="SKU_GOOGLE_PLAY_SPEED_ROUNDS">riotapps_rwe_speed_rounds.a</string>
     
     <string name="header_1_win">1 win</string>
     <string name="header_num_wins">%s wins</string>

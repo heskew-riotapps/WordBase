@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.riotapps.wordbase.R;
 import com.riotapps.wordbase.hooks.PlayerService;
 import com.riotapps.wordbase.utils.Constants;
 import com.riotapps.wordbase.utils.Logger;
@@ -26,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
  
     private SQLiteDatabase database = null; 
  
-    private final Context myContext;
+    private final Context context;
  
     /**
      * Constructor
@@ -36,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public DatabaseHelper(Context context) {
  
     	super(context, DB_NAME, null, 1);
-        this.myContext = context;
+        this.context = context;
         DB_PATH = context.getFilesDir().getParentFile().getPath() + Constants.DATABASE_PATH;
     }	
  
@@ -64,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     		Logger.d(TAG, "createDataBase about doesTableExist");
     		if (this.doesTableExist()){
     			//now check version
-    			if (PlayerService.getWordDatabaseVersion() < Constants.WORD_DATABASE_VERSION){
+    			if (PlayerService.getWordDatabaseVersion() < this.context.getResources().getInteger(R.integer.database_version)){
     				Logger.d(TAG, "database version out of sync, copy again");
     				create = true;
     			}
@@ -90,7 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         	try {
         		Logger.d(TAG, "createDataBase about copyDataBase");
     			copyDataBase();
-    			PlayerService.saveWordDatabaseVersion(Constants.WORD_DATABASE_VERSION);
+    			PlayerService.saveWordDatabaseVersion(this.context.getResources().getInteger(R.integer.database_version));
     			
     			//load indexes
     			this.database = this.getReadableDatabase();
@@ -146,7 +147,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private void copyDataBase() throws IOException{
  
     	//Open your local db as the input stream
-    	InputStream myInput = myContext.getAssets().open(DB_NAME);
+    	InputStream myInput = context.getAssets().open(DB_NAME);
  
     	// Path to the just created empty db
     	String outFileName = DB_PATH + DB_NAME;

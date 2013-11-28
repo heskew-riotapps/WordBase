@@ -1,6 +1,7 @@
 package com.riotapps.wordbase;
 
 import java.io.IOException;
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
@@ -142,6 +143,13 @@ public class Splash  extends FragmentActivity {
 	       else {
 	         // does the user have the premium upgrade?
 	    	   StoreService.syncPurchases(inventory, this);
+	    	   
+	    	   List<String> skus = StoreService.getAllSkus(this);
+	    	   for (String sku : skus){
+	    		   if (inventory.hasDetails(sku)){
+	    			   StoreService.saveCachedInventoryItemPrice(sku, inventory.getSkuDetails(sku).getPrice());
+	    		   }
+	    	   }
 	       }
 		  
 	 

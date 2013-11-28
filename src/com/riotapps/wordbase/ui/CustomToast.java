@@ -16,7 +16,7 @@ public class CustomToast extends AlertDialog{
 	private static final String TAG = CustomToast.class.getSimpleName();
 	  private String dialogText = "";
 	  private TextView dialog_text;
-	  private int numMillisecondsInView = 1000;
+	  private int numMillisecondsInView = 800;
 	  
 	 // public void SetText(String text){
 	//	  this.dialogText = text;

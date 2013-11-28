@@ -47,12 +47,12 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
 	private static final String TAG = Main.class.getSimpleName();
  
 	private Context context = this;
-	private Player player;
+	protected Player player;
 	 private PopupMenu popupMenu;
 	 private CustomButtonDialog customDialog;
 	 private LinearLayout llOpponents = null;
         
-     private int chosenOpponentId = 0;
+     protected int chosenOpponentId = 0;
 	//Timer timer = null;
 	boolean callingIntent = false;
  
@@ -370,11 +370,11 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
     
 		 //open dialog mgr to confirm that player wants to play this particular opponent
 		 
-		 
 		 if (v.getId() == R.id.options) {
 			popupMenu.show();
 		} else {
 			int opponentId = Integer.parseInt(v.getTag().toString());
+			//this.chosenOpponentId = opponentId;
 			this.handleGameStartPrompt(opponentId);
 		}
  
@@ -418,7 +418,7 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
 		}
 	}
     
-    private void handleGameStartPrompt(int opponentId){
+    protected void handleGameStartPrompt(int opponentId){
 		Opponent o = OpponentService.getOpponent(opponentId);
     	this.chosenOpponentId = opponentId;
     	

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <integer name="database_version">3</integer>
  	<integer name="gameBoardLogoHeightPercentageInTenths">7</integer>
     <integer name="gameboard_button_area_height">48</integer>
     <integer name="gameboard_lookup_words_width">200</integer>

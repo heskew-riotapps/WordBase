@@ -5,12 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.riotapps.wordbase.R;
 import com.riotapps.wordbase.billing.Inventory;
 import com.riotapps.wordbase.data.StoreData;
 import com.riotapps.wordbase.utils.Constants;
 import com.riotapps.wordbase.utils.Logger;
+import com.riotapps.wordbase.utils.Storage;
 
 public class StoreService {
 	private static final String TAG = StoreService.class.getSimpleName();
@@ -18,11 +20,12 @@ public class StoreService {
 	public static Purchase getPurchaseBySku(String sku){
 		return StoreData.getPurchaseBySku(sku);
 	}
-	
+	/*
 	public static List<StoreItem> getStoreItems(){
 		
 		return StoreData.getStoreItems();
 	}
+	*/
 
 	public static List<String> getAllSkus(Context context){
 		List<String> skus = new ArrayList<String>();
@@ -31,6 +34,8 @@ public class StoreService {
 		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE));
 		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS));
 		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS));
+		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_SPEED_ROUNDS));
+		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_DOUBLE_TIME));
 		
 		return skus;
 	}
@@ -47,7 +52,15 @@ public class StoreService {
 		return purchase.isPurchased();
 	}
 
+	public static boolean isSpeedRoundsPurchased(Context context){
+ 		Purchase purchase = StoreData.getPurchaseBySku(context.getString(R.string.SKU_GOOGLE_PLAY_SPEED_ROUNDS));
+ 		return purchase.isPurchased() || isPremiumUpgradePurchased(context);
+	}
 	
+	public static boolean isDoubleTimePurchased(Context context){
+ 		Purchase purchase = StoreData.getPurchaseBySku(context.getString(R.string.SKU_GOOGLE_PLAY_DOUBLE_TIME));
+ 		return purchase.isPurchased() || isPremiumUpgradePurchased(context);
+	}
 	
 	public static boolean isHopperPeekPurchased(Context context){
 		
@@ -139,6 +152,32 @@ public class StoreService {
 	     else{
 			 clearPurchase(context.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS));	 
 		 }
+	     if (inventory.hasPurchase(context.getString(R.string.SKU_GOOGLE_PLAY_DOUBLE_TIME))){
+	        	com.riotapps.wordbase.billing.Purchase skuDoubleTime = inventory.getPurchase(context.getString(R.string.SKU_GOOGLE_PLAY_DOUBLE_TIME));
+	        	savePurchase(skuDoubleTime.getSku(), skuDoubleTime.getToken()); 
+	     }  
+	     else{
+			 clearPurchase(context.getString(R.string.SKU_GOOGLE_PLAY_DOUBLE_TIME));	 
+		 }
+	     if (inventory.hasPurchase(context.getString(R.string.SKU_GOOGLE_PLAY_SPEED_ROUNDS))){
+	        	com.riotapps.wordbase.billing.Purchase skuSpeedRounds = inventory.getPurchase(context.getString(R.string.SKU_GOOGLE_PLAY_SPEED_ROUNDS));
+	        	savePurchase(skuSpeedRounds.getSku(), skuSpeedRounds.getToken()); 
+	     }  
+	     else{
+			 clearPurchase(context.getString(R.string.SKU_GOOGLE_PLAY_SPEED_ROUNDS));	 
+		 }
 	} 
+	
+	
+
+	public static String getCachedInventoryItemPrice(String sku){
+	 
+		return StoreData.getCachedInventoryItemPrice(sku);
+	}
+	
+	public static void saveCachedInventoryItemPrice(String sku, String price){
+		StoreData.saveCachedInventoryItemPrice(sku, price);
+	}
+ 
 	
 }

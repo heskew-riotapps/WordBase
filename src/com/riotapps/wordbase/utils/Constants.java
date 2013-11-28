@@ -89,6 +89,9 @@ public class Constants {
 	public static final String TRACKER_ACTION_BUTTON_TAPPED = "button_click";
 	public static final String TRACKER_ACTION_WORD_LOOKED_UP = "word_looked_up";
 	public static final String TRACKER_ACTION_GAME_STARTED = "game_started";
+	public static final String TRACKER_ACTION_90_SECOND_GAME_STARTED = "90_second_dash_game_started";
+	public static final String TRACKER_ACTION_SPEED_ROUNDS_GAME_STARTED = "speed_rounds_game_started";
+	public static final String TRACKER_ACTION_DOUBLE_TIME_GAME_STARTED = "double_time_game_started";
 	public static final String TRACKER_ACTION_GAME_COMPLETED = "game_completed";
 
 	public static final String TRACKER_ACTION_GAME_AUTO_PLAY = "game_opponent_play";
@@ -229,6 +232,7 @@ public class Constants {
  	public static final String USER_PREFS_GAME_LIST_CHECK_TIME = "game_list_check";
  	public static final String USER_PREFS_GCM_REGISTRATION_ID = "gcm";
  	public static final String PURCHASE_PREFS_ITEM = "p_item_%s";
+ 	public static final String INVENTORY_PREFS_ITEM = "inv_item_%s";
  	public static final String OPPONENT_PREFS_RECORD = "o_rec_%s";
  	public static final String OPPONENT_PREFS_GROUP_ACTIVATED = "o_rec_%s";
 	public static final String USER_PREFS_GAME_ALERT_CHECK = "game_alert_check_%s";
@@ -419,7 +423,14 @@ public class Constants {
 	public static final int RETURN_CODE_CUSTOM_DIALOG_START_OK_CLICKED = 122;	
 	public static final int RETURN_CODE_CUSTOM_DIALOG_START_CANCEL_CLICKED = 123;	
 	public static final int RETURN_CODE_CUSTOM_DIALOG_START_CLOSE_CLICKED = 124;	
-	
+	public static final int RETURN_CODE_CREATE_GAME_DIALOG_OK_CLICKED = 125;	
+	public static final int RETURN_CODE_CREATE_GAME_DIALOG_CLOSE_CLICKED = 126;
+	public static final int RETURN_CODE_CREATE_GAME_DIALOG_CANCEL_CLICKED = 127;
+	public static final int RETURN_CODE_CREATE_GAME_DIALOG_ORIGINAL_GAME_CLICKED = 128;
+	public static final int RETURN_CODE_CREATE_GAME_DIALOG_SPEED_ROUND_CLICKED = 129;
+	public static final int RETURN_CODE_CREATE_GAME_DIALOG_DOUBLE_TIME_CLICKED = 130;
+	public static final int RETURN_CODE_CREATE_GAME_DIALOG_SPEED_ROUND_STORE_CLICKED = 131;
+	public static final int RETURN_CODE_CREATE_GAME_DIALOG_DOUBLE_TIME_STORE_CLICKED = 132;
 	/**=============================================
 	 * directions 
 	 *==============================================*/
@@ -486,6 +497,12 @@ public class Constants {
 	
 	public static final boolean GAME_SURFACE_SKIP_PRE_PLAY_PROMPT = true;
 	public static final boolean GAME_SURFACE_SKIP_POST_PLAY_PROMPT = true;
+	
+	public static final int RACE_GAME_TYPE_90_SECOND_DASH = 0;
+	public static final int RACE_GAME_TYPE_SPEED_ROUNDS = 1;
+	public static final int RACE_GAME_TYPE_DOUBLE_TIME =2 ;
+	
+	
 	
 }//end class Constants
  

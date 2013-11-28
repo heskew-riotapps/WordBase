@@ -70,8 +70,28 @@ public class StoreData {
 	
 	}
 	
+	public static String getCachedInventoryItemPrice(String sku){
+		SharedPreferences settings = Storage.getPurchaseSharedPreferences();
+		return settings.getString(String.format(Constants.INVENTORY_PREFS_ITEM, sku), "??");
+	}
 	
-	
+	public static void saveCachedInventoryItemPrice(String sku, String price){
+ 
+		SharedPreferences settings = Storage.getPurchaseSharedPreferences();
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(String.format(Constants.INVENTORY_PREFS_ITEM, sku), price);
+		// Check if we're running on GingerBread or above
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+		     // If so, call apply()
+		     editor.apply();
+		 // if not
+		} else {
+		     // Call commit()
+		     editor.commit();
+		} 
+ 
+	}
+	/*
 	public static List<StoreItem> getStoreItems(){
 		
 	 	Gson gson = new Gson(); 
@@ -88,7 +108,7 @@ public class StoreData {
 		
 		return storeItems;
 	}
-	
+	*/
 	
 	
 }
