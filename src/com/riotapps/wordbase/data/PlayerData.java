@@ -1,8 +1,10 @@
 package com.riotapps.wordbase.data;
 
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.List;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
@@ -93,6 +95,16 @@ public class PlayerData {
 	    return uses;
 	}
 	
+	public static int getRemainingFreeUsesWordDefinition(Context context){
+		
+	    SharedPreferences settings = Storage.getSharedPreferences();
+	    int uses = settings.getInt(Constants.USER_PREFS_FREE_REMAINING_USES_WORD_DEFINITION, context.getResources().getInteger(R.integer.free_uses_word_definitions));
+	    
+	    settings = null;
+	    
+	    return uses;
+	}
+	
 	public static int removeAFreeUseFromHopperPeek(){
 	    SharedPreferences settings = Storage.getSharedPreferences();
 	    int uses = settings.getInt(Constants.USER_PREFS_FREE_REMAINING_USES_HOPPER_PEEK, Constants.FREE_USES_HOPPER_PEEK);
@@ -118,6 +130,73 @@ public class PlayerData {
 	    	SharedPreferences.Editor editor = settings.edit();
 		
 	  		editor.putInt(Constants.USER_PREFS_FREE_REMAINING_USES_WORD_DEFINITION, uses);
+	  		editor.apply();
+	    } 
+	    
+	    settings = null;
+	    return uses;
+	}	
+	public static int removeAFreeUseFromWordDefinition(Context context){
+	    SharedPreferences settings = Storage.getSharedPreferences();
+	    int uses = settings.getInt(Constants.USER_PREFS_FREE_REMAINING_USES_WORD_DEFINITION, context.getResources().getInteger(R.integer.free_uses_word_definitions));
+	    
+	    if (uses > 0){
+	    	uses -= 1;
+	    	SharedPreferences.Editor editor = settings.edit();
+		
+	  		editor.putInt(Constants.USER_PREFS_FREE_REMAINING_USES_WORD_DEFINITION, uses);
+	  		editor.apply();
+	    } 
+	    
+	    settings = null;
+	    return uses;
+	}	
+	
+	public static int getRemainingFreeUsesSpeedRounds(Context context){
+		
+	    SharedPreferences settings = Storage.getSharedPreferences();
+	    int uses = settings.getInt(Constants.USER_PREFS_FREE_REMAINING_USES_SPEED_ROUNDS, context.getResources().getInteger(R.integer.free_uses_speed_rounds));
+	    
+	    settings = null;
+	    
+	    return uses;
+	}
+	
+	public static int removeAFreeUseFromSpeedRounds(Context context){
+	    SharedPreferences settings = Storage.getSharedPreferences();
+	    int uses = settings.getInt(Constants.USER_PREFS_FREE_REMAINING_USES_SPEED_ROUNDS, context.getResources().getInteger(R.integer.free_uses_speed_rounds));
+	    
+	    if (uses > 0){
+	    	uses -= 1;
+	    	SharedPreferences.Editor editor = settings.edit();
+		
+	  		editor.putInt(Constants.USER_PREFS_FREE_REMAINING_USES_SPEED_ROUNDS, uses);
+	  		editor.apply();
+	    } 
+	    
+	    settings = null;
+	    return uses;
+	}	
+	
+	public static int getRemainingFreeUsesDoubleTime(Context context){
+		
+	    SharedPreferences settings = Storage.getSharedPreferences();
+	    int uses = settings.getInt(Constants.USER_PREFS_FREE_REMAINING_USES_DOUBLE_TIME, context.getResources().getInteger(R.integer.free_uses_double_time));
+	    
+	    settings = null;
+	    
+	    return uses;
+	}
+	
+	public static int removeAFreeUseFromDoubleTime(Context context){
+	    SharedPreferences settings = Storage.getSharedPreferences();
+	    int uses = settings.getInt(Constants.USER_PREFS_FREE_REMAINING_USES_DOUBLE_TIME, context.getResources().getInteger(R.integer.free_uses_double_time));
+	    
+	    if (uses > 0){
+	    	uses -= 1;
+	    	SharedPreferences.Editor editor = settings.edit();
+		
+	  		editor.putInt(Constants.USER_PREFS_FREE_REMAINING_USES_DOUBLE_TIME, uses);
 	  		editor.apply();
 	    } 
 	    
@@ -151,4 +230,26 @@ public class PlayerData {
 	    return Constants.FREE_USES_WORD_HINTS - uses <= 0 ? 0 : Constants.FREE_USES_WORD_HINTS - uses;
 	}
 	
+	
+	public static long getLastInterstitialPurchaseReminderTime(){
+ 
+	    SharedPreferences settings = Storage.getSharedPreferences();
+	    long uses = settings.getLong(Constants.USER_PREFS_LAST_INTERSTITIAL_PURCHASE_REMINDER, Constants.DEFAULT_HIDE_AD_PURCHASE_REMINDER);
+	    
+	    settings = null;
+	    
+	    return uses;
+	}
+	
+	public static void setLastInterstitialPurchaseReminderTime(){
+	    SharedPreferences settings = Storage.getSharedPreferences();
+	 
+	    SharedPreferences.Editor editor = settings.edit();
+		
+	  	editor.putLong(Constants.USER_PREFS_LAST_INTERSTITIAL_PURCHASE_REMINDER, new Date().getTime());
+	  	editor.apply();
+
+	    settings = null;
+	  
+	}
 }

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import android.annotation.SuppressLint;
@@ -203,6 +204,21 @@ public class PlayerService {
 		 return PlayerData.getRemainingFreeUsesWordDefinition();	
 	}
 	
+	public static int getRemainingFreeUsesWordDefinition(Context context){
+		
+		 return PlayerData.getRemainingFreeUsesWordDefinition(context);	
+	}
+	
+	public static int getRemainingFreeUsesSpeedRounds(Context context){
+		
+		 return PlayerData.getRemainingFreeUsesSpeedRounds(context);	
+	}
+	
+	public static int getRemainingFreeUsesDoubleTime(Context context){
+		
+		 return PlayerData.getRemainingFreeUsesDoubleTime(context);	
+	}
+	
 	public static int removeAFreeUseFromHopperPeek(){
 		//remain number of free uses is returned
 		return PlayerData.removeAFreeUseFromHopperPeek();
@@ -216,6 +232,17 @@ public class PlayerService {
 		return PlayerData.removeAFreeUseFromWordDefinition();
 	}	
 	
+	public static int removeAFreeUseFromWordDefinition(Context context){
+		return PlayerData.removeAFreeUseFromWordDefinition(context);
+	}	
+	
+	public static int removeAFreeUseFromSpeedRounds(Context context){
+		return PlayerData.removeAFreeUseFromSpeedRounds(context);
+	}	
+	
+	public static int removeAFreeUseFromDoubleTime(Context context){
+		return PlayerData.removeAFreeUseFromDoubleTime(context);
+	}	
 	
 	public static String getBadgeDrawable__(int numWins){
 		if (numWins == -1) {
@@ -347,6 +374,27 @@ public class PlayerService {
 		}
 		//fallthrough
 		return Constants.BADGE_0;
+	}
+	
+	public static long getLastInterstitialPurchaseReminderTime(){
+		 
+	    return PlayerData.getLastInterstitialPurchaseReminderTime();
+	}
+	
+	public static long getHoursSinceLastInterstitialPurchaseReminder(){
+		 
+	    long last = getLastInterstitialPurchaseReminderTime();
+	    
+	    if (last == Constants.DEFAULT_HIDE_AD_PURCHASE_REMINDER) { return Constants.DEFAULT_HIDE_AD_PURCHASE_REMINDER; }
+	    
+	    long now = new Date().getTime();
+	     
+	    return TimeUnit.MILLISECONDS.toHours(now - last);
+	}
+
+	
+	public static void setLastInterstitialPurchaseReminderTime(){
+		PlayerData.setLastInterstitialPurchaseReminderTime();
 	}
 
 }

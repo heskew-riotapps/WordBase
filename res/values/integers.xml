@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="database_version">3</integer>
- 	<integer name="gameBoardLogoHeightPercentageInTenths">7</integer>
+    <integer name="hours_between_interstitial_purchase_reminder">24</integer>
+    <integer name="free_uses_speed_rounds">15</integer>
+    <integer name="free_uses_double_time">15</integer>
+    <integer name="free_uses_word_definitions">4</integer>
+   	<integer name="gameBoardLogoHeightPercentageInTenths">7</integer>
     <integer name="gameboard_button_area_height">48</integer>
     <integer name="gameboard_lookup_words_width">200</integer>
     <integer name="gameboard_lookup_words_height">40</integer>

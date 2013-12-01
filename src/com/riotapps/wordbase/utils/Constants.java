@@ -165,6 +165,9 @@ public class Constants {
 	public static final String TRACKER_LABEL_START_GAME_OK = "start_game_ok";
 	public static final String TRACKER_LABEL_START_GAME_CANCEL = "start_game_cancel";
 	public static final String TRACKER_LABEL_START_GAME_DISMISS = "start_game_dismiss";
+	public static final String TRACKER_LABEL_HIDE_INTERSTITIAL_REMINDER_DISMISS = "hide_ad_reminder_dismiss";
+	public static final String TRACKER_LABEL_HIDE_INTERSTITIAL_REMINDER_CANCEL = "hide_ad_reminder_cancel";
+	public static final String TRACKER_LABEL_HIDE_INTERSTITIAL_REMINDER_OK = "hide_ad_reminder_ok";
 	 public static final String TRACKER_LABEL_PLAY_WITH_ERRORS = "play_with_errors_%s";
 	public static final long TRACKER_DEFAULT_OPTION_VALUE = 0;
 	public static final long TRACKER_SINGLE_VALUE = 1;
@@ -224,6 +227,9 @@ public class Constants {
 	public static final String USER_PREFS_FREE_REMAINING_USES_HOPPER_PEEK = "fu_hp";
 	public static final String USER_PREFS_FREE_USAGES_WORD_HINTS = "fu_wh";
 	public static final String USER_PREFS_FREE_REMAINING_USES_WORD_DEFINITION = "fu_wd";
+	public static final String USER_PREFS_FREE_REMAINING_USES_SPEED_ROUNDS = "fu_sr";
+	public static final String USER_PREFS_FREE_REMAINING_USES_DOUBLE_TIME = "fu_dt";
+	public static final String USER_PREFS_LAST_INTERSTITIAL_PURCHASE_REMINDER = "r_lIp";
  	public static final String USER_PREFS_GAME_JSON = "game_json_%s";
  	public static final String USER_PREFS_GAME_LIST_JSON = "game_list_";
  	public static final String USER_PREFS_FRIENDS_JSON = "friends_json";
@@ -249,7 +255,7 @@ public class Constants {
 	public static final int FREE_USES_WORD_HINTS = 4;
 	public static final int FREE_USES_HOPPER_PEEK = 4;
 	public static final int FREE_USES_WORD_DEFINITION = 2;
-	
+	public static final int FREE_USES_SPEED_ROUNDS = 2;
 
 	
 	
@@ -431,6 +437,9 @@ public class Constants {
 	public static final int RETURN_CODE_CREATE_GAME_DIALOG_DOUBLE_TIME_CLICKED = 130;
 	public static final int RETURN_CODE_CREATE_GAME_DIALOG_SPEED_ROUND_STORE_CLICKED = 131;
 	public static final int RETURN_CODE_CREATE_GAME_DIALOG_DOUBLE_TIME_STORE_CLICKED = 132;
+	public static final int RETURN_CODE_CUSTOM_DIALOG_INTERSTITIAL_REMINDER_OK_CLICKED = 133;	
+	public static final int RETURN_CODE_CUSTOM_DIALOG_INTERSTITIAL_REMINDER_CLOSE_CLICKED = 134;
+	public static final int RETURN_CODE_CUSTOM_DIALOG_INTERSTITIAL_REMINDER_CANCEL_CLICKED = 135;	
 	/**=============================================
 	 * directions 
 	 *==============================================*/
@@ -501,6 +510,8 @@ public class Constants {
 	public static final int RACE_GAME_TYPE_90_SECOND_DASH = 0;
 	public static final int RACE_GAME_TYPE_SPEED_ROUNDS = 1;
 	public static final int RACE_GAME_TYPE_DOUBLE_TIME =2 ;
+	
+	public static final long DEFAULT_HIDE_AD_PURCHASE_REMINDER = -1;
 	
 	
 	

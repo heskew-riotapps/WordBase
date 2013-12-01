@@ -8,8 +8,12 @@ import com.google.gson.annotations.SerializedName;
 import com.riotapps.wordbase.R;
 import com.riotapps.wordbase.utils.ApplicationContext;
 import com.riotapps.wordbase.utils.Constants;
+import com.riotapps.wordbase.utils.Logger;
+ 
 
 public class Opponent{
+	
+	private static final String TAG = Opponent.class.getSimpleName();
 	
 	@SerializedName("id")
 	private int id;
@@ -27,6 +31,9 @@ public class Opponent{
 	private int opponentGroupId;
 	private OpponentRecord record = null;
 	private Bitmap smallImage = null;
+	
+	private int smallResourceId = 0;
+	private int mainResourceId = 0;
 	
 	private OpponentGroup opponentGroup = null;
 	
@@ -140,7 +147,9 @@ public class Opponent{
 	}
 	
 	public Bitmap getSmallBitmap(){
+		Logger.d(TAG, "getSmallBitmap id=" + this.id);
 		if (this.smallImage == null){
+			Logger.d(TAG, "getSmallBitmap smallImage is null");
 		 this.preloadBitmaps();
 		}
 		
@@ -148,12 +157,35 @@ public class Opponent{
 	
 	}
 	
+	public int getSmallResourceId(){
+		if (smallResourceId == 0){
+			Context context = ApplicationContext.getAppContext();
+			smallResourceId = context.getResources().getIdentifier(context.getString(R.string.namespace) + ":drawable/" + this.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_SMALL), null, null);  
+		}
+		return smallResourceId;
+	}
+	
+	public int getMainResourceId(){
+		if (mainResourceId == 0){
+			Context context = ApplicationContext.getAppContext();
+			mainResourceId = context.getResources().getIdentifier(context.getString(R.string.namespace) + ":drawable/" + this.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);  
+		}
+		return mainResourceId;
+	}
+	
+	public void preloadResourceIds(){
+		int small = this.getSmallResourceId();
+		int main = this.getMainResourceId();
+	}
+	
 	public void preloadBitmaps(){
 		if (this.smallImage == null){
 		  Context context = ApplicationContext.getAppContext();
-			
+		  Logger.d(TAG, "preloadBitmaps id=" + this.id);
 		  int opponentImageId = context.getResources().getIdentifier(context.getString(R.string.namespace) + ":drawable/" + this.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_SMALL), null, null);
+		  Logger.d(TAG, "preloadBitmaps opponentImageId=" + opponentImageId);
 		  this.smallImage = BitmapFactory.decodeResource(context.getResources(), opponentImageId);
+		  Logger.d(TAG, "preloadBitmaps after decode");
 		}
 	}
 	

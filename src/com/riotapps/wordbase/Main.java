@@ -343,8 +343,8 @@ public class Main extends FragmentActivity implements View.OnClickListener, Popu
 	 	RelativeLayout.LayoutParams paramsImage = new RelativeLayout.LayoutParams(width, height);
 		ivOpponent.setLayoutParams(paramsImage);
 		
-		int opponentImageId = context.getResources().getIdentifier(this.getString(R.string.namespace) + ":drawable/" + opponent.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);
-		ivOpponent.setImageResource(opponentImageId);
+	//	int opponentImageId = context.getResources().getIdentifier(this.getString(R.string.namespace) + ":drawable/" + opponent.getDrawableByMode(Constants.OPPONENT_IMAGE_MODE_MAIN), null, null);
+		ivOpponent.setImageResource(opponent.getMainResourceId());
 		
 		
 		 

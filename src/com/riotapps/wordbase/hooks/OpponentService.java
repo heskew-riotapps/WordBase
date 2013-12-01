@@ -25,6 +25,7 @@ public class OpponentService {
 		
 		for (Opponent o : opponents){
 			o.preloadBitmaps();
+			o.preloadResourceIds();
 		}
 		return opponents;
 			 

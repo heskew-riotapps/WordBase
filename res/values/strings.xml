@@ -39,6 +39,7 @@
     <string name="header_1_win">1 win</string>
     <string name="header_num_wins">%s wins</string>
     <string name="version_name_display">(%s)</string>
+    <string name="parentheses_enclosure">(%s)</string>
 	<string name="logo">logo</string>
 	
     <string name="admob_pub_id_main_landing">ca-app-pub-7811514377323585/2429670350</string>
@@ -395,5 +396,9 @@
 		<string name="word_hint_sub_description">(Don\'t forget to tap the Play button if you decide to play the word.)</string>
 		<string name="word_hint_description_none_found">Sorry, Ethan didn\'t find any word hints.  That doesn\'t mean all hope is lost though!  You may be able to play a word that Ethan didn\'t find.</string>
 		 <string name="progress_word_hint_is_thinking">Ethan is thinking&#8230;</string>
+		 
+		 	 <string name="game_opponent_winner_message">%2$s won %3$s - %4$s %1$s</string>
+	 <string name="game_player_winner_message">You won %2$s - %3$s %1$s</string>	 
+	 <string name="game_draw_message">a %2$s - %3$s draw was declared %1$s</string>
 					
 </resources>

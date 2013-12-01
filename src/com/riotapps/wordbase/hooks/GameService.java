@@ -14,7 +14,6 @@ import java.util.SortedSet;
 import java.util.Timer;
 import java.util.TreeSet;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -44,6 +43,7 @@ import com.riotapps.wordbase.ui.RowCol;
 import com.riotapps.wordbase.data.GameData;
 import com.riotapps.wordbase.hooks.Game.LastAction;
 import com.riotapps.wordbase.hooks.WordService;
+import android.annotation.SuppressLint;
  
  
 @SuppressLint("NewApi")
