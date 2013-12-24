@@ -1,7 +1,7 @@
 package com.riotapps.wordbase;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,15 +9,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 
+import com.amazon.inapp.purchasing.PurchasingManager;
 import com.google.analytics.tracking.android.EasyTracker;
+import com.riotapps.wordbase.billing.AmazonPurchaseObserver;
 import com.riotapps.wordbase.billing.IabHelper;
 import com.riotapps.wordbase.billing.IabResult;
 import com.riotapps.wordbase.billing.Inventory;
-import com.riotapps.wordbase.data.DatabaseHelper;
 import com.riotapps.wordbase.hooks.Player;
 import com.riotapps.wordbase.hooks.PlayerService;
 import com.riotapps.wordbase.hooks.StoreService;
-import com.riotapps.wordbase.hooks.WordService;
 import com.riotapps.wordbase.services.WordLoaderService;
 import com.riotapps.wordbase.utils.*;
 
@@ -56,19 +56,9 @@ public class Splash  extends FragmentActivity {
 		
 		 // compute your public key and store it in base64EncodedPublicKey
 		
-		try{
-        mHelper = new IabHelper(this, StoreService.getIABPublicKey(this));
-        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-        	   public void onIabSetupFinished(IabResult result) {
-        		   onSetupFinished(result);
-        	   }
-        	});
-		}
-		catch (Exception e){
-			Logger.d(TAG, "mHelper e=" + e.getMessage());
-		}
-		//pub logic in to wait for purchase check, perhaps kick it off from inventory listener
 		
+		//pub logic in to wait for purchase check, perhaps kick it off from inventory listener
+		this.prepareInAppPurchasing();
 		
         
       //  this.handleRouting();
@@ -104,6 +94,40 @@ public class Splash  extends FragmentActivity {
         this.captureTime("onCreate ended");
         
      }
+    
+    @Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (Utils.fromAppStore(this) == Enums.InstalledFromStore.AMAZON){
+			PurchasingManager.initiateGetUserIdRequest();
+			Set<String> skus = StoreService.getAllAmazonSkus(this);
+			PurchasingManager.initiateItemDataRequest(skus);
+	    	
+    	}
+		
+	}
+
+	public void prepareInAppPurchasing(){
+    	if (Utils.fromAppStore(this) == Enums.InstalledFromStore.AMAZON){
+    		PurchasingManager.registerObserver(new AmazonPurchaseObserver(this));
+    	}
+    	else {
+    		//google play
+    	try{
+			
+            mHelper = new IabHelper(this, StoreService.getIABPublicKey(this));
+            mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            	   public void onIabSetupFinished(IabResult result) {
+            		   onSetupFinished(result);
+            	   }
+            	});
+    		}
+    		catch (Exception e){
+    			Logger.d(TAG, "mHelper e=" + e.getMessage());
+    		}
+    	}
+    }
     
     public void onSetupFinished(IabResult result){
     	  if (!result.isSuccess()) {

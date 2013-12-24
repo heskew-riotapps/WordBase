@@ -1,7 +1,13 @@
 package com.riotapps.wordbase;
 
+import com.amazon.inapp.purchasing.BasePurchasingObserver;
+import com.amazon.inapp.purchasing.PurchaseResponse;
+import com.amazon.inapp.purchasing.PurchasingManager;
+import com.amazon.inapp.purchasing.Receipt;
+import com.amazon.inapp.purchasing.PurchaseResponse.PurchaseRequestStatus;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Tracker;
+import com.riotapps.wordbase.billing.AmazonPurchaseObserver;
 import com.riotapps.wordbase.billing.IabHelper;
 import com.riotapps.wordbase.billing.IabResult;
 import com.riotapps.wordbase.billing.Inventory;
@@ -12,7 +18,9 @@ import com.riotapps.wordbase.ui.DialogManager;
 import com.riotapps.wordbase.ui.MenuUtils;
 import com.riotapps.wordbase.utils.ApplicationContext;
 import com.riotapps.wordbase.utils.Constants;
+import com.riotapps.wordbase.utils.Enums;
 import com.riotapps.wordbase.utils.Logger;
+import com.riotapps.wordbase.utils.Utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -53,15 +61,20 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 	        this.setupFonts();
 	        
 	        // compute your public key and store it in base64EncodedPublicKey
-	        mHelper = new IabHelper(this, StoreService.getIABPublicKey(this));
-	        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-	        	   public void onIabSetupFinished(IabResult result) {
-	        	                
-	        	         // Hooray, IAB is fully set up!
-	        	      Logger.d(TAG, "In-app Billing is ready to go...almost ");
-	        	      onSetupFinished(result);
-	        	   }
-	        	});
+	    	if (Utils.fromAppStore(this) == Enums.InstalledFromStore.AMAZON){
+	    		PurchasingManager.registerObserver(new PurchasingObserver(this));
+	    	}
+	    	else{
+		        mHelper = new IabHelper(this, StoreService.getIABPublicKey(this));
+		        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+		        	   public void onIabSetupFinished(IabResult result) {
+		        	                
+		        	         // Hooray, IAB is fully set up!
+		        	      Logger.d(TAG, "In-app Billing is ready to go...almost ");
+		        	      onSetupFinished(result);
+		        	   }
+		        	});
+	    	}
 	        
 	 }
 	  @Override
@@ -69,14 +82,20 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 	      Logger.d(TAG, "onActivityResult(" + requestCode + "," + resultCode + "," + data);
 
 	      // Pass on the activity result to the helper for handling
-	      if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
-	          // not handled, so handle it ourselves (here's where you'd
-	          // perform any handling of activity results not related to in-app
-	          // billing...
-	          super.onActivityResult(requestCode, resultCode, data);
+	      
+	      if (Utils.fromAppStore(this) == Enums.InstalledFromStore.AMAZON){
+	    	  
 	      }
 	      else {
-	          Logger.d(TAG, "onActivityResult handled by IABUtil.");
+		      if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
+		          // not handled, so handle it ourselves (here's where you'd
+		          // perform any handling of activity results not related to in-app
+		          // billing...
+		          super.onActivityResult(requestCode, resultCode, data);
+		      }
+		      else {
+		          Logger.d(TAG, "onActivityResult handled by IABUtil.");
+		      }
 	      }
 	  }
 	  
@@ -177,30 +196,60 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 		 else {
 			 StoreService.savePurchase(purchase.getSku(), purchase.getToken());
 			 
-			 String thankYouMessage = this.getString(R.string.thank_you);
-			 if (purchase.getSku().equals(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL))){
-				 thankYouMessage = this.getString(R.string.purchase_thanks_hide_interstitial);
-			 }
-			 else if (purchase.getSku().equals(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK))){
-				 thankYouMessage = this.getString(R.string.purchase_thanks_hopper_peek);
-			 }
-			 else if (purchase.getSku().equals(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))){
-				 thankYouMessage = this.getString(R.string.purchase_thanks_premium_upgrade);
-			 }
-			 else if (purchase.getSku().equals(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS))){
-				 thankYouMessage = this.getString(R.string.purchase_thanks_word_definitions);
-			 }
-			 else if (purchase.getSku().equals(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS))){
-				 thankYouMessage = this.getString(R.string.purchase_thanks_word_hints);
-			 }
-				 
-			 //popup a thank you dialog
-			 DialogManager.SetupAlert(this, this.getString(R.string.thank_you), thankYouMessage);
-	 
-			 this.resetPriceButtons(purchase.getSku());
-		 }
+			 this.handlePostPurchase(purchase.getSku());
+		}
        
 	 }
+	 
+	 private void onAmazonPurchaseFinished(final PurchaseResponse response){
+		 
+		 //Security Recommendation: When you receive the purchase response from Google Play, make sure to check the returned data signature, 
+		 //the orderId, and the developerPayload string in the Purchase object to make sure that you are getting the expected values. 
+		 //You should verify that the orderId is a unique value that you have not previously processed, and the developerPayload string
+		 //matches the token that you sent previously with the purchase request. As a further security precaution, 
+		 //you should perform the verification on your own secure server.
+		 
+		 final PurchaseRequestStatus status = response.getPurchaseRequestStatus();
+         
+	        if (status.equals(PurchaseResponse.PurchaseRequestStatus.SUCCESSFUL)) {
+	            Receipt receipt = response.getReceipt();
+	        	String sku = receipt.getSku();
+	            String purchaseToken = receipt.getPurchaseToken();
+	        
+	            StoreService.savePurchase(sku, purchaseToken);
+				this.handlePostPurchase(sku);
+			}
+	        else   if (status.equals(PurchaseResponse.PurchaseRequestStatus.FAILED)) {
+	        
+	        }
+        
+	 }
+
+	 private void handlePostPurchase(String sku){
+		 String thankYouMessage = this.getString(R.string.thank_you);
+		 if (sku.equals(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL))){
+			 thankYouMessage = this.getString(R.string.purchase_thanks_hide_interstitial);
+		 }
+		 else if (sku.equals(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK))){
+			 thankYouMessage = this.getString(R.string.purchase_thanks_hopper_peek);
+		 }
+		 else if (sku.equals(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))){
+			 thankYouMessage = this.getString(R.string.purchase_thanks_premium_upgrade);
+		 }
+		 else if (sku.equals(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS))){
+			 thankYouMessage = this.getString(R.string.purchase_thanks_word_definitions);
+		 }
+		 else if (sku.equals(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS))){
+			 thankYouMessage = this.getString(R.string.purchase_thanks_word_hints);
+		 }
+			 
+		 //popup a thank you dialog
+		 DialogManager.SetupAlert(this, this.getString(R.string.thank_you), thankYouMessage);
+ 
+		 this.resetPriceButtons(sku);
+ 
+	 }
+	 
 	 private void resetPriceButtons(String sku){
 		 if (sku.equals(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL))){
 			 Button bNoAdsPrice = (Button)this.findViewById(R.id.bNoAdsPrice);
@@ -261,10 +310,19 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 	 
 	 
 	 private void purchaseItem(String sku){
-		 this.trackEvent(Constants.TRACKER_ACTION_PURCHASE, sku, Constants.TRACKER_SINGLE_VALUE);
-		 
-		 mHelper.launchPurchaseFlow(this, sku, 10001,   
-				   mPurchaseFinishedListener, "bGoa+V7g/yqDXvKRqq+JTFn4uQZbPiQJo4pf9RzJ");
+		 if (Utils.fromAppStore(this).equals(Enums.InstalledFromStore.AMAZON)){
+			 this.trackEvent(Constants.TRACKER_ACTION_PURCHASE_AMAZON, sku, Constants.TRACKER_SINGLE_VALUE);
+			 
+			 String requestId = PurchasingManager.initiatePurchaseRequest(sku);
+
+			 
+		 }
+		 else {
+			 this.trackEvent(Constants.TRACKER_ACTION_PURCHASE, sku, Constants.TRACKER_SINGLE_VALUE);
+			 
+			 mHelper.launchPurchaseFlow(this, sku, 10001,   
+					   mPurchaseFinishedListener, "bGoa+V7g/yqDXvKRqq+JTFn4uQZbPiQJo4pf9RzJ");
+		 }
 	 }
 	 
 	 
@@ -415,5 +473,17 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 	 	
 	}
 	
+	private class PurchasingObserver extends BasePurchasingObserver{
+
+		public PurchasingObserver(Context context) {
+			super(context);
+			// TODO Auto-generated constructor stub
+		}
+		
+		   public void onPurchaseResponse(final PurchaseResponse response) {
+			   onAmazonPurchaseFinished(response);
+		   }
+
+	}
 
 }

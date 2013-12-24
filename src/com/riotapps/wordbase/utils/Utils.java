@@ -287,4 +287,22 @@ public class Utils {
 	    return context.getResources().getIdentifier(context.getString(R.string.namespace) + ":drawable/" + drawableFileName, null, null);	
     }
     
+    public static Enums.InstalledFromStore fromAppStore(Context context){
+     
+    	String installer = context.getPackageManager().getInstallerPackageName(context.getString(R.string.namespace)); 
+    	
+    	if (installer == Constants.GOOGLE_PLAY_STORE){
+    		return Enums.InstalledFromStore.GOOGLE_PLAY;
+    	} 
+    	else if (installer == Constants.AMAZON_APPSTORE){
+    		return Enums.InstalledFromStore.AMAZON;
+    	} 
+    	else {
+    		return Enums.InstalledFromStore.NO_STORE;
+    	}
+    	}
+    	//<package name="com.package.bla.bla" ... installer="com.amazon.venezia">
+    	//<package name="com.package.bla.bla" ... installer="com.android.vending">
+    }
+    
 }

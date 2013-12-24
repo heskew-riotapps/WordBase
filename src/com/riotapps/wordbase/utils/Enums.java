@@ -17,4 +17,9 @@ public class Enums {
 		DELETE
 	}
 		
+	public static enum InstalledFromStore {
+		GOOGLE_PLAY,
+		AMAZON,
+		NO_STORE
+	}
 }

@@ -2,7 +2,9 @@ package com.riotapps.wordbase.hooks;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -36,6 +38,19 @@ public class StoreService {
 		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS));
 		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_SPEED_ROUNDS));
 		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_DOUBLE_TIME));
+		
+		return skus;
+	}
+
+	public static Set<String> getAllAmazonSkus(Context context){
+		Set<String> skus = new HashSet<String>();
+		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK));
+		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL));
+		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE));
+		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS));
+		skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS));
+		//skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_SPEED_ROUNDS));
+		//skus.add(context.getString(R.string.SKU_GOOGLE_PLAY_DOUBLE_TIME));
 		
 		return skus;
 	}
@@ -105,10 +120,27 @@ public class StoreService {
 		StoreData.savePurchase(purchase);
 		
 	}
+
+	public static void savePurchase(String sku, String token, String userId){
+		//check for existing purchase for this sku
+		
+		 Logger.d(TAG, "savePurchase sku=" + sku);
+		
+		Purchase purchase = new Purchase(sku, new Date());
+		purchase.setPurchaseToken(token);
+		
+		StoreData.savePurchase(purchase, userId);
+		
+	}
 	
 	public static void clearPurchase(String sku){
 		
 		StoreData.removePurchase(sku);
+	}
+	
+	public static void clearPurchase(String sku, String userId){
+		
+		StoreData.removePurchase(sku, userId);
 	}
 	
 	public static void syncPurchases(Inventory inventory, Context context){

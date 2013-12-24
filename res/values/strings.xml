@@ -28,6 +28,8 @@
 	<string name="IAB_12">rfUxLNFtJ7TbjaqgIk13Ujl1dB8I50nwOMfR</string>
 	<string name="IAB_13">jWPyYs9aA0e6Y50ozjlkKZqpVxQIDAQAB</string>
 	
+	<string name="AMAZON_APP_KEY">OVERRIDE_ONLY</string>
+	
 	<string name="SKU_GOOGLE_PLAY_HOPPER_PEEK">riotapps_wordsmash_hopper_peek.a</string>
 	<string name="SKU_GOOGLE_PLAY_PREMIUM_UPGRADE">riotapps_wordsmash_premium_upgrade.a</string>
 	<string name="SKU_GOOGLE_PLAY_WORD_DEFINITIONS">riotapps_wordsmash_word_definitions.a</string>
@@ -400,5 +402,5 @@
 		 	 <string name="game_opponent_winner_message">%2$s won %3$s - %4$s %1$s</string>
 	 <string name="game_player_winner_message">You won %2$s - %3$s %1$s</string>	 
 	 <string name="game_draw_message">a %2$s - %3$s draw was declared %1$s</string>
-					
+		<string name="store_not_connected">Sorry, you must be connected to wi-fi or a mobile network to visit the store.  Please come back after you get connected.  Thank you for playing %s.</string>			
 </resources>

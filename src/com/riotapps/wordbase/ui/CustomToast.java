@@ -2,6 +2,7 @@ package com.riotapps.wordbase.ui;
 
 import com.riotapps.wordbase.R;
  
+import com.riotapps.wordbase.interfaces.ICloseDialog;
 import com.riotapps.wordbase.utils.Logger;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,6 +18,8 @@ public class CustomToast extends AlertDialog{
 	  private String dialogText = "";
 	  private TextView dialog_text;
 	  private int numMillisecondsInView = 800;
+	  private Context context;
+	  private int onFinishReturnCode = 0;
 	  
 	 // public void SetText(String text){
 	//	  this.dialogText = text;
@@ -24,20 +27,40 @@ public class CustomToast extends AlertDialog{
 	
 	  public CustomToast(Context context) {  
 	        super(context);
+	        this.context = context;
 	  }
 	  
 	  public CustomToast(Context context, int numMillisecondsInView) {  
 	        super(context);
+	        this.context = context;
+	        this.numMillisecondsInView = numMillisecondsInView;
+	  }
+	 
+	  public CustomToast(Context context, int numMillisecondsInView, int onFinishReturnCode) {  
+	        super(context);
+	        this.onFinishReturnCode = onFinishReturnCode;
+	        this.context = context;
 	        this.numMillisecondsInView = numMillisecondsInView;
 	  }
 	  
 	  public CustomToast(Context context, String text) {  
 	        super(context);
+	        this.context = context;
 	        this.dialogText = text;
 	  }
 	  
+	  public CustomToast(Context context, String text, int numMillisecondsInView, int onFinishReturnCode) {  
+	        super(context);
+	        this.context = context;
+	        this.onFinishReturnCode = onFinishReturnCode;
+	        this.numMillisecondsInView = numMillisecondsInView;
+	        this.dialogText = text;
+	  }
+
+	  
 	  public CustomToast(Context context, String text, int numMillisecondsInView) {  
 	        super(context);
+	        this.context = context;
 	        this.numMillisecondsInView = numMillisecondsInView;
 	        this.dialogText = text;
 	  }
@@ -73,6 +96,10 @@ public class CustomToast extends AlertDialog{
 
 			     public void onFinish() {
 			        // mTextField.setText("done!");
+			    	 if (onFinishReturnCode > 0) {
+			    		 ((ICloseDialog)context).dialogClose(onFinishReturnCode);
+			    	 }
+			    	 
 			    	 CustomToast.this.dismiss(); 
 			     }
 			  };

@@ -37,6 +37,7 @@ import com.riotapps.wordbase.utils.Logger;
 import com.riotapps.wordbase.utils.NetworkConnectivity;
 import com.riotapps.wordbase.utils.Validations;
 
+import com.amazon.inapp.purchasing.Offset;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.riotapps.wordbase.data.PlayerData;
@@ -397,4 +398,12 @@ public class PlayerService {
 		PlayerData.setLastInterstitialPurchaseReminderTime();
 	}
 
+	public static Offset getPersistedOffset(String userId){
+		return PlayerData.getPersistedOffset(userId);
+	}
+
+	public static void setPersistedOffset(Offset offset, String userId){
+		PlayerData.setPersistedOffset(offset, userId);
+	}
+	
 }

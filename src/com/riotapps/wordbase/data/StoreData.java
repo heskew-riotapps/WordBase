@@ -53,11 +53,46 @@ public class StoreData {
 	    
 		gson = null;
 	}
+
+	public static void savePurchase(Purchase purchase, String userId){
+		Gson gson = new Gson(); 			 
+		 
+		SharedPreferences settings = Storage.getPurchaseSharedPreferences();
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(String.format(Constants.PURCHASE_PREFS_ITEM_BY_USER, purchase.getSku(), userId), gson.toJson(purchase));
+		// Check if we're running on GingerBread or above
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+		     // If so, call apply()
+		     editor.apply();
+		 // if not
+		} else {
+		     // Call commit()
+		     editor.commit();
+		} 
+	    
+		gson = null;
+	}
 	
 	public static void removePurchase(String sku){
 	 	SharedPreferences settings = Storage.getPurchaseSharedPreferences();
 		SharedPreferences.Editor editor = settings.edit();
 		editor.remove(String.format(Constants.PURCHASE_PREFS_ITEM, sku));
+	 	// Check if we're running on GingerBread or above
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+		     // If so, call apply()
+		     editor.apply();
+		 // if not
+		} else {
+		     // Call commit()
+		     editor.commit();
+		} 
+	
+	}
+
+	public static void removePurchase(String sku, String userId){
+	 	SharedPreferences settings = Storage.getPurchaseSharedPreferences();
+		SharedPreferences.Editor editor = settings.edit();
+		editor.remove(String.format(Constants.PURCHASE_PREFS_ITEM_BY_USER, sku, userId));
 	 	// Check if we're running on GingerBread or above
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
 		     // If so, call apply()

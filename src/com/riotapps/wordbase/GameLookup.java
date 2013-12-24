@@ -113,7 +113,7 @@ public class GameLookup extends FragmentActivity  implements View.OnClickListene
     	}
 	     
 	 
-	     if (!StoreService.isWordDefinitionLookupPurchased(this) && PlayerService.getRemainingFreeUsesWordDefinition() == 0){
+	     if (!StoreService.isWordDefinitionLookupPurchased(this) && PlayerService.getRemainingFreeUsesWordDefinition(this) == 0){
 	    	 this.tvPreviewMessage.setText(this.getString(R.string.word_definition_purchase_offer));
 	   		 this.llDefs.setVisibility(View.GONE);
 	   		 this.tvNotFound.setVisibility(View.GONE);
@@ -123,7 +123,7 @@ public class GameLookup extends FragmentActivity  implements View.OnClickListene
 	     else {
 	    	 if (!StoreService.isWordDefinitionLookupPurchased(this)){
 					
-					int remainingFreeUses  = PlayerService.removeAFreeUseFromWordDefinition();
+					int remainingFreeUses  = PlayerService.removeAFreeUseFromWordDefinition(this);
 					if (remainingFreeUses > 1){
 						this.tvPreviewMessage.setText(String.format(this.getString(R.string.word_definition_preview), String.valueOf(remainingFreeUses)));
 					}

@@ -2,7 +2,7 @@
 <resources>
     <integer name="database_version">3</integer>
     <integer name="hours_between_interstitial_purchase_reminder">24</integer>
-    <integer name="free_uses_speed_rounds">15</integer>
+    <integer name="free_uses_speed_rounds">25</integer>
     <integer name="free_uses_double_time">15</integer>
     <integer name="free_uses_word_definitions">4</integer>
    	<integer name="gameBoardLogoHeightPercentageInTenths">7</integer>

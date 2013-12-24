@@ -89,7 +89,7 @@ public class Constants {
 	public static final String TRACKER_ACTION_BUTTON_TAPPED = "button_click";
 	public static final String TRACKER_ACTION_WORD_LOOKED_UP = "word_looked_up";
 	public static final String TRACKER_ACTION_GAME_STARTED = "game_started";
-	public static final String TRACKER_ACTION_90_SECOND_GAME_STARTED = "90_second_dash_game_started";
+	public static final String TRACKER_ACTION_90_SECOND_GAME_STARTED = "fast_dash_game_started";
 	public static final String TRACKER_ACTION_SPEED_ROUNDS_GAME_STARTED = "speed_rounds_game_started";
 	public static final String TRACKER_ACTION_DOUBLE_TIME_GAME_STARTED = "double_time_game_started";
 	public static final String TRACKER_ACTION_GAME_COMPLETED = "game_completed";
@@ -108,6 +108,7 @@ public class Constants {
 	public static final String TRACKER_ACTION_GAME_LOST = "game_lost";
 	public static final String TRACKER_ACTION_GAME_DRAW = "game_draw";
 	public static final String TRACKER_ACTION_PURCHASE = "purchase";
+	public static final String TRACKER_ACTION_PURCHASE_AMAZON = "purchase_amazon";
 	public static final String TRACKER_ACTION_HOPPER_PEEK = "hopper_peek";
  
 	public static final String TRACKER_ACTION_WORD_HINT = "word_hints";
@@ -226,6 +227,7 @@ public class Constants {
 	public static final String USER_PREFS_WORD_DATABASE_VERSION = "wdb_v";
 	public static final String USER_PREFS_FREE_REMAINING_USES_HOPPER_PEEK = "fu_hp";
 	public static final String USER_PREFS_FREE_USAGES_WORD_HINTS = "fu_wh";
+	public static final String USER_PREFS_AMAZON_PURCHASE_OFFSET = "az_of_%s";
 	public static final String USER_PREFS_FREE_REMAINING_USES_WORD_DEFINITION = "fu_wd";
 	public static final String USER_PREFS_FREE_REMAINING_USES_SPEED_ROUNDS = "fu_sr";
 	public static final String USER_PREFS_FREE_REMAINING_USES_DOUBLE_TIME = "fu_dt";
@@ -237,7 +239,8 @@ public class Constants {
  	public static final String USER_PREFS_PLAYER_CHECK_TIME = "player_check";
  	public static final String USER_PREFS_GAME_LIST_CHECK_TIME = "game_list_check";
  	public static final String USER_PREFS_GCM_REGISTRATION_ID = "gcm";
- 	public static final String PURCHASE_PREFS_ITEM = "p_item_%s";
+ 	public static final String PURCHASE_PREFS_ITEM = "p_item_%s_";
+ 	public static final String PURCHASE_PREFS_ITEM_BY_USER = "p_item_%1$s_%2$s";
  	public static final String INVENTORY_PREFS_ITEM = "inv_item_%s";
  	public static final String OPPONENT_PREFS_RECORD = "o_rec_%s";
  	public static final String OPPONENT_PREFS_GROUP_ACTIVATED = "o_rec_%s";
@@ -439,7 +442,10 @@ public class Constants {
 	public static final int RETURN_CODE_CREATE_GAME_DIALOG_DOUBLE_TIME_STORE_CLICKED = 132;
 	public static final int RETURN_CODE_CUSTOM_DIALOG_INTERSTITIAL_REMINDER_OK_CLICKED = 133;	
 	public static final int RETURN_CODE_CUSTOM_DIALOG_INTERSTITIAL_REMINDER_CLOSE_CLICKED = 134;
-	public static final int RETURN_CODE_CUSTOM_DIALOG_INTERSTITIAL_REMINDER_CANCEL_CLICKED = 135;	
+	public static final int RETURN_CODE_CUSTOM_DIALOG_INTERSTITIAL_REMINDER_CANCEL_CLICKED = 135;
+	public static final int RETURN_CODE_CUSTOM_TOAST_READY_FINISHED = 136;	 
+	public static final int RETURN_CODE_CUSTOM_TOAST_SET_FINISHED = 137;	
+	public static final int RETURN_CODE_CUSTOM_TOAST_GO_FINISHED = 138;	
 	/**=============================================
 	 * directions 
 	 *==============================================*/
@@ -513,6 +519,9 @@ public class Constants {
 	
 	public static final long DEFAULT_HIDE_AD_PURCHASE_REMINDER = -1;
 	
+	public static final String GOOGLE_PLAY_STORE = "com.android.vending";
+	public static final String AMAZON_APPSTORE = "com.amazon.venezia";
+ 
 	
 	
 }//end class Constants
