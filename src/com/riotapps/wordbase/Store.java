@@ -63,6 +63,7 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 	        // compute your public key and store it in base64EncodedPublicKey
 	    	if (Utils.fromAppStore(this) == Enums.InstalledFromStore.AMAZON){
 	    		PurchasingManager.registerObserver(new PurchasingObserver(this));
+	    		this.loadStore();
 	    	}
 	    	else{
 		        mHelper = new IabHelper(this, StoreService.getIABPublicKey(this));
@@ -167,7 +168,7 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 	         // update the local purchases first just in case something is out of sync
 	         StoreService.syncPurchases(inventory, this);
 	         
-	    	 this.loadStore(inventory);
+	    	 this.loadStore();
 
 	       }
 	 }
@@ -326,7 +327,8 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 	 }
 	 
 	 
-	 private void loadStore(Inventory inventory){
+	 //private void loadStore(Inventory inventory){
+	 private void loadStore(){
 		 //if premium upgrade is purchased, dont let them buy the other items that are already covered
 		 
 		 TextView tvPremiumUpgradeTitle = (TextView)this.findViewById(R.id.tvPremiumUpgradeTitle);
@@ -354,68 +356,74 @@ public class Store  extends FragmentActivity implements View.OnClickListener{
 		 Button bHopperPeekPrice = (Button)this.findViewById(R.id.bHopperPeekPrice);
 		 ImageView ivHopperPeekPurchased = (ImageView)this.findViewById(R.id.ivHopperPeekPurchased);
 		 
-		 SkuDetails skuPremiumUpgrade = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE));
+		 //SkuDetails skuPremiumUpgrade = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE));
 		 tvPremiumUpgradeTitle.setText(this.getString(R.string.store_item_premium_upgrade_title));
 		 tvPremiumUpgradeDescription.setText(this.getString(R.string.store_item_premium_upgrade_description));
-		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))){
+		 //if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))){
+		 if (StoreService.isPremiumUpgradePurchased(this)){
 			 bPremiumUpgradePrice.setVisibility(View.GONE); 
 			 }
 		 else{
-			 bPremiumUpgradePrice.setText(skuPremiumUpgrade.getPrice());
+			 //bPremiumUpgradePrice.setText(skuPremiumUpgrade.getPrice());
+			 bPremiumUpgradePrice.setText(StoreService.getCachedInventoryItemPrice(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE)));
 			 bPremiumUpgradePrice.setTag(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE));
 			 bPremiumUpgradePrice.setOnClickListener(this);
 			 ivPremiumUpgradePurchased.setVisibility(View.GONE);
 		 }
 
-		 SkuDetails skuNoAds = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL));
+		// SkuDetails skuNoAds = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL));
 		 tvNoAdsTitle.setText(this.getString(R.string.store_item_no_ads_title));
 		 tvNoAdsDescription.setText(this.getString(R.string.store_item_no_ads_description));
-		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
+		 //if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
+		 if (StoreService.isHideInterstitialAdPurchased(this)) {
 			 bNoAdsPrice.setVisibility(View.GONE); 
 			 }
 		 else{
-			 bNoAdsPrice.setText(skuNoAds.getPrice());
+			 bNoAdsPrice.setText(StoreService.getCachedInventoryItemPrice(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL)));
 			 bNoAdsPrice.setTag(this.getString(R.string.SKU_GOOGLE_PLAY_HIDE_INTERSTITIAL));
 			 bNoAdsPrice.setOnClickListener(this);
 			 ivNoAdsPurchased.setVisibility(View.GONE);
 		 }
 	 	 
-		 SkuDetails skuWordDefinitions = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS));
+		// SkuDetails skuWordDefinitions = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS));
 		 tvWordDefinitionsTitle.setText(this.getString(R.string.store_item_word_definitions_title));
 		 tvWordDefinitionsDescription.setText(this.getString(R.string.store_item_word_definitions_description));
-		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
+		 //if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
+		 if (StoreService.isWordDefinitionLookupPurchased(this)) {
 			 bWordDefinitionsPrice.setVisibility(View.GONE); 
 			 }
 		 else{
-			 bWordDefinitionsPrice.setText(skuWordDefinitions.getPrice());
+			 bWordDefinitionsPrice.setText(StoreService.getCachedInventoryItemPrice(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS)));
 			 bWordDefinitionsPrice.setTag(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_DEFINITIONS));
 			 bWordDefinitionsPrice.setOnClickListener(this);
 			 ivWordDefinitionsPurchased.setVisibility(View.GONE);
 		 }
 		 
 		 
-		 SkuDetails skuWordHints = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS));
+		// SkuDetails skuWordHints = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS));
 		 tvWordHintsTitle.setText(this.getString(R.string.store_item_word_hints_title));
 		 tvWordHintsDescription.setText(this.getString(R.string.store_item_word_hints_description));
-		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
+		 //if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
+		 if (StoreService.isWordHintsPurchased(this)) {
 			 bWordHintsPrice.setVisibility(View.GONE); 
 			 }
 		 else{
-			 bWordHintsPrice.setText(skuWordHints.getPrice());
+			 bWordHintsPrice.setText(StoreService.getCachedInventoryItemPrice(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS)));
 			 bWordHintsPrice.setTag(this.getString(R.string.SKU_GOOGLE_PLAY_WORD_HINTS));
 			 bWordHintsPrice.setOnClickListener(this);
 			 ivWordHintsPurchased.setVisibility(View.GONE);
 		 }
 		 
 		 
-		 SkuDetails skuHopperPeek = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK));
+		// SkuDetails skuHopperPeek = inventory.getSkuDetails(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK));
 		 tvHopperPeekTitle.setText(this.getString(R.string.store_item_hopper_peek_title));
 		 tvHopperPeekDescription.setText(this.getString(R.string.store_item_hopper_peek_description));
-		 if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
+		 //if (inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK)) || inventory.hasPurchase(this.getString(R.string.SKU_GOOGLE_PLAY_PREMIUM_UPGRADE))) {
+		 if (StoreService.isHopperPeekPurchased(this)) {
 			 bHopperPeekPrice.setVisibility(View.GONE); 
 			 }
 		 else{
-			 bHopperPeekPrice.setText(skuHopperPeek.getPrice());
+			 bHopperPeekPrice.setText(StoreService.getCachedInventoryItemPrice(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK)));
 			 bHopperPeekPrice.setTag(this.getString(R.string.SKU_GOOGLE_PLAY_HOPPER_PEEK));
 			 bHopperPeekPrice.setOnClickListener(this);
 			 ivHopperPeekPurchased.setVisibility(View.GONE);

@@ -21,6 +21,8 @@ public class WordLoaderService extends Service {
 	private boolean isProcessing = false;
 	private Context context = this;
 	
+	public static boolean isLoading = true;
+	
    @Override
    public IBinder onBind(Intent intent) {
       return null;
@@ -67,10 +69,11 @@ public class WordLoaderService extends Service {
          protected String doInBackground(String... params) {
         	//   ApplicationContext appContext = (ApplicationContext)getApplicationContext();
         	   try{
+        		   
         		    captureTime("sqlite initialize (copy database) starting"); 
         	    	WordService.createDatabase(context);
         	        captureTime("sqlite initialize (copy database) ended");
-        	    	
+        	   
         	    	WordService wordService = new WordService(context);
         	    	//DatabaseHelper db = new DatabaseHelper(this);
         	     //   this.captureTime("sqlite initialize (copy database) starting");   
@@ -108,113 +111,7 @@ public class WordLoaderService extends Service {
         	        
         	    	wordService.finish();
         	    	wordService = null;
-        		  /* captureTime("index - load started");
-        		   WordService.isWordIndexed("aaaabenn");
-        		   captureTime("index - loaded");
-        		   
-        		   WordService.isWordValid("aaa"); 
-        		  // appContext.getWordService().isWordValid("aaa");     			  
-        		   captureTime("letter a - loaded");
-        		   
-        		   WordService.isWordValid("bbb");
-        		   //appContext.getWordService().isWordValid("bbb");
-        		   captureTime("letter b - loaded");
-        		   
-        		   WordService.isWordValid("ccc");
-        		  // appContext.getWordService().isWordValid("ccc");     			  
-        		   captureTime("letter c - loaded");
-        		   
-        		   WordService.isWordValid("ddd");
-        		 //  appContext.getWordService().isWordValid("ddd");
-        		   captureTime("letter d - loaded");
-        		   
-        		   WordService.isWordValid("eee");
-        		 //  appContext.getWordService().isWordValid("eee");     			  
-        		   captureTime("letter e - loaded");
-        		   
-        		   WordService.isWordValid("fff");
-        		//  appContext.getWordService().isWordValid("fff");
-        		   captureTime("letter f - loaded");
-        		   
-        		   WordService.isWordValid("gg");
-        		//   appContext.getWordService().isWordValid("ggg");     			  
-        		   captureTime("letter g - loaded");
-        		   
-        		   WordService.isWordValid("hhh");
-        		   captureTime("letter h - loaded");
-        		   
-        		   WordService.isWordValid("iii");
-        		 //  appContext.getWordService().isWordValid("iii");     			  
-        		   captureTime("letter i - loaded");
-        		   
-        		   WordService.isWordValid("jjj");
-        		  // appContext.getWordService().isWordValid("jjj");
-        		   captureTime("letter j - loaded");
-        		   
-        		   WordService.isWordValid("kkk");
-        		//   appContext.getWordService().isWordValid("kkk");     			  
-        		   captureTime("letter k - loaded");
-        		   
-        		   WordService.isWordValid("lll");
-        		//   appContext.getWordService().isWordValid("lll");
-        		   captureTime("letter l - loaded");
-        		   
-        		   WordService.isWordValid("mmm");
-        		 ///  appContext.getWordService().isWordValid("mmm");     			  
-        		   captureTime("letter m - loaded");
-        		 
-        		   WordService.isWordValid("nnn");
-        		 //  appContext.getWordService().isWordValid("nnn");
-        		   captureTime("letter n - loaded");
-        		   
-        		   WordService.isWordValid("ooo");
-        		 //  appContext.getWordService().isWordValid("ooo");     			  
-        		   captureTime("letter o - loaded");
-        		   
-        		   WordService.isWordValid("ppp");
-        		   //appContext.getWordService().isWordValid("ppp");
-        		   captureTime("letter p - loaded");
-        		   
-        		   WordService.isWordValid("qqq");
-        		   //appContext.getWordService().isWordValid("qqq");     			  
-        		   captureTime("letter q - loaded");
-        		   
-        		   WordService.isWordValid("rrr");
-        		 ///  appContext.getWordService().isWordValid("rrr");
-        		   captureTime("letter r - loaded");
-        		   
-        		   WordService.isWordValid("sss");
-        		//   appContext.getWordService().isWordValid("sss");     			  
-        		   captureTime("letter s - loaded");
-        		   
-        		   WordService.isWordValid("ttt");
-        		  // appContext.getWordService().isWordValid("ttt");
-        		   captureTime("letter t - loaded");
-        		   
-        		   WordService.isWordValid("uuu");
-        		 // appContext.getWordService().isWordValid("uuu");     			  
-        		   captureTime("letter u - loaded");
-        		   
-        		   WordService.isWordValid("vvv");
-        		///   appContext.getWordService().isWordValid("vvv");
-        		   captureTime("letter v - loaded");
-         		   
-        		   WordService.isWordValid("www");
-        		//   appContext.getWordService().isWordValid("www");
-        		   captureTime("letter w - loaded");
-        		   
-        		   WordService.isWordValid("xxx");
-        		///  appContext.getWordService().isWordValid("xxx");     			  
-        		   captureTime("letter x- loaded");
-        		   
-        		   WordService.isWordValid("yyy");
-        	///	   appContext.getWordService().isWordValid("yyy");
-        		   captureTime("letter y - loaded");
-        		
-        		   WordService.isWordValid("zzz");
-        		///   appContext.getWordService().isWordValid("zzz");     			  
-        		   captureTime("letter z - loaded");  		   
-        	   */
+        	     
         	   }
         	   catch (Exception e){
         		   Logger.d(TAG, e.toString());
@@ -225,7 +122,7 @@ public class WordLoaderService extends Service {
 
          @Override
          protected void onPostExecute(String result) {
-        	  
+        	 WordLoaderService.isLoading = false; 
         	 stopSelf();
          }
 

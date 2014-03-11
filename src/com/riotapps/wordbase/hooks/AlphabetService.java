@@ -223,4 +223,48 @@ public class AlphabetService {
 		
 		return list;	
 	}
+	
+	public static List<String> getScrollLetters(){
+		ApplicationContext appContext = (ApplicationContext)ApplicationContext.getAppContext().getApplicationContext();
+		/*
+		   #A - 8
+			#B = 2
+			#C = 2
+			#D = 4
+			#E = 12
+			#F = 2
+			#G = 2
+			#H = 4
+			#I = 8
+			#J = 1
+			#K = 1
+			#L = 4
+			#M = 2
+			#N = 6
+			#O = 8
+			#P = 2
+			#Q = 1
+			#R = 6
+			#S = 5
+			#T = 9
+			#U = 4
+			#V = 1
+			#W = 2
+			#X = 1
+			#Y = 2
+			#Z = 1
+			*/
+		String[] letters = appContext.getResources().getStringArray(R.array.alphabet_spread_for_scroll);
+		Utils.shuffleArray(letters);
+		
+		List<String> list = new ArrayList<String>();
+		
+		for (int x = 0; x < letters.length; x++){
+			list.add(letters[x]);
+		}
+		
+		 
+		
+		return list;	
+	}
 }

@@ -35,6 +35,14 @@ public class MenuUtils {
 	     
 		}
 	
+	public static void fillMenuNoGames(FragmentActivity context, PopupMenu popupMenu){
+ 			popupMenu.getMenu().add(Menu.NONE,  Constants.MENU_STORE, Menu.NONE, context.getString(R.string.main_menu_store));
+	        popupMenu.getMenu().add(Menu.NONE,  Constants.MENU_RULES, Menu.NONE, context.getString(R.string.main_menu_rules));
+	        popupMenu.getMenu().add(Menu.NONE,  Constants.MENU_SHARE, Menu.NONE, context.getString(R.string.main_menu_share));
+	        popupMenu.getMenu().add(Menu.NONE,  Constants.MENU_ABOUT, Menu.NONE, context.getString(R.string.main_menu_about));	     
+		}
+	
+	
 		public static void hideMenu(FragmentActivity context){
 			ImageButton popupMenu = (ImageButton)context.findViewById(R.id.options);	
 	    	  popupMenu.setVisibility(View.GONE);

@@ -21,7 +21,7 @@ public class WordData {
 	//		  DatabaseHelper.COLUMN_COMMENT };
 
 	  public WordData(Context context) {
-	    dbHelper = new DatabaseHelper(context);
+	    dbHelper = DatabaseHelper.getInstance(context); // new DatabaseHelper(context);
 	  }
 
 	  public void open() throws SQLException {	  

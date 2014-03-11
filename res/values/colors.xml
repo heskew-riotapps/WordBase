@@ -38,6 +38,7 @@
     <color name="content_area_background_pressed_color">#bbbdbd</color>
    
     <color name="content_font_color">#1874CD</color>
+     <color name="alert_font_color">#1874CD</color>
     <color name="form_border_color">#3366dd</color> <!-- previously 3366dd -->  
     <color name="title_bar_background_color">#FF0000</color><!-- FF0000  -->
  

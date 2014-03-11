@@ -140,6 +140,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
     private static final long MOVE_STOPPED_DURATION_IN_MILLISECONDS = 200;
     
     private static final int MOVEMENT_TRIGGER_TAPCHECK_THRESHOLD = 3;
+    private float movementTriggerTapcheckThreshold = 3;
+    private float movementTriggerTapcheckThresholdPercentageOfTotalWidth = .00625f;
 //    private static final float MOVEMENT_TRIGGER_TAPCHECK_THRESHOLD = .02f;
     private static final float MOVEMENT_TRIGGER_THRESHOLD = .05f;
   //  private static final int MAX_LOGO_HEIGHT = 60;
@@ -343,7 +345,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	}
 
 	public void construct( GameSurface parent) {
-		//Log.w(TAG, "construct called");
+		//Logger.w(TAG, "construct called");
 		this.parent = parent;
 		//this.appContext = appContext;
 		this.parent.captureTime(TAG + " construct starting");
@@ -392,7 +394,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		   	   // me.LoadTiles();
 		   	   // me.LoadTray();
 		   	    me.LoadExtras();
-		   	    Log.w(TAG, "run called");
+		   	    Logger.w(TAG, "run called");
 		   	    
 		   	    
 		  
@@ -452,6 +454,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 //	  	Logger.d(TAG, "SetDerivedValues h1=" +  this.getHeight() );
 //	  	 Logger.d(TAG, "SetDerivedValues h=" +  h );
 	 	 this.fullWidth = this.getWidth();
+	 	 this.movementTriggerTapcheckThreshold = this.fullWidth * this.movementTriggerTapcheckThresholdPercentageOfTotalWidth;
 	//	 this.height = h -  this.parent.getResources().getInteger(com.riotapps.word.R.integer.gameboard_button_area_height) - this.parent.getResources().getInteger(com.riotapps.word.R.integer.scoreboard_height);// + 6;// lp.height; //getMeasuredHeight();
 
 	 	 //	 this.height = this.getHeight() - this.parent.getResources().getInteger(com.riotapps.word.R.integer.gameboard_button_area_height) - this.parent.getResources().getInteger(com.riotapps.word.R.integer.scoreboard_height);// + 6;// lp.height; //getMeasuredHeight();
@@ -747,13 +750,13 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-		Log.w(TAG, "surfaceChanged called");
+		Logger.w(TAG, "surfaceChanged called");
 		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		Log.w(TAG, "surfaceCreated called");
+		Logger.w(TAG, "surfaceCreated called");
 		this.parent.captureTime("surfaceCreated starting");
 		this.startThread();
 		this.surfaceCreated = true;
@@ -762,11 +765,15 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		Log.w(TAG, "surfaceDestroyed called");
-		this.parent.captureTime("surfaceDestroyed starting");
+		Logger.w(TAG, "surfaceDestroyed called");
+		if (this.parent != null) {
+			this.parent.captureTime("surfaceDestroyed starting");
+		}
 	    this.stopThread();
 	    this.surfaceCreated = false;
-	    this.parent.captureTime("surfaceDestroyed ending");
+	    if (this.parent != null) {
+	    	this.parent.captureTime("surfaceDestroyed ending");
+	    }
 	}
 	
 	private void dismissDialog(){
@@ -777,25 +784,25 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	}
 	
 	public void onPause() {
-		Log.w(TAG, "onPause called");
+		Logger.w(TAG, "onPause called");
 		this.dismissDialog();
 		this.gameThread.onPause();
 	//	 this.stopThread();
 	}
 	
 	public void onStop() {
-		Log.w(TAG, "onStop called");
+		Logger.w(TAG, "onStop called");
 		this.dismissDialog();
 		 this.stopThread();
 	}
 	
 //	public void onBackPressed() {
-//		Log.w(TAG, "onBackPressed called");
+//		Logger.w(TAG, "onBackPressed called");
 //		 this.stopThread();
 //	}
 	
 	public void onRestart() {
-		 Log.w(TAG, "onRestart called");
+		 Logger.w(TAG, "onRestart called");
 		//  if (this.surfaceCreated) {this.startThread();}
 	//	this.gameThread = null;
 		 this.gameThread = new GameThread(holder, this);
@@ -808,18 +815,18 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	}
 	
 	 public void onDestroy(){
-		 Log.w(TAG, "onDestroy called");
+		 Logger.w(TAG, "onDestroy called");
 		this.surfaceDestroyed(this.surfaceHolder); 
 		this.parent = null;
 	 }
 	
 	 public void onWindowFocusChanged(){
-		 Log.w(TAG, "onWindowFocusChanged called");
+		 Logger.w(TAG, "onWindowFocusChanged called");
 		 this.stopThread();
 		 }
 	 
 	public void onResume() {
-		Log.w(TAG, "onResume called");
+		Logger.w(TAG, "onResume called");
 		
 		//make sure surface has been created first because onresume is initially called before surfacecreated and starting the 
 		//thread then kills things (canvas is null in onDraw)
@@ -831,7 +838,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	
 	private void startThread(){
 		
-		Log.w(TAG, "startThread called is thread alive " + this.gameThread.isAlive() + " isThreadRunning: " + this.isThreadRunning); 
+		Logger.w(TAG, "startThread called is thread alive " + this.gameThread.isAlive() + " isThreadRunning: " + this.isThreadRunning); 
 		if (!this.isThreadRunning){ //() !=Thread.State.RUNNABLE) { 
 			//if (!this.gameThread.isAlive()){
 				this.gameThread.start();
@@ -859,7 +866,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		// simply copied from sample application LunarLander:
 	    // we have to tell thread to shut down & wait for it to finish, or else
 	    // it might touch the Surface after we return and explode
-		Log.w(TAG, "stopThread called is thread alive " + this.gameThread.isAlive() + " isThreadRunning: " + this.isThreadRunning); 
+		Logger.w(TAG, "stopThread called is thread alive " + this.gameThread.isAlive() + " isThreadRunning: " + this.isThreadRunning); 
 		if (this.isThreadRunning){
 	//		this.gameThread = null;
 	//		this.isThreadRunning = false;
@@ -876,7 +883,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		        }
 		    }	
 	    this.isThreadRunning = false;  
-	    Log.w(TAG, "stopThread is thread alive " + this.gameThread.isAlive());
+	    Logger.w(TAG, "stopThread is thread alive " + this.gameThread.isAlive());
 		}
 	}
 	
@@ -1045,7 +1052,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
             	 
             	
             	 //includes a check to ignore double taps
-            	 //  Log.w(getClass().getSimpleName() + "onTouchEvent ActionUP ", this.tapCheck + " " + currentTouchTime + " " + this.readyToDraw);
+            	 //  Logger.w(getClass().getSimpleName() + "onTouchEvent ActionUP ", this.tapCheck + " " + currentTouchTime + " " + this.readyToDraw);
             	 this.parent.captureTime(TAG + " ACTION_UP");
             	   
             	   this.readyToDraw = false;
@@ -1282,8 +1289,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	    					 int previousY = Math.round(this.coordinates.get(0).getyLocation());
 	    					 int currentY = Math.round(this.coordinates.get(NUMBER_OF_COORDINATES_TO_DETERMINE_DIRECTION_AND_SPEED - 1).getyLocation());
 	    					 
-	    					 Log.w(TAG, "onTouchEvent: ACTION_UP previousX=" + previousX + " currentX=" + currentX + " diff=" + (currentX - previousX)); 
-	    					 Log.w(TAG, "onTouchEvent: ACTION_UP previousY=" + previousX + " currentY=" + currentY + " diff=" + (currentY - previousY)); 
+	    					 Logger.w(TAG, "onTouchEvent: ACTION_UP previousX=" + previousX + " currentX=" + currentX + " diff=" + (currentX - previousX)); 
+	    					 Logger.w(TAG, "onTouchEvent: ACTION_UP previousY=" + previousX + " currentY=" + currentY + " diff=" + (currentY - previousY)); 
 	    					
 	    					 //time since last move action
 	    					// long timeSinceLastMoveInMilliseconds = (System.nanoTime() - this.coordinates.get(NUMBER_OF_COORDINATES_TO_DETERMINE_DIRECTION_AND_SPEED - 1).getTimestamp()) / 1000000;
@@ -1309,8 +1316,8 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 						          
 						        int yDisplacement = this.coordinates.get(NUMBER_OF_COORDINATES_TO_DETERMINE_DIRECTION_AND_SPEED - 1).getyLocation() - this.coordinates.get(0).getyLocation();
 						        
-						        Log.w(TAG, "onTouchEvent: ACTION_UP speed " + speed);
-						        Log.w(TAG, "onTouchEvent: ACTION_UP xDisplacement " + xDisplacement + " yDisplacement " + yDisplacement);
+						        Logger.w(TAG, "onTouchEvent: ACTION_UP speed " + speed);
+						        Logger.w(TAG, "onTouchEvent: ACTION_UP xDisplacement " + xDisplacement + " yDisplacement " + yDisplacement);
 						        
 						        this.xPosition = tiles.get(0).getxPositionZoomed();
 						        this.yPosition = tiles.get(0).getyPositionZoomed();    
@@ -1318,14 +1325,14 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 						        this.xDistance =  this.coordinates.get(0).getxLocation() - this.coordinates.get(NUMBER_OF_COORDINATES_TO_DETERMINE_DIRECTION_AND_SPEED - 1).getxLocation(); ///multiply by speed to adjust
 						        this.yDistance =  this.coordinates.get(0).getyLocation() - this.coordinates.get(NUMBER_OF_COORDINATES_TO_DETERMINE_DIRECTION_AND_SPEED - 1).getyLocation(); ///multiply by speed to adjust;
 							 
-						        Log.w(TAG, "onTouchEvent: ACTION_UP xDistance=" + this.xDistance + "  yDistance=" + this.yDistance + " speed=" + speed); 
+						        Logger.w(TAG, "onTouchEvent: ACTION_UP xDistance=" + this.xDistance + "  yDistance=" + this.yDistance + " speed=" + speed); 
 						        
 						        this.isMomentum = true;
 						        setToReadyDraw = true;
 		    					//this.readyToDraw = true;
 	    				    }
 	    					else {
-	    						 Log.w(TAG, "onTouchEvent: ACTION_UP threshold of movement not met to trigger momentum scrolling"); 
+	    						 Logger.w(TAG, "onTouchEvent: ACTION_UP threshold of movement not met to trigger momentum scrolling"); 
 	    					}
 	    				 }
     				 }
@@ -1341,12 +1348,12 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
              case MotionEvent.ACTION_MOVE:   
             	 
             	// this.currentTouchMotion = MotionEvent.ACTION_MOVE;
-            	 //Log.w(TAG, "ACTION_MOVE: x " + )
+            	 //Logger.w(TAG, "ACTION_MOVE: x " + )
             //	 Logger.w(TAG, "ACTION_MOVE= tapCheck about to be set to 0");
             //	 this.tapCheck = 0;
             //	 this.dblTapCheck = 0;
             //	 this.isMoving = true;
-            	 
+            	 Logger.d(TAG, "ACTION MOVE  this.fullWidth=" +  this.fullWidth);
             	 Logger.w(TAG, "ACTION_MOVE= this.currentX=" + this.currentX + " this.previousX" + this.previousX + " this.currentY=" + this.currentY + " this.previousY" + this.previousY );
 
              	 Logger.w(TAG, "ACTION_MOVE  xDiff=" + Math.abs(this.currentX - this.previousX));
@@ -1363,9 +1370,12 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 
             	 
             	 //check for minimum threshold of movement  
-            	 if (Math.abs(this.currentX - this.previousX) > MOVEMENT_TRIGGER_TAPCHECK_THRESHOLD ||
-            		 Math.abs(this.currentY - this.previousY) > MOVEMENT_TRIGGER_TAPCHECK_THRESHOLD){
+            	 if (Math.abs(this.currentX - this.previousX) > this.movementTriggerTapcheckThreshold || //MOVEMENT_TRIGGER_TAPCHECK_THRESHOLD ||
+            		 Math.abs(this.currentY - this.previousY) > this.movementTriggerTapcheckThreshold){  //MOVEMENT_TRIGGER_TAPCHECK_THRESHOLD){
  
+            		 //change this to span more than one move event because more sensitive devices are wiping out
+            		 //tapcheck when move is not intended *** but will that affect the move logic below???
+            		 //perhaps get tapcheck threshold based on percentage of screen size
             		 Logger.w(TAG, "ACTION_MOVE= minimum threshold met, tapCheck about to be set to 0");
             		 this.tapCheck = 0;
    		 			 this.dblTapCheck = 0;
@@ -1405,7 +1415,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		            			  this.currentX >= Math.round(this.previousX * (1 - MOVEMENT_TRIGGER_THRESHOLD)) && 
 		            			  this.currentY <= Math.round(this.previousY * (1 + MOVEMENT_TRIGGER_THRESHOLD)) && 
 		            			  this.currentY >= Math.round(this.previousY * (1 - MOVEMENT_TRIGGER_THRESHOLD))){
-		            		 Log.w(TAG,"onTouchEvent minimum threshold not met");
+		            		 Logger.w(TAG,"onTouchEvent minimum threshold not met");
 		            	 //else if (this.previousX == this.currentX && this.previousY == this.currentY){
 		            		 this.readyToDraw = false;
 		            	}
@@ -1422,7 +1432,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		            		 }
 		            		 
 		            		 setToReadyDraw = true;
-		            		 Log.w(TAG,"onTouchEvent: coodinates size" + this.coordinates.size());
+		            		 Logger.w(TAG,"onTouchEvent: coodinates size" + this.coordinates.size());
 		            	}
 		            	// this.readyToDraw = false;
 		            	 if (this.currentX < this.outerZoomLeft || this.currentY < this.outerZoomTop) {
@@ -1438,7 +1448,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
             	 else{
             		 Logger.d(TAG,"onTouchEvent minimum threshold NOT met for movement");
             	 }
-            	 //  Log.w(getClass().getSimpleName() + "onTouchEvent ACTION_MOVE ", this.previousX + " " + this.currentX + " " + this.readyToDraw);
+            	 //  Logger.w(getClass().getSimpleName() + "onTouchEvent ACTION_MOVE ", this.previousX + " " + this.currentX + " " + this.readyToDraw);
             	 break; 
              default:
             	 this.readyToDraw = false;
@@ -1842,7 +1852,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		// Logger.d(TAG, "onDraw this.readyToDraw=" + this.readyToDraw);
 		 if (this.readyToDraw == true){ 
 			
-			 // Log.w(getClass().getSimpleName() + "onDraw2 ",this.currentTouchMotion + " " + this.tapCheck + " " +  this.isMoving  + " " + this.readyToDraw + " " + this.previousX + " " + this.previousY
+			 // Logger.w(getClass().getSimpleName() + "onDraw2 ",this.currentTouchMotion + " " + this.tapCheck + " " +  this.isMoving  + " " + this.readyToDraw + " " + this.previousX + " " + this.previousY
 			//	 		 + " " + this.currentX + " " + this.currentY + " " + this.previousTouchMotion);
 			 
 			// if (this.touchMotion != MotionEvent.ACTION_MOVE ) { 
@@ -1881,7 +1891,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 				//	 this.trayTileTapped = false;
 				 }
 				 else if (this.isMomentum){
-					 Log.w(TAG,"onDraw drawMomentumScroll about to be called");
+					 Logger.w(TAG,"onDraw drawMomentumScroll about to be called");
 					 this.drawMomentumScroll(canvas);
 				 }
 				 else if(this.currentTouchMotion == MotionEvent.ACTION_MOVE &&
@@ -1891,7 +1901,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 				 }
 				 //only draw board moving if a tile is not moving (which was checked above)
 				 else if (this.currentTouchMotion == MotionEvent.ACTION_MOVE) {
-				//	 Log.w(TAG,"onDraw drawBoardOnMove about to be called");
+				//	 Logger.w(TAG,"onDraw drawBoardOnMove about to be called");
 					 this.drawBoardOnMove(canvas, this.previousX - this.currentX, this.previousY - this.currentY);
 				
 				 }
@@ -1975,7 +1985,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 			 this.getDraggingTile().setyPositionDragging(position.getyLocation());
 			 
 				
-			 Logger.d(TAG, "drawDraggingTile positionX=" + position.getxLocation() + " Y=" + position.getyLocation());
+			// Logger.d(TAG, "drawDraggingTile positionX=" + position.getxLocation() + " Y=" + position.getyLocation());
 
 		 }
 		 //let's see if a tray tile is being dragged
@@ -1994,7 +2004,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		 Coordinate center = new Coordinate();
 		 if (this.getDraggingTile() != null && this.getDraggingTile().isDragPositionSet()){
 			 
-			 Logger.d(TAG,"findCenterOfDraggingTile x=" + this.getDraggingTile().getxPositionDragging() + " y=" + this.getDraggingTile().getyPositionDragging());
+		//	 Logger.d(TAG,"findCenterOfDraggingTile x=" + this.getDraggingTile().getxPositionDragging() + " y=" + this.getDraggingTile().getyPositionDragging());
 			 center.setxLocation(this.getDraggingTile().getxPositionDragging() + (this.draggingTileSize / 2));
 			 center.setyLocation(this.getDraggingTile().getyPositionDragging() + (this.draggingTileSize / 2));
 		 }
@@ -2016,7 +2026,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		 int xPosition = this.currentX - (this.draggingTileSize / 2);
 		 int yPosition = this.currentY - (this.draggingTileSize / 2);
 		 
-		 Logger.d(TAG, "drawDraggingTileGuts xPosition="  + xPosition + " yPosition=" + yPosition);
+	//	 Logger.d(TAG, "drawDraggingTileGuts xPosition="  + xPosition + " yPosition=" + yPosition);
 		 
 		 //adjust if over any of the edges 
 		 if (xPosition < this.visibleAreaRect.getLeft() - Math.round(this.draggingTileSize / 4)){
@@ -2034,17 +2044,17 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		 }
 		 if (yPosition + this.draggingTileSize > this.visibleAreaRect.getBottom() + Math.round(this.draggingTileSize / 4)){
 			 //we are outside of the bottom edge
-			 Logger.d(TAG, "drawDraggingTile yPosition=" + yPosition + " height=" + height + " draggingTileSize=" + draggingTileSize);
+		//	 Logger.d(TAG, "drawDraggingTile yPosition=" + yPosition + " height=" + height + " draggingTileSize=" + draggingTileSize);
 			 //yPosition = yPosition - (yPosition + this.draggingTileSize - this.height);
 			 yPosition =  this.visibleAreaRect.getBottom() + Math.round(this.draggingTileSize / 4) - this.draggingTileSize;
 			 
-			 Logger.d(TAG, "drawDraggingTile yPosition=" + yPosition + " Height=" + height + " draggingTileSize=" + draggingTileSize);
+		//	 Logger.d(TAG, "drawDraggingTile yPosition=" + yPosition + " Height=" + height + " draggingTileSize=" + draggingTileSize);
 		 }
 		 
 		 position.setxLocation(xPosition);
 		 position.setyLocation(yPosition);
 		 
-		 Logger.d(TAG, "drawDraggingTileGuts xPosition_="  + position.getxLocation() + " yPosition_=" + position.getyLocation());
+		// Logger.d(TAG, "drawDraggingTileGuts xPosition_="  + position.getxLocation() + " yPosition_=" + position.getyLocation());
 		 
 		 canvas.drawBitmap(GameSurfaceView.bgTrayBaseDragging, xPosition, yPosition, null);
 
@@ -2088,7 +2098,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	 
 	 
 	private void drawFullBoard(Canvas canvas){
-		Logger.d(TAG, "drawFullBoard");
+	//	Logger.d(TAG, "drawFullBoard");
 		 canvas.drawColor(0, Mode.CLEAR);
 		 this.drawUpperGap(canvas);
 		 this.drawFullView(canvas);
@@ -2096,9 +2106,9 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	}
 	
 	private void drawBoardOnMove(Canvas canvas, int leftDiff, int topDiff){
-		Logger.d(TAG, "drawBoardOnMove leftDiff=" + leftDiff + " topDiff=" + topDiff);
+	///	Logger.d(TAG, "drawBoardOnMove leftDiff=" + leftDiff + " topDiff=" + topDiff);
 		
-		Logger.d(TAG, "drawBoardOnMove this.trayTiles.get(0).getxPosition()=" + this.trayTiles.get(0).getxPosition() + " " + this.trayTiles.get(0).getxPositionDragging());
+	//	Logger.d(TAG, "drawBoardOnMove this.trayTiles.get(0).getxPosition()=" + this.trayTiles.get(0).getxPosition() + " " + this.trayTiles.get(0).getxPositionDragging());
 		 this.readyToDraw = false;
 		 this.parent.captureTime(TAG + " drawBoardOnMove started");
 		 boolean setReadyToDraw = false;
@@ -2111,7 +2121,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		//	 newLeft = 
 		// }
 		 
-		// Log.w(TAG,"drawBoardOnMove: leftDiff=" + leftDiff + " topDiff=" + topDiff + " prevX=" +  this.previousX  + " prevY=" + this.previousY + 
+		// Logger.w(TAG,"drawBoardOnMove: leftDiff=" + leftDiff + " topDiff=" + topDiff + " prevX=" +  this.previousX  + " prevY=" + this.previousY + 
 		//		 " currX="  +  this.currentX  + " currY=" + this.currentY + " outerZoomLeft=" 
 		//		 + this.outerZoomLeft + " outerZoomTop=" + this.outerZoomTop);
 		 
@@ -2132,14 +2142,14 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 			 //grab top left tile  
 			 GameTile topLeftTile = this.tiles.get(0);
 			 
-			// Log.w(getClass().getSimpleName() + "onDraw ACTION_MOVE ",leftDiff + " " + topDiff + " " +  this.previousX  + " " + this.previousY + " "
+			// Logger.w(getClass().getSimpleName() + "onDraw ACTION_MOVE ",leftDiff + " " + topDiff + " " +  this.previousX  + " " + this.previousY + " "
 			// + topLeftTile.getxPositionZoomed() + " " + topLeftTile.getyPositionZoomed() + " "
 			// + this.outerZoomLeft + " " + this.outerZoomTop);
 
 			 this.parent.captureTime(TAG + " drawBoardOnMove check bounds starting ");
 			 
-			 Logger.w(TAG, "drawBoardOnMove: topLeftTile.getxPositionZoomed()=" + topLeftTile.getxPositionZoomed() + " topLeftTile.getyPositionZoomed()=" + topLeftTile.getyPositionZoomed());
-			 Logger.w(TAG, "drawBoardOnMove: this.outerZoomLeft=" + this.outerZoomLeft + " this.outerZoomTop=" + this.outerZoomTop);
+		//	 Logger.w(TAG, "drawBoardOnMove: topLeftTile.getxPositionZoomed()=" + topLeftTile.getxPositionZoomed() + " topLeftTile.getyPositionZoomed()=" + topLeftTile.getyPositionZoomed());
+		//	 Logger.w(TAG, "drawBoardOnMove: this.outerZoomLeft=" + this.outerZoomLeft + " this.outerZoomTop=" + this.outerZoomTop);
 
 			 //make sure it will be within outer left bounds
 			 if (topLeftTile.getxPositionZoomed() - leftDiff < this.outerZoomLeft){
@@ -2149,14 +2159,14 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 				 leftDiff = topLeftTile.getxPositionZoomed() - this.outerZoomLeft; //topLeftTile.getxPositionZoomed() + this.outerZoomLeft; //leftDiff - (this.outerZoomLeft - topLeftTile.getxPositionZoomed());  
 					
 				 
-				 Log.w(TAG, "drawBoardOnMove: leftdiff(1)=" + leftDiff);
+		//		 Logger.w(TAG, "drawBoardOnMove: leftdiff(1)=" + leftDiff);
 			 } 
 			 else {
 				 //make sure it will be within visible left bounds
 				 if (topLeftTile.getxPositionZoomed() - leftDiff > 0) {
 					 leftDiff = topLeftTile.getxPositionZoomed() - 0;//leftDiff - (1 - topLeftTile.getxPositionZoomed() - leftDiff);   
 					 
-					 Logger.w(TAG, "drawBoardOnMove: leftdiff(2)=" + leftDiff);
+			//		 Logger.w(TAG, "drawBoardOnMove: leftdiff(2)=" + leftDiff);
 				 }
 				 else {
 					 setReadyToDraw = true;
@@ -2169,14 +2179,14 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 				 topDiff = this.outerZoomTop;// - topLeftTile.getyPositionZoomed();//topLeftTile.getyPositionZoomed() + this.outerZoomTop; //topDiff - (this.outerZoomTop - topLeftTile.getyPositionZoomed() - topDiff);
 				 //topDiff = topDiff - (this.outerZoomTop - topLeftTile.getyPositionZoomed());
 				 topDiff = topLeftTile.getyPositionZoomed() - this.outerZoomTop;
-				 Logger.w(TAG, "drawBoardOnMove: topdiff(1)=" + topDiff);
+		//		 Logger.w(TAG, "drawBoardOnMove: topdiff(1)=" + topDiff);
 			 }
 			 else { 
 				 //make sure it will be within visible top bounds
 				 if (topLeftTile.getyPositionZoomed() - topDiff > 0) {
 					 topDiff = topLeftTile.getyPositionZoomed();// - 1;//topDiff - (1 - topLeftTile.getyPositionZoomed() - topDiff);
 					 
-					 Log.w(TAG, "drawBoardOnMove: topdiff(2)=" + topDiff);
+			//		 Logger.w(TAG, "drawBoardOnMove: topdiff(2)=" + topDiff);
 				 }
 				 else {
 					 setReadyToDraw = true;
@@ -2241,7 +2251,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	        	this.readyToDraw = false;
 	        }
 	        
-	        //Log.w(TAG, "drawMomentumScroll xDistance=" + this.xDistance + " yDistance=" + this.yDistance );
+	        //Logger.w(TAG, "drawMomentumScroll xDistance=" + this.xDistance + " yDistance=" + this.yDistance );
 	        
 	        if (!this.readyToDraw){this.isMomentum = false;}
 		
@@ -2318,9 +2328,9 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	    	tile.setxPositionZoomed(tile.getxPositionZoomed() - leftDiff);
 	     	 tile.setyPositionZoomed(tile.getyPositionZoomed() - topDiff);
 	     	 
-	     	 if (tile.getxPositionZoomed() == 0 && tile.getyPositionZoomed() == 0){
-	     		Logger.d(TAG, "drawZoomedBoardByDiff positions=0 tileId=" + tile.getId());
-	     	 }
+	 //    	 if (tile.getxPositionZoomed() == 0 && tile.getyPositionZoomed() == 0){
+	  //   		Logger.d(TAG, "drawZoomedBoardByDiff positions=0 tileId=" + tile.getId());
+	  //   	 }
 	 		 
 	 		 this.drawZoomedBoardGuts(canvas, tile);
  
@@ -2492,19 +2502,55 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	     //this is a hack because for some reason the vertical origin is going up in direction as opposed to down
 	     int textTop = textVerticalMidpoint + (bounds.height() / 3);
 	     
-	     Logger.d(TAG, "drawUpperGap this.parent.getGame().isCompleted()=" + this.parent.getGame().isCompleted() );
+	  //   Logger.d(TAG, "drawUpperGap this.parent.getGame().isCompleted()=" + this.parent.getGame().isCompleted() );
 	     
 	     if (this.parent.getGame().isCompleted() || this.parent.getLastPlayerActionBeforeAutoplay().length() > 0){
      		 String secondLine = lastActionText; ;
 	    	 
 	    	 if (this.parent.getGame().isCompleted()){
-	    		 secondLine = String.format(this.parent.getString(R.string.upper_gap_randoms),
-     				 this.parent.getGame().getRandomConsonants().get(0),
-     				 this.parent.getGame().getRandomConsonants().get(1),
-     				 this.parent.getGame().getRandomConsonants().get(2),
-     				 this.parent.getGame().getRandomConsonants().get(3),
-     				 this.parent.getGame().getRandomVowel());
- 
+	    		// if (!this.isTablet){
+	    			 String opponentTiles = this.parent.getString(R.string.upper_gap_opponent_tiles_0);
+	    			 List<String> tiles = this.parent.getGame().getOpponentGame().getTrayLetters();
+	    			 if (tiles.size() == 1){
+	    				 opponentTiles = String.format(this.parent.getString(R.string.upper_gap_opponent_tiles_1), tiles.get(0));
+	    			 }
+	    			 else if (tiles.size() == 2){
+	    				 opponentTiles = String.format(this.parent.getString(R.string.upper_gap_opponent_tiles_2), tiles.get(0), tiles.get(1));
+	    			 }
+	    			 else if (tiles.size() == 3){
+	    				 opponentTiles = String.format(this.parent.getString(R.string.upper_gap_opponent_tiles_3), tiles.get(0), tiles.get(1), tiles.get(2));
+	    			 }
+	    			 else if (tiles.size() == 4){
+	    				 opponentTiles = String.format(this.parent.getString(R.string.upper_gap_opponent_tiles_4), tiles.get(0), tiles.get(1), tiles.get(2), tiles.get(3));
+	    			 }
+	    			 else if (tiles.size() == 5){
+	    				 opponentTiles = String.format(this.parent.getString(R.string.upper_gap_opponent_tiles_5), tiles.get(0), tiles.get(1), tiles.get(2), tiles.get(3), tiles.get(4));
+	    			 }
+	    			 else if (tiles.size() == 6){
+	    				 opponentTiles = String.format(this.parent.getString(R.string.upper_gap_opponent_tiles_6), tiles.get(0), tiles.get(1), tiles.get(2), tiles.get(3), tiles.get(4), tiles.get(5));
+	    			 }
+	    			 else if (tiles.size() == 7){
+	    				 opponentTiles = String.format(this.parent.getString(R.string.upper_gap_opponent_tiles_7), tiles.get(0), tiles.get(1), tiles.get(2), tiles.get(3), tiles.get(4), tiles.get(5), tiles.get(6));
+	    			 } 
+	    			 
+		    		 secondLine = String.format(this.parent.getString(R.string.upper_gap_randoms_and_opponent_tiles),
+	     				 this.parent.getGame().getRandomConsonants().get(0),
+	     				 this.parent.getGame().getRandomConsonants().get(1),
+	     				 this.parent.getGame().getRandomConsonants().get(2),
+	     				 this.parent.getGame().getRandomConsonants().get(3),
+	     				 this.parent.getGame().getRandomVowel(), 
+	     				 this.parent.getGame().getOpponent().getName(),
+	     				 opponentTiles);
+	    	//	 }
+	    	//	 else {
+	    	//		 //this is a tablet so show third line
+	    	//		 secondLine = String.format(this.parent.getString(R.string.upper_gap_randoms),
+		    // 				 this.parent.getGame().getRandomConsonants().get(0),
+		    // 				 this.parent.getGame().getRandomConsonants().get(1),
+		    // 				 this.parent.getGame().getRandomConsonants().get(2),
+		    // 				 this.parent.getGame().getRandomConsonants().get(3),
+		    // 				 this.parent.getGame().getRandomVowel());
+	    	//	 }
 	    	 }
      		 
      		 Paint pSecondLine = new Paint();
@@ -2583,11 +2629,11 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		
 	     canvas.drawRect(boundsGap, pGap);
 	     
-	     Logger.d(TAG, "logo is null=" + (this.logo == null));
-	     Logger.d(TAG, "midpoint  =" +  this.midpoint);
-	     Logger.d(TAG, "topGapHeight  =" +  this.topGapHeight);
-	     Logger.d(TAG, "fullWidth  =" +  this.fullWidth);
-	     Logger.d(TAG, "bottomGapHeight  =" +  this.bottomGapHeight);
+	//     Logger.d(TAG, "logo is null=" + (this.logo == null));
+	//     Logger.d(TAG, "midpoint  =" +  this.midpoint);
+	//     Logger.d(TAG, "topGapHeight  =" +  this.topGapHeight);
+	//     Logger.d(TAG, "fullWidth  =" +  this.fullWidth);
+	//     Logger.d(TAG, "bottomGapHeight  =" +  this.bottomGapHeight);
  
 	     
 	     canvas.drawBitmap(this.logo, this.midpoint - (Math.round(this.logo.getWidth() / 2)), this.topGapHeight + this.fullWidth + Math.round(this.bottomGapHeight / 2) - Math.round(this.logo.getHeight() / 2) , null); ///do not use 10,,,figure out math
@@ -2626,7 +2672,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 	     boundsBackground.right = this.trayAreaRect.getRight(); //this.fullWidth;
 	     boundsBackground.top = this.trayTop - TRAY_VERTICAL_MARGIN; //this.trayTop - TRAY_VERTICAL_MARGIN - TRAY_TOP_BORDER_HEIGHT;
 	     
-	     Logger.d(TAG, "drawTray this.trayAreaRect.getBottom()=" + this.trayAreaRect.getBottom());
+	   //  Logger.d(TAG, "drawTray this.trayAreaRect.getBottom()=" + this.trayAreaRect.getBottom());
 	     
 	     boundsBackground.bottom = boundsBackground.top + this.trayTileSize + (TRAY_VERTICAL_MARGIN * 2);
 	     
@@ -2690,7 +2736,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		for (TrayTile trayTile : this.trayTiles){
 			x += trayTile.getCurrentLetter();
 		}
-		Logger.d(TAG, "setHintLetters before recall tiles= " + x);
+	//	Logger.d(TAG, "setHintLetters before recall tiles= " + x);
 		
 		for(GameTile tile : this.tiles){
 			if (tile.getPlacedLetter().length() > 0){
@@ -2704,7 +2750,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		for (TrayTile trayTile : this.trayTiles){
 			x += trayTile.getCurrentLetter();
 		}
-		Logger.d(TAG, "setHintLetters after recall tiles= " + x);
+	//	Logger.d(TAG, "setHintLetters after recall tiles= " + x);
 		
 		this.LoadTray();
 
@@ -2712,7 +2758,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		for (TrayTile trayTile : this.trayTiles){
 			x += trayTile.getCurrentLetter();
 		}
-		Logger.d(TAG, "setHintLetters after loadTray= " + x);
+	//	Logger.d(TAG, "setHintLetters after loadTray= " + x);
 		
 		for(GameTile tile : placedResult.getPlacedTiles()){
 			boolean trayLetterFound = false;
@@ -2735,7 +2781,7 @@ public class GameSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
 		for (TrayTile trayTile : this.trayTiles){
 			x += trayTile.getCurrentLetter();
 		}
-		Logger.d(TAG, "setHintLetters after setTiles= " + x);
+	//	Logger.d(TAG, "setHintLetters after setTiles= " + x);
  		 //clear the active tiles
  		this.clearCurrentTrayTile();
 	 

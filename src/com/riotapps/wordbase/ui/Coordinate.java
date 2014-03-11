@@ -2,8 +2,8 @@ package com.riotapps.wordbase.ui;
 
 public class Coordinate{
 	  
-	 private int xLocation;
-	 private int yLocation;
+	 private int xLocation = 0;
+	 private int yLocation = 0;
 	 private long timestamp;
 	 
 	 public Coordinate(){}

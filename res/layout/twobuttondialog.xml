@@ -20,7 +20,7 @@
          android:id="@+id/alert_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		style="@style/TextStyle"
+		style="@style/AlertTextStyle"
         android:layout_centerHorizontal="true"
 		android:layout_marginTop="10dp"
     />
@@ -34,7 +34,7 @@
         android:paddingTop="3dp"
 		/>
     <TextView
-        style="@style/TextLargeStyle"
+        style="@style/AlertTextLargeStyle"
      	android:id="@+id/alert_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

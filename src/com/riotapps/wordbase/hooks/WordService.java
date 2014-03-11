@@ -230,7 +230,7 @@ public class WordService {
  
 	}
 	public static void createDatabase(Context context){
-		DatabaseHelper db = new DatabaseHelper(context);
+		DatabaseHelper db = DatabaseHelper.getInstance(context); //new DatabaseHelper(context);
 		
 		try {
 			db.createDataBase();

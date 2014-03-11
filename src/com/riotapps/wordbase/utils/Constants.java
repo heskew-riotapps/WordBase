@@ -8,6 +8,13 @@ public class Constants {
 	public static final int WORD_DATABASE_VERSION =  3; 
 	public static final int DEFAULT_WORD_DATABASE_VERSION =  0; 
 	
+	public static final String LDPI = "ldpi";
+	public static final String MDPI = "mdpi";
+	public static final String HDPI = "hdpi";
+	public static final String XHDPI = "xhdpi";
+	public static final String XXHDPI = "xxhdpi";
+	public static final String XXXHDPI = "xxxhdpi";
+	
 	public static final String ACTIVITY_CLASS_MAIN = "main";
 	public static final String ACTIVITY_CLASS_ABOUT = "about";
 	public static final String ACTIVITY_CLASS_COMPLETED_GAMES = "completed_games";
@@ -224,6 +231,7 @@ public class Constants {
  	public static final String USER_PREFS_OPPONENT_GROUPS = "_opp_groups";
 	public static final String USER_PREFS_COMPLETED_GAMES = "c_games";
 	public static final String USER_PREFS_PLAYER_JSON = "player_json";
+	public static final String USER_PREFS_PLAYER_HIGH_SCORE = "player_hs";
 	public static final String USER_PREFS_WORD_DATABASE_VERSION = "wdb_v";
 	public static final String USER_PREFS_FREE_REMAINING_USES_HOPPER_PEEK = "fu_hp";
 	public static final String USER_PREFS_FREE_USAGES_WORD_HINTS = "fu_wh";

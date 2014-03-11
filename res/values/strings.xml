@@ -7,6 +7,10 @@
     <string name="namespace">com.riotapps.wordbase</string>
      <string name="derived_device_screen_size">unspecified</string>
     <string name="derived_device_resolution">unspecified</string>
+    
+    <string name="app_store_google_play">Google Play</string>
+    <string name="app_store_amazon">Amazon Appstore</string>
+    <string name="app_store_unspecified">Undetermined App Store</string>
 
     <string name="wordnik_apiKey">48f31f368d20791114b01067e1d05b68ca177aabdbab4150b</string>
     <string name="chartboost_app_id">5126a10716ba477b0e000019</string>
@@ -189,6 +193,16 @@
  	<string name="tile_2L">2L</string>
  	<string name="tile_2W">2W</string>
  	<string name="upper_gap_randoms">the random letters in this game: %1$s, %2$s, %3$s, %4$s, %5$s</string>
+ 	<string name="upper_gap_opponent_tiles">the remaining tiles in %1$s\'s tray: %2$s</string>
+ 	<string name="upper_gap_randoms_and_opponent_tiles">randoms: %1$s, %2$s, %3$s, %4$s, %5$s  -  %6$s\'s tiles: %7$s</string>
+ 	<string name="upper_gap_opponent_tiles_0">none left</string>
+ 	<string name="upper_gap_opponent_tiles_1">%1$s</string>
+ 	<string name="upper_gap_opponent_tiles_2">%1$s, %2$s</string>
+ 	<string name="upper_gap_opponent_tiles_3">%1$s, %2$s, %3$s</string>
+ 	<string name="upper_gap_opponent_tiles_4">%1$s, %2$s, %3$s, %4$s</string>
+ 	<string name="upper_gap_opponent_tiles_5">%1$s, %2$s, %3$s, %4$s, %5$s</string>
+ 	<string name="upper_gap_opponent_tiles_6">%1$s, %2$s, %3$s, %4$s, %5$s, %6$s</string>
+ 	<string name="upper_gap_opponent_tiles_7">%1$s, %2$s, %3$s, %4$s, %5$s, %6$s, %7$s</string>
  	<string name="scoreboard_letters_left">%s letters left</string>
  	<string name="scoreboard_1_letter_left">1 letter left</string>
  	<string name="scoreboard_num_points">%s points</string>
@@ -381,7 +395,7 @@
 			
 		<string name="smiley_attribution">Thanks to Codicode for the cool smiley characters!</string>    
 		
-		<string name="about_device_specs">This device is %1$s size with %2$s resolution.</string>    
+		<string name="about_device_specs">This device is %1$s size with %2$s resolution. From %3$s.</string>    
 		<string name="game_surface_first_time_alert_title">Good luck!</string>
 		<string name="game_surface_first_time_alert_message">Drag letters from the tray onto the board to form words in a single axis.\n\nThe first word must be played on at least one smiley.\n\nLetters can be played on top of previously played letters.</string>
 		<string name="main_first_time_alert_title">Welcome!</string>

@@ -26,9 +26,13 @@ import java.util.Random;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.StatFs;
+import android.util.TypedValue;
 
 import com.riotapps.wordbase.R;
 
@@ -186,7 +190,54 @@ public class Utils {
     	//return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
     }
 
-     
+    public static int convertPixelsToDensityPixels(Context context, int pixels){
+    	
+    	String resolution = context.getApplicationContext().getString(R.string.derived_device_resolution);
+    	int dp = 0;
+    	if (resolution.equals(Constants.LDPI)){
+    		dp = Math.round(pixels * 1.33f);
+    	}
+    	else if (resolution.equals(Constants.MDPI)){
+    		dp = pixels;
+    	}
+    	else if (resolution.equals(Constants.HDPI)){
+    		dp = Math.round(pixels * .75f);
+    	}
+    	else if (resolution.equals(Constants.XHDPI)){
+    		dp = Math.round(pixels * .5f);
+    	}
+    	else {
+    		dp = Math.round(pixels * .33f);
+    	}
+    	return dp;
+//    	return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, context.getApplicationContext().getResources().getDisplayMetrics());
+    }
+    
+ public static int convertPixelsBasedOnXxhdpiReolution(Context context, int pixels){
+    	
+    	String resolution = context.getApplicationContext().getString(R.string.derived_device_resolution);
+    	int i = 0;
+    	if (resolution.equals(Constants.LDPI)){//120
+    		i = Math.round(pixels * .25f);
+    	}
+    	else if (resolution.equals(Constants.MDPI)){//160
+    		i = Math.round(pixels * .33f);
+    	}
+    	else if (resolution.equals(Constants.HDPI)){//240
+    		i = Math.round(pixels * .5f);
+    	}
+    	else if (resolution.equals(Constants.XHDPI)){//320
+    		i = Math.round(pixels * .66f);
+    	}
+    	else if (resolution.equals(Constants.XXHDPI)){//480
+    		i = pixels;
+    	}
+    	else {
+    		i = Math.round(pixels * 1.33f); //640
+    	} 
+    	return i;
+//    	return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, context.getApplicationContext().getResources().getDisplayMetrics());
+    }
     
     public static String getTimeSinceString(Context context,Date targetDate){
     	//date diff in milliseconds
@@ -288,21 +339,62 @@ public class Utils {
     }
     
     public static Enums.InstalledFromStore fromAppStore(Context context){
-     
+    //	PackageManager pm = getPackageManager();
+    //	String installationSource = pm.getInstallerPackageName(getPackageName());
     	String installer = context.getPackageManager().getInstallerPackageName(context.getString(R.string.namespace)); 
     	
-    	if (installer == Constants.GOOGLE_PLAY_STORE){
+    	//might just change manifest to make it point to specific store when building for that store
+
+    	if (installer != null && installer.equals(Constants.GOOGLE_PLAY_STORE)){
     		return Enums.InstalledFromStore.GOOGLE_PLAY;
     	} 
-    	else if (installer == Constants.AMAZON_APPSTORE){
+    	else if (installer != null && installer.equals(Constants.AMAZON_APPSTORE)){
     		return Enums.InstalledFromStore.AMAZON;
     	} 
     	else {
-    		return Enums.InstalledFromStore.NO_STORE;
-    	}
+    		ApplicationInfo ai;
+			try {
+				ai = context.getPackageManager().getApplicationInfo(context.getPackageName(),PackageManager.GET_META_DATA);
+				
+				String defaultAppStore = (String) ai.metaData.get("DefaultAppStore");
+	    		
+	    	    if (defaultAppStore.equals(Constants.GOOGLE_PLAY_STORE)){
+	    	    	return Enums.InstalledFromStore.GOOGLE_PLAY;
+	    	    }
+	    	    else if (defaultAppStore.equals(Constants.AMAZON_APPSTORE)){
+	        		return Enums.InstalledFromStore.AMAZON;
+	        	} 
+			} catch (NameNotFoundException e) {
+				Logger.d(TAG, e.getMessage());
+			}
+    	   
+			return Enums.InstalledFromStore.NO_STORE;
+     
     	}
     	//<package name="com.package.bla.bla" ... installer="com.amazon.venezia">
     	//<package name="com.package.bla.bla" ... installer="com.android.vending">
     }
+    
+    public static String appStoreTitle(Context context){
+    	Enums.InstalledFromStore store = fromAppStore(context);
+    	
+    	if (store ==  Enums.InstalledFromStore.GOOGLE_PLAY){
+    		return context.getString(R.string.app_store_google_play);
+    	} 
+    	else if (store == Enums.InstalledFromStore.AMAZON){
+      		return context.getString(R.string.app_store_amazon);
+    	}
+    	else {
+      		return context.getString(R.string.app_store_unspecified);
+       	}
+
+     }
+    	
+	public static String trimEnd(String input)
+	{
+		return input.replaceAll("\\s+$", "");	
+	}	
+     
+ 
     
 }

@@ -1,15 +1,25 @@
 package com.riotapps.wordbase;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 
+import com.amazon.inapp.purchasing.BasePurchasingObserver;
+import com.amazon.inapp.purchasing.GetUserIdResponse;
+import com.amazon.inapp.purchasing.Item;
+import com.amazon.inapp.purchasing.ItemDataResponse;
+import com.amazon.inapp.purchasing.Offset;
+import com.amazon.inapp.purchasing.PurchaseResponse;
+import com.amazon.inapp.purchasing.PurchaseUpdatesResponse;
 import com.amazon.inapp.purchasing.PurchasingManager;
+import com.amazon.inapp.purchasing.Receipt;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.riotapps.wordbase.billing.AmazonPurchaseObserver;
 import com.riotapps.wordbase.billing.IabHelper;
@@ -98,8 +108,10 @@ public class Splash  extends FragmentActivity {
     @Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
+    	Logger.d(TAG, "onResume starting");
 		super.onResume();
 		if (Utils.fromAppStore(this) == Enums.InstalledFromStore.AMAZON){
+	    	Logger.d(TAG, "AMAZON starting");
 			PurchasingManager.initiateGetUserIdRequest();
 			Set<String> skus = StoreService.getAllAmazonSkus(this);
 			PurchasingManager.initiateItemDataRequest(skus);
@@ -109,6 +121,7 @@ public class Splash  extends FragmentActivity {
 	}
 
 	public void prepareInAppPurchasing(){
+		Logger.d(TAG, "prepareInAppPurchasing starting");
     	if (Utils.fromAppStore(this) == Enums.InstalledFromStore.AMAZON){
     		PurchasingManager.registerObserver(new AmazonPurchaseObserver(this));
     	}
@@ -176,63 +189,23 @@ public class Splash  extends FragmentActivity {
 	    	   }
 	       }
 		  
+		  this.route();
+	      	
+	 }
 	 
-	      	if (appContext.getPlayer().getActiveGameId().length() > 0){
+	 public void route(){
+		 if (appContext.getPlayer().getActiveGameId().length() > 0){
 			 	((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_GAME_SURFACE);
- 
+
 	       	}
 	      	else{
 			 	((ApplicationContext)this.getApplication()).startNewActivity(this, Constants.ACTIVITY_CLASS_MAIN);
 	      	}
- 
+
 	 }
+	 
 	    
     private void startBackgroundService(){
-    	/*
-    	this.captureTime("sqlite initialize (copy database) starting"); 
-    	WordService.createDatabase(this);
-        this.captureTime("sqlite initialize (copy database) ended");
-    	
-    	WordService wordService = new WordService(this);
-    	//DatabaseHelper db = new DatabaseHelper(this);
-     //   this.captureTime("sqlite initialize (copy database) starting");   
-    //	wordService.initialize(this);
-       // this.captureTime("sqlite initialize (copy database) ended");
-    	
-  
-    	Logger.d(TAG, "does cast exist as a word? " + wordService.doesWordExistInSql("cast"));
-        this.captureTime("sqlite check for cast ended");
-    	   
-    	Logger.d(TAG, "does castcc exist as a word? " + wordService.doesWordExistInSql("castcc"));
-        this.captureTime("sqlite check for castcc ended");
-          
-    	Logger.d(TAG, "does ghilnoos exist as an index? " + wordService.doesIndexExistInSql("ghilnoos"));
-        this.captureTime("sqlite check for ghilnoos ended");
-           
-    	Logger.d(TAG, "does ssuwyddddddd exist as an index? " + wordService.doesIndexExistInSql("ssuwyddddddd"));
-        this.captureTime("sqlite check for ssuwyddddddd ended");
-        
-      //  wordService.tempAddIndexes();
-      //  this.captureTime("sqlite adding indexes ended");
-        
-        
-    	Logger.d(TAG, "does cast exist as a word? " + wordService.doesWordExistInSql("cast"));
-        this.captureTime("sqlite check for cast ended");
-    	   
-    	Logger.d(TAG, "does castcc exist as a word? " + wordService.doesWordExistInSql("castcc"));
-        this.captureTime("sqlite check for castcc ended");
-          
-    	Logger.d(TAG, "does ghilnoos exist as an index? " + wordService.doesIndexExistInSql("ghilnoos"));
-        this.captureTime("sqlite check for ghilnoos ended");
-           
-    	Logger.d(TAG, "does ssuwyddddddd exist as an index? " + wordService.doesIndexExistInSql("ssuwyddddddd"));
-        this.captureTime("sqlite check for ssuwyddddddd ended");
-        
-    	wordService.finish();
-    	wordService = null;
-    	*/
-    	
-    	
      	this.startService(new Intent(this, WordLoaderService.class));
     }
    
@@ -282,8 +255,113 @@ public class Splash  extends FragmentActivity {
 	}
 
  	
- 	
-	
+	private class AmazonPurchaseObserver extends BasePurchasingObserver {
+		   private static final String TAG = "AmazonPurchaseObserver";
+		   private boolean rvsProductionMode = false;
+		   private String currentUserID = null;
+		   
+		   public AmazonPurchaseObserver(Activity iapActivity) {
+		      super(iapActivity);
+		   }
+		 
+		   public void onSdkAvailable(final boolean isSandboxMode) {
+			   Logger.d(TAG, "AmazonPurchaseObserver onSdkAvailable " + isSandboxMode);
+			   this.rvsProductionMode = isSandboxMode;
+		   }
+		   public void onGetUserIdResponse(final GetUserIdResponse response) {
+			   Logger.d(TAG, "AmazonPurchaseObserver.onGetUserIdResponse starting");
+			   if (response.getUserIdRequestStatus() == GetUserIdResponse.GetUserIdRequestStatus.SUCCESSFUL) {
+			            currentUserID = response.getUserId();
+			            PurchasingManager.initiatePurchaseUpdatesRequest(PlayerService.getPersistedOffset(this.currentUserID));
+			        }
+			        else { 
+			            // Fail gracefully. 
+			        } 
+		   }
+		   
+		//   private Offset getPersistedOffset() {
+		        // Retrieve the offset you have previously persisted. 
+		        // If no offset exists or the app is dealing exclusively with consumables
+		        // use Offset.BEGINNING.
+		  //  }
+		   
+		   public void onItemDataResponse(final ItemDataResponse response) {
+			   Logger.d(TAG, "AmazonPurchaseObserver.onItemDataResponse starting status=" + response.getItemDataRequestStatus());
+			      switch (response.getItemDataRequestStatus()) {
+		           case SUCCESSFUL_WITH_UNAVAILABLE_SKUS: 
+		        	   // If the requestStatus is successful, retrieve the item data map (item type, icon url, 
+		        	   //localized price, title and description) keyed on sku for display in the app.
+
+		               for (final String s : response.getUnavailableSkus()) { 
+		                   Logger.v(TAG, "Unavailable SKU:" + s); 
+		               }
+		   
+		           case SUCCESSFUL: 
+		               final Map<String, Item> items = response.getItemData();
+		               for (final String key : items.keySet()) {
+		                   Item i = items.get(key);
+		                   StoreService.saveCachedInventoryItemPrice(i.getSku(), i.getPrice());
+		                   
+		                 //  Logger.v(TAG, String.format("Item: %s\n Type: %s\n SKU: %s\n Price: %s\n Description: %s\n“, i.getTitle(), 
+		                 //        i.getItemType(), i.getSku(), i.getPrice(), i.getDescription()));
+		               }
+		               break;
+		 
+		           case FAILED: // Fail gracefully on failed responses.
+		               Logger.v(TAG, "ItemDataRequestStatus: FAILED");
+		               
+		               //update StoreService.isStoreOpen?
+		               
+		               break;
+		        }
+			      //redierct herer
+			      if (appContext.getPlayer().getActiveGameId().length() > 0){
+					 	((ApplicationContext)Splash.this.getApplication()).startNewActivity(Splash.this, Constants.ACTIVITY_CLASS_GAME_SURFACE);
+		 
+			       	}
+			      	else{
+					 	((ApplicationContext)Splash.this.getApplication()).startNewActivity(Splash.this, Constants.ACTIVITY_CLASS_MAIN);
+			      	}
+		   }
+		   
+		   public void onPurchaseResponse(final PurchaseResponse response) { }
+		   
+		   
+		   public void onPurchaseUpdatesResponse(final PurchaseUpdatesResponse response) {  
+			   Logger.d(TAG, "AmazonPurchaseObserver.onGetUserIdResponse starting status=" + response.getPurchaseUpdatesRequestStatus());
+		        switch (response.getPurchaseUpdatesRequestStatus()) {
+		            case SUCCESSFUL:
+		                // Check for revoked SKUs
+		                for (final String sku : response.getRevokedSkus()) {
+		                    Logger.v(TAG, "Revoked Sku:" + sku);
+		                    StoreService.clearPurchase(sku, this.currentUserID);
+		                }  
+		 
+		                PlayerService.setPersistedOffset(response.getOffset(), this.currentUserID);
+		                
+		                // Process receipts
+		                for (final Receipt receipt : response.getReceipts()) {
+		                    switch (receipt.getItemType()) {
+		                        case ENTITLED: // Re-entitle the customer 
+		                        	StoreService.savePurchase(receipt.getSku(), receipt.getPurchaseToken(), this.currentUserID);
+		                        break;
+		                    }
+		                }
+		                
+		                final Offset newOffset = response.getOffset();
+		                if (response.isMore()) {
+		                    Logger.v(TAG, "Initiating Another Purchase Updates with offset: "
+		                  + newOffset.toString());
+		                    PurchasingManager.initiatePurchaseUpdatesRequest(newOffset);
+		                }
+		                break;
+		                 
+		           case FAILED:
+		                // Provide the user access to any previously persisted entitlements.
+		                break;
+		        }
+		}
+	}
 }
 	
  

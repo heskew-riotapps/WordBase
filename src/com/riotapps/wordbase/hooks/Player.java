@@ -25,6 +25,10 @@ public class Player implements Parcelable{
 	@SerializedName("activeGameId")
 	private String activeGameId = "";
 	
+	@SerializedName("h_s")
+	private int highScore = 0; //num wins
+	
+	
 	@SerializedName("n_w")
 	private int numWins = 0; //num wins
 	
@@ -33,7 +37,26 @@ public class Player implements Parcelable{
 	
 	@SerializedName("n_d")
 	private int numDraws = 0; //num draws
+	
+	@SerializedName("n_pl")
+	private int numPlayed = 0; //num played (for games with no opponent)
+	
+	@SerializedName("n_ts_up")
+	private int numTopScoreUpdates = 0;  
+	
+	@SerializedName("gstp")
+	private int numGamesSinceLastTopScore = 0; 
+	
+	@SerializedName("m_gstp")
+	private int mostGamesBetweenTopScores = 0;  
 
+
+	public int getMostGamesBetweenTopScores() {
+		return mostGamesBetweenTopScores;
+	}
+	public void setMostGamesBetweenTopScores(int mostGamesBetweenTopScores) {
+		this.mostGamesBetweenTopScores = mostGamesBetweenTopScores;
+	}
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -49,6 +72,12 @@ public class Player implements Parcelable{
 		 return ctx.getString(com.riotapps.wordbase.R.string.anonymous_player_name); 
 	 }
  
+	public int getNumGamesSinceLastTopScore() {
+		return numGamesSinceLastTopScore;
+	}
+	public void setNumGamesSinceLastTopScore(int numGamesSinceLastTopScore) {
+		this.numGamesSinceLastTopScore = numGamesSinceLastTopScore;
+	}
 	public int getNumWins() {
 		return numWins;
 	}
@@ -73,7 +102,28 @@ public class Player implements Parcelable{
 	public void setActiveGameId(String activeGameId) {
 		this.activeGameId = activeGameId;
 	}
- 	@Override
+	
+	
+	
+ 	public int getNumPlayed() {
+		return numPlayed;
+	}
+	public void setNumPlayed(int numPlayed) {
+		this.numPlayed = numPlayed;
+	}
+	public int getNumTopScoreUpdates() {
+		return numTopScoreUpdates;
+	}
+	public void setNumTopScoreUpdates(int numTopScoreUpdates) {
+		this.numTopScoreUpdates = numTopScoreUpdates;
+	}
+	public int getHighScore() {
+		return highScore;
+	}
+	public void setHighScore(int highScore) {
+		this.highScore = highScore;
+	}
+	@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
 		return 0;

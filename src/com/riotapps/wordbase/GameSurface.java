@@ -126,6 +126,13 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		this.lastPlayerActionBeforeAutoplay = lastPlayerActionBeforeAutoplay;
 	}
 
+	private Chartboost getCB(){
+		if (this.cb == null){
+			this.setupChartBoost();
+		}
+		return this.cb;
+	}
+	
 	private boolean isPreAutoplayTaskRunning = false;
 	private boolean isWordHintTaskRunning = false;
 	private boolean loadHintsAfterTaskCompletes = false;
@@ -1006,9 +1013,10 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		
 		
 		if (this.isChartBoostActive){
-			
-			this.cb.onDestroy(this);
-			this.cb = null;
+			if (this.cb != null){
+				this.cb.onDestroy(this);
+				this.cb = null;
+			}
 		}
 		
 		super.onDestroy();
@@ -1040,8 +1048,8 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		 EasyTracker.getInstance().activityStop(this);
 		if (this.isChartBoostActive){
 			
-			if (this.cb.hasCachedInterstitial()){ this.cb.clearCache(); }
-			this.cb.onStop(this);
+			if (this.getCB().hasCachedInterstitial()){ this.getCB().clearCache(); }
+			this.getCB().onStop(this);
 		 
 			//this.cb = n//ull;
 		}
@@ -1164,7 +1172,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 		//override back button in case user just started game. this will make sure they don;t back through 
 		//all of the pick opponent activities
  
-		if (this.isChartBoostActive && this.cb.onBackPressed())
+		if (this.isChartBoostActive && this.getCB().onBackPressed())
 			// If a Chartboost view exists, close it and return
 			return;
 		else if (this.game.isCompleted() && !this.isCompletedThisSession){
@@ -1384,7 +1392,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 			if (this.cb == null) {
 				this.setupChartBoost();	
 			}
-			this.cb.onStart(this);
+			this.getCB().onStart(this);
 		}
 		/*
 		if (this.isRevMobActive){
@@ -2308,8 +2316,8 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 	 		 			spinner.show();				
 	 				}
 	 				
-		 			this.cb.setTimeout((int)Constants.GAME_SURFACE_INTERSTITIAL_AD_CHECK_IN_MILLISECONDS);
-		 			this.cb.showInterstitial();
+		 			this.getCB().setTimeout((int)Constants.GAME_SURFACE_INTERSTITIAL_AD_CHECK_IN_MILLISECONDS);
+		 			this.getCB().showInterstitial();
 			    	Logger.d(TAG, "showInterstitial from Chartboost");
 			    	//String toastStr = "Loading Interstitial";
 			    	//if (cb.hasCachedInterstitial()) toastStr = "Loading Interstitial From Cache";
@@ -2827,7 +2835,7 @@ public class GameSurface extends FragmentActivity implements View.OnClickListene
 			public void didDismissInterstitial(String location) {
 
 				// Immediately re-caches an interstitial
-				cb.cacheInterstitial(location);
+				getCB().cacheInterstitial(location);
 				handlePostAdServer();
 				//handlePostTurnFinalAction(postTurnAction);
 

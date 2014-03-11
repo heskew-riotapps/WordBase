@@ -28,7 +28,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private SQLiteDatabase database = null; 
  
     private final Context context;
- 
+    private static DatabaseHelper mInstance = null;
+    public static DatabaseHelper getInstance(Context ctx) {
+        /** 
+         * use the application context as suggested by CommonsWare.
+         * this will ensure that you dont accidentally leak an Activitys
+         * context (see this article for more information: 
+         * http://developer.android.com/resources/articles/avoiding-memory-leaks.html)
+         */
+        if (mInstance == null) {
+            mInstance = new DatabaseHelper(ctx.getApplicationContext());
+        }
+        return mInstance;
+    }
+    
     /**
      * Constructor
      * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
@@ -172,6 +185,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void openDataBase() throws SQLException{
  
     	//Open the database
+    	Logger.d(TAG, "openDataBase called");
         String myPath = DB_PATH + DB_NAME;
     	database = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
  
