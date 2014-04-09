@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -32,6 +33,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.StatFs;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
 import com.riotapps.wordbase.R;
@@ -216,29 +218,155 @@ public class Utils {
  public static int convertPixelsBasedOnXxhdpiReolution(Context context, int pixels){
     	
     	String resolution = context.getApplicationContext().getString(R.string.derived_device_resolution);
+    	Logger.d(TAG, "convertPixelsBasedOnXxhdpiReolution resolution=" + resolution);
+    	
     	int i = 0;
     	if (resolution.equals(Constants.LDPI)){//120
-    		i = Math.round(pixels * .25f);
+    		i = Math.round(pixels * 2); //4);
     	}
     	else if (resolution.equals(Constants.MDPI)){//160
-    		i = Math.round(pixels * .33f);
+    		i = Math.round(pixels * 2); //3);
     	}
     	else if (resolution.equals(Constants.HDPI)){//240
-    		i = Math.round(pixels * .5f);
+    		i = Math.round(pixels * 1.5f); //2);
     	}
     	else if (resolution.equals(Constants.XHDPI)){//320
-    		i = Math.round(pixels * .66f);
+    		i = Math.round(pixels * 1.75f); //1.5f);
     	}
     	else if (resolution.equals(Constants.XXHDPI)){//480
     		i = pixels;
     	}
     	else {
-    		i = Math.round(pixels * 1.33f); //640
+    		i = Math.round(pixels * .75f); //640
     	} 
     	return i;
 //    	return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, context.getApplicationContext().getResources().getDisplayMetrics());
     }
-    
+ 
+ public static double getScreenWidthInInches(Activity activity){
+	 DisplayMetrics dm = new DisplayMetrics();
+	 activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+	 double x = Math.pow(dm.widthPixels/dm.xdpi,2);
+	 //double y = Math.pow(dm.heightPixels/dm.ydpi,2);
+	 //double screenInches = Math.sqrt(x+y);
+	 
+	 return x;
+	 //Logger.d("debug","Screen inches : " + screenInches);
+ }
+ 
+ public static int shrinkPixelsBasedOnXxhdpiReolution2(Context context, int pixels){
+	 	
+	 	String resolution = context.getApplicationContext().getString(R.string.derived_device_resolution);
+	 	Logger.d(TAG, "convertPixelsBasedOnXxhdpiReolution resolution=" + resolution);
+	 	
+	 	int i = 0;
+	 	if (resolution.equals(Constants.LDPI)){//120
+	 		i = Math.round(pixels * .25f);
+	 	}
+	 	else if (resolution.equals(Constants.MDPI)){//160
+	 		i = Math.round(pixels * .33f);
+	 	}
+	 	else if (resolution.equals(Constants.HDPI)){//240
+	 		i = Math.round(pixels * .5f);
+	 	}
+	 	else if (resolution.equals(Constants.XHDPI)){//320
+	 		i = Math.round(pixels * .66f);
+	 	}
+	 	else if (resolution.equals(Constants.XXHDPI)){//480
+	 		i = pixels;
+	 	}
+	 	else {
+	 		i = Math.round(pixels * 1.33f); //640
+	 	} 
+	 	return i;
+	// 	return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, context.getApplicationContext().getResources().getDisplayMetrics());
+	 }
+
+	 public static int shrinkPixelsBasedOnXxhdpiReolution(Context context, int pixels){
+	 	
+	 	String resolution = context.getApplicationContext().getString(R.string.derived_device_resolution);
+	 	Logger.d(TAG, "convertPixelsBasedOnXxhdpiReolution resolution=" + resolution);
+	 	
+	 	int i = 0;
+	 	if (resolution.equals(Constants.LDPI)){//120
+	 		i = Math.round(pixels * .35f); //.25f);
+	 	}
+	 	else if (resolution.equals(Constants.MDPI)){//160
+	 		i = Math.round(pixels * .5f);//.33f);
+	 	}
+	 	else if (resolution.equals(Constants.HDPI)){//240
+	 		i = Math.round(pixels * .65f); //.5f);
+	 	}
+	 	else if (resolution.equals(Constants.XHDPI)){//320
+	 		i = Math.round(pixels * .8f); //.66f);
+	 	}
+	 	else if (resolution.equals(Constants.XXHDPI)){//480
+	 		i = pixels;
+	 	}
+	 	else {
+	 		i = Math.round(pixels * 1.33f); //640
+	 	} 
+	 	return i;
+	// 	return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, context.getApplicationContext().getResources().getDisplayMetrics());
+	 }
+	 
+	 public static float convertPixelMultiplierPercentageBasedOnXxhdpiReolution(Context context){ 
+		 	
+		 	String resolution = context.getApplicationContext().getString(R.string.derived_device_resolution);
+		 	Logger.d(TAG, "convertPixelPercentageBasedOnXxhdpiReolution resolution=" + resolution);
+		 	
+		 	float f = 1f;
+		 	if (resolution.equals(Constants.LDPI)){//120
+		 		f = 4f;
+		 	}
+		 	else if (resolution.equals(Constants.MDPI)){//160
+		 		f = 3f;
+		 	}
+		 	else if (resolution.equals(Constants.HDPI)){//240
+		 		f = 2f;
+		 	}
+		 	else if (resolution.equals(Constants.XHDPI)){//320
+		 		f = 1.5f;
+		 	}
+		 	else if (resolution.equals(Constants.XXHDPI)){//480
+		 		f = 1;
+		 	}
+		 	else {
+		 		f = .75f; //640
+		 	} 
+		 	return f;
+		// 	return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, context.getApplicationContext().getResources().getDisplayMetrics());
+		 }
+
+	 public static float shrinkPixelMultiplierBasedOnXxhdpiReolution(Context context){ 
+		 	
+		 	String resolution = context.getApplicationContext().getString(R.string.derived_device_resolution);
+		 	Logger.d(TAG, "convertPixelPercentageBasedOnXxhdpiReolution resolution=" + resolution);
+		 	
+		 	float f = 1f;
+		 	if (resolution.equals(Constants.LDPI)){//120
+		 		f = .25f;
+		 	}
+		 	else if (resolution.equals(Constants.MDPI)){//160
+		 		f = .33f;
+		 	}
+		 	else if (resolution.equals(Constants.HDPI)){//240
+		 		f = .5f;
+		 	}
+		 	else if (resolution.equals(Constants.XHDPI)){//320
+		 		f = .66f;
+		 	}
+		 	else if (resolution.equals(Constants.XXHDPI)){//480
+		 		f = 1f;
+		 	}
+		 	else {
+		 		f = 1.33f; //640
+		 	} 
+		 	return f;
+		// 	return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, context.getApplicationContext().getResources().getDisplayMetrics());
+		 }
+	 
+
     public static String getTimeSinceString(Context context,Date targetDate){
     	//date diff in milliseconds
     	if (targetDate == null) {

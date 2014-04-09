@@ -19,7 +19,7 @@ public class Logger {
 	public static void w(String tag, String msg, Exception e){  
 		//is logging on?
 		 if (BuildConfig.DEBUG && LOG_OK) {    
-			Log.w((tag==null?"UNKNOWN_TAG":tag), (msg==null?"unknown message":msg));
+			Log.w((tag==null?"UNKNOWN_TAG":tag), (msg==null?"unknown message":msg), (e==null?null:e));
 		 }
 	}
 	
@@ -39,11 +39,11 @@ public class Logger {
 			//   ){
 			if (LOG_TIMER_CAPTURE_ONLY){
 				if (msg.indexOf("time since last capture") > -1){
-					Log.d((tag==null?"UNKNOWN_TAG":tag), (msg==null?"unknown message":msg));			
+					Log.d((tag==null?"UNKNOWN_TAG":tag), (msg==null?"unknown message":msg), (e==null?null:e));			
 				}
 			}
 			else{
-				Log.d((tag==null?"UNKNOWN_TAG":tag), (msg==null?"unknown message":msg));			
+				Log.d((tag==null?"UNKNOWN_TAG":tag), (msg==null?"unknown message":msg), (e==null?null:e));			
 			}
 		 }
 		//}
@@ -65,7 +65,7 @@ public class Logger {
 	public static void e(String tag, String msg, Exception e){
 		////is logging on?
 		if (BuildConfig.DEBUG && LOG_OK) {
-			Log.e((tag==null?"UNKNOWN_TAG":tag), (msg==null?"unknown message":msg));
+			Log.e((tag==null?"UNKNOWN_TAG":tag), (msg==null?"unknown message":msg), (e==null?null:e));
 		 }
 	}
 	

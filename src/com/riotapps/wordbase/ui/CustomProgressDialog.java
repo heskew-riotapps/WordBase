@@ -68,7 +68,12 @@ public class CustomProgressDialog extends AlertDialog{
 	public void show() {
 		// TODO Auto-generated method stub
 		Logger.d(TAG, "SHOW");
-		super.show();
+		try{
+			super.show();
+		}
+		catch (Exception e){
+			Logger.d(TAG, "show error=" + e.getMessage());
+		}
 	}  
 	    
 	  
